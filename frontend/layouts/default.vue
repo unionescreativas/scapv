@@ -1,5 +1,7 @@
-<template> </template>
+<template>
+  <nuxt />
+</template>
 
 <script>
-export default {};
+export default {}
 </script>

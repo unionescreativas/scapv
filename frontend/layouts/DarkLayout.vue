@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="show-overlay"></div>
-        <!-- <Loader /> -->
+        <!-- <Lo<ader /> -->
         <RightSideBar toggleClass="top-50 setting-toggle iq-card">
             <i class="ri-sound-module-fill font-size-18 text-primary" slot="icon" />
             <iq-card class="shadow-none">
