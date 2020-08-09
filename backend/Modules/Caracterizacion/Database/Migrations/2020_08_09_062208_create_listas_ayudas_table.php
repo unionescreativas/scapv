@@ -18,7 +18,7 @@ class CreateListasAyudasTable extends Migration
             $table->primary('id');
             //aqui van los campos------------------>
             $table->string('nombre');
-            $table->number('cantidad_permitida');
+            $table->integer('cantidad_permitida');
             //aqui van los campos------------------>
             $table->boolean('estado')->default(1);
             $table->uuid('usuario_creacion')->nullable();

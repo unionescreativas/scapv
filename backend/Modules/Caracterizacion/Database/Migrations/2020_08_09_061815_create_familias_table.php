@@ -17,7 +17,8 @@ class CreateFamiliasTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             //aqui van los campos------------------>
-            $table->uuid('ciudadanos_id')->nullable();
+            $table->uuid('ciudadano_id')->nullable();
+            $table->string('parentesco');
             $table->string('tipo_documento');
             $table->integer('numero_documento');
             $table->string('pep')->nullable();
@@ -43,7 +44,6 @@ class CreateFamiliasTable extends Migration
             $table->string('fecha_llegada')->nullable();
             $table->string('intencion_ciudad')->nullable();
             $table->string('respuesta_intencion')->nullable();
-            $table->string('fecha_llegada')->nullable();
             $table->string('discapacidad')->nullable();
             $table->string('salud')->nullable();
             $table->string('estudia_actualmente')->nullable();
@@ -61,7 +61,7 @@ class CreateFamiliasTable extends Migration
             $table->uuid('usuario_actualizacion')->nullable();
             $table->softDeletesTz();
             $table->timestamps();
-            $table->foreign('ciudadanos_id')
+            $table->foreign('ciudadano_id')
                 ->references('id')->on('ciudadanos');
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAyudasTable extends Migration
+class CreateDocumentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,22 @@ class CreateAyudasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ayudas', function (Blueprint $table) {
+        Schema::create('documentos', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
             //aqui van los campos------------------>
-            $table->uuid('lista_ayuda_id');
-            $table->uuid('ciudadano_id');
-            $table->integer('cantidad_entregada');
-            $table->date('fecha_entrega');
+            $table->uuid('modulo_id');
+            $table->string('modulo');
+            $table->uuid('nombre');
+            $table->string('nombre_archivo');
+            $table->string('url');
+            $table->string('extension');
             //aqui van los campos------------------>
             $table->boolean('estado')->default(1);
             $table->uuid('usuario_creacion')->nullable();
             $table->uuid('usuario_actualizacion')->nullable();
             $table->softDeletesTz();
             $table->timestamps();
-            $table->foreign('lista_ayuda_id')
-                ->references('id')->on('listas_ayudas');
-            $table->foreign('ciudadano_id')
-                ->references('id')->on('ciudadanos');
         });
     }
 
@@ -41,6 +39,6 @@ class CreateAyudasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ayudas');
+        Schema::dropIfExists('documentos');
     }
 }
