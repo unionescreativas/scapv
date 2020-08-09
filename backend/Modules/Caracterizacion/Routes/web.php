@@ -14,3 +14,5 @@
 Route::prefix('caracterizacion')->group(function() {
     Route::get('/', 'CaracterizacionController@index');
 });
+
+

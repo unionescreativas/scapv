@@ -2,13 +2,17 @@
 
 namespace Modules\Caracterizacion\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Caracterizacion\Traits\Ordenar;
 
 class Ciudadano extends Model
 {
     use SoftDeletes;
+    use Ordenar;
     protected $table = 'ciudadanos';
     protected $keyType = 'string';
     public $incrementing = false;
@@ -24,10 +28,6 @@ class Ciudadano extends Model
     {
         return $this->hasMany('Modules\Caracterizacion\Entities\Ayuda');
     }
-
-
-
-
 
     public static function boot()
     {
