@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Documentos extends Model
 {
     use SoftDeletes;
-    protected $table = '';
+    protected $table = 'documentos';
     protected $keyType = 'string';
     public $incrementing = false;
     //protected $fillable = [];

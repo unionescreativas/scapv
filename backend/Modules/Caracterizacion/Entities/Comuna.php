@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Comuna extends Model
 {
     use SoftDeletes;
-    protected $table = '';
+    protected $table = 'comunas';
     protected $keyType = 'string';
     public $incrementing = false;
     //protected $fillable = [];

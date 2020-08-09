@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Lista_Ayuda extends Model
 {
     use SoftDeletes;
-    protected $table = '';
+    protected $table = 'listas_ayudas';
     protected $keyType = 'string';
     public $incrementing = false;
     //protected $fillable = [];

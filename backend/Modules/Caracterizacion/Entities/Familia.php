@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Familia extends Model
 {
     use SoftDeletes;
-    protected $table = '';
+    protected $table = 'familias';
     protected $keyType = 'string';
     public $incrementing = false;
     //protected $fillable = [];
