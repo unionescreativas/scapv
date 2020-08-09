@@ -1,0 +1,13 @@
+{
+    "name": "Georeferenciacion",
+    "alias": "georeferenciacion",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Georeferenciacion\\Providers\\GeoreferenciacionServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
