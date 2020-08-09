@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "laraveles/spanish": "^1.5",
-        "nwidart/laravel-modules": "^7.2"
+        "nwidart/laravel-modules": "^7.2",
+        "webpatser/laravel-uuid": "3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
