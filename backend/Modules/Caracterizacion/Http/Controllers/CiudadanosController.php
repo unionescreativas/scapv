@@ -23,7 +23,8 @@ class CiudadanosController extends Controller
 
         ActivityLogger::activity("Consulto datos del modulo ciudadanos");
         // $query = Ciudadano::aplicarFilter();
-        $ciudadanos =Ciudadano::aplicarOrden()
+        $ciudadanos =CiudJamesDordoy\LaravelVueDatatable\Providers\LaravelVueDatatableServiceProvider::class,
+        adano::aplicarOrden()
             ->paginacion();
 
         return CiudadanoCollection::make($ciudadanos);
