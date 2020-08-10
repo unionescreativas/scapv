@@ -27,8 +27,6 @@ class CreateAyudasTable extends Migration
             $table->uuid('usuario_actualizacion')->nullable();
             $table->softDeletesTz();
             $table->timestamps();
-            $table->foreign('lista_ayuda_id')
-                ->references('id')->on('listas_ayudas');
             $table->foreign('ciudadano_id')
                 ->references('id')->on('ciudadanos');
         });
