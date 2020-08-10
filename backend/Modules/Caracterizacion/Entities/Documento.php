@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
-class Familia extends Model
+class Documento extends Model
 {
     use SoftDeletes, LaravelVueDatatableTrait;
     //nombre de la table --------------------------------------------------------->
-    protected $table = 'familias';
+    protected $table = 'documentos';
     //nombre de la table --------------------------------------------------------->
     protected $keyType = 'string';
     public $incrementing = false;

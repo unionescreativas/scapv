@@ -13,9 +13,9 @@ Route::middleware('auth:api')->get('/caracterizacion', function (Request $reques
 |--------------------------------------------------------------------------
 
 */
-Route::put('ciudadanos/{id}/restore', 'CiudadanosController@restore')->name('ciudadanos.restore');
-Route::put('ciudadanos/{id}/activar', 'CiudadanosController@activar')->name('ciudadanos.activar');
 Route::put('ciudadanos/{id}/inactivar', 'CiudadanosController@inactivar')->name('categorias.inactivar');
+Route::put('ciudadanos/{id}/activar', 'CiudadanosController@activar')->name('ciudadanos.activar');
+Route::put('ciudadanos/{id}/restore', 'CiudadanosController@restore')->name('ciudadanos.restore');
 
 Route::group(['middleware' => ['activity']], function () {
     Route::apiResources(
