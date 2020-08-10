@@ -1,0 +1,13 @@
+{
+    "name": "Caracterizacion",
+    "alias": "caracterizacion",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Caracterizacion\\Providers\\CaracterizacionServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
