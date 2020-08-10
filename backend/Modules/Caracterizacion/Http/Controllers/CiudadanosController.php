@@ -30,13 +30,13 @@ class CiudadanosController extends Controller
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
-        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)->where('estado', '1');
+        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)->where('ciudadanos.estado', '1');
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
     public function show($id)
     {
-        $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
+        $variableConsulta = $this->configModelo::where('id', $id)->where('ciudadanos.estado', '1')->get();
         if ($variableConsulta->isEmpty()) {
             $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
             ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
@@ -153,7 +153,8 @@ class CiudadanosController extends Controller
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
-        $variableConsulta->restore();
+        $variableConsulta->estado = 1;
+        $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '205'];
     }
 
@@ -171,8 +172,7 @@ class CiudadanosController extends Controller
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;
         ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo},Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");
-        $variableConsulta->deleted_at = null;
-        $variableConsulta->save();
+        $variableConsulta->restore();
         return ['data' => $variableConsulta, 'status' => '207'];
     }
 }
