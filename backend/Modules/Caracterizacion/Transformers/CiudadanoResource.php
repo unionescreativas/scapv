@@ -56,9 +56,6 @@ class CiudadanoResource extends JsonResource
                 'tipo_empleo' => $this->resource->tipo_empleo,
                 'observaciones' => $this->resource->observaciones
             ],
-            'links' => [
-                'self' => route('api', $this->resource)
-            ]
         ];
     }
 }

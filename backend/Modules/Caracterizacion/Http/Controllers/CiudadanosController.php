@@ -10,7 +10,6 @@ use Modules\Caracterizacion\Entities\Ciudadano;
 use Modules\Caracterizacion\Transformers\CiudadanoResource;
 use Modules\Caracterizacion\Transformers\CiudadanoCollection;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-
 class CiudadanosController extends Controller
 {
     use ActivityLogger;
@@ -23,13 +22,10 @@ class CiudadanosController extends Controller
     {
 
         ActivityLogger::activity("Consulto datos del modulo ciudadanos");
-        $ciudadanos = Ciudadano::aplicarOrden(request('sort'))
-            ->paginate(
-                $perpage = request('page.size'),
-                $columns = ['*'],
-                $pageName = 'page',
-                $page = request('page.number')
-            )->appends(request()->query());
+        // $query = Ciudadano::aplicarFilter();
+        $ciudadanos =Ciudadano::aplicarOrden()
+            ->paginacion();
+
         return CiudadanoCollection::make($ciudadanos);
     }
 
@@ -38,15 +34,51 @@ class CiudadanosController extends Controller
         return CiudadanoResource::make($ciudadano);
     }
 
-    public function create()
-    {
-        return view('caracterizacion::create');
-    }
-
 
     public function store(Request $request)
     {
         //
+
+        $ciudadanos = new Ciudadano;
+        $ciudadanos->tipo_documento = $request->tipo_documento;
+        $ciudadanos->numero_documento = $request->numero_documento;
+        $ciudadanos->pep = $request->pep;
+        $ciudadanos->nombres = $request->nombres;
+        $ciudadanos->apellidos = $request->apellidos;
+        $ciudadanos->fecha_expedicion = $request->fecha_expedicion;
+        $ciudadanos->fecha_vencimiento = $request->fecha_vencimiento;
+        $ciudadanos->fecha_nacimiento = $request->fecha_nacimiento;
+        $ciudadanos->edad = $request->edad;
+        $ciudadanos->genero = $request->genero;
+        $ciudadanos->estado_civil = $request->estado_civil;
+        $ciudadanos->telefono = $request->telefono;
+        $ciudadanos->celular = $request->celular;
+        $ciudadanos->correo_electronico = $request->correo_electronico;
+        $ciudadanos->departamento = $request->departamento;
+        $ciudadanos->ciudad = $request->ciudad;
+        $ciudadanos->barrrio = $request->barrrio;
+        $ciudadanos->comuna = $request->comuna;
+        $ciudadanos->dirrecion = $request->dirrecion;
+        $ciudadanos->lat = $request->lat;
+        $ciudadanos->let = $request->let;
+        $ciudadanos->actividad = $request->actividad;
+        $ciudadanos->ciudad_origen = $request->ciudad_origen;
+        $ciudadanos->pais_origen = $request->pais_origen;
+        $ciudadanos->fecha_llegada = $request->fecha_llegada;
+        $ciudadanos->intencion_ciudad = $request->intencion_ciudad;
+        $ciudadanos->respuesta_intencion = $request->respuesta_intencion;
+        $ciudadanos->discapacidad = $request->discapacidad;
+        $ciudadanos->salud = $request->salud;
+        $ciudadanos->estudia_actualmente = $request->estudia_actualmente;
+        $ciudadanos->nivel_escolaridad = $request->nivel_escolaridad;
+        $ciudadanos->tipo_profesion = $request->tipo_profesion;
+        $ciudadanos->comunidad_lgtbi = $request->comunidad_lgtbi;
+        $ciudadanos->comunidad_etnica = $request->comunidad_etnica;
+        $ciudadanos->trabajo = $request->trabajo;
+        $ciudadanos->tipo_empleo = $request->tipo_empleo;
+        $ciudadanos->observaciones = $request->observaciones;
+        $ciudadanos->save();
+        return ['data' => $ciudadanos, 'status' => '201'];
     }
 
 
