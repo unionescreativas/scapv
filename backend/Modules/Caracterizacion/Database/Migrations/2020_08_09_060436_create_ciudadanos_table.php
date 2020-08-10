@@ -61,6 +61,7 @@ class CreateCiudadanosTable extends Migration
             $table->uuid('usuario_actualizacion')->nullable();
             $table->softDeletesTz();
             $table->timestamps();
+            $table->unique('numero_documento');
         });
     }
 

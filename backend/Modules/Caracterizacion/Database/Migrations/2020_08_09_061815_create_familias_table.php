@@ -17,10 +17,10 @@ class CreateFamiliasTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             //aqui van los campos------------------>
-            $table->uuid('ciudadano_id')->nullable();
+            $table->uuid('ciudadano_id');
             $table->string('parentesco');
             $table->string('tipo_documento');
-            $table->integer('numero_documento');
+            $table->string('numero_documento');
             $table->string('pep')->nullable();
             $table->string('nombres');
             $table->string('apellidos');
@@ -63,6 +63,7 @@ class CreateFamiliasTable extends Migration
             $table->timestamps();
             $table->foreign('ciudadano_id')
                 ->references('id')->on('ciudadanos');
+            $table->unique('numero_documento');
         });
     }
 
