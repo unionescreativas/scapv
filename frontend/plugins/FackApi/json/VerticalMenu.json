@@ -1,0 +1,158 @@
+[
+  {
+    "title": "Menú",
+    "name": "sidebar.titulo-menu",
+    "is_heading": true,
+    "is_active": false,
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": ""
+  },
+  {
+    "title": "Estadísticas",
+    "name": "sidebar.menu-1",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "path": "estadisticas"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "fa fa-chart-bar"
+  },
+  {
+    "title": "Caracterización",
+    "name": "sidebar.menu-2",
+    "is_heading": false,
+    "is_active": false,
+    "link": "",
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "fa fa-list",
+    "children": [
+      {
+        "title": "Crear Familias",
+        "name": "sidebar.menu-2-submenu-1",
+        "is_active": false,
+        "link": {
+          "path": "crear-familias"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Familias",
+        "name": "sidebar.menu-2-submenu-2",
+        "is_active": false,
+        "link": {
+          "path": "app.e-commerce.detail"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Integrantes",
+        "name": "sidebar.menu-2-submenu-3",
+        "is_active": false,
+        "link": {
+          "path": "app.e-commerce.cart"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Ayudas",
+        "name": "sidebar.menu-2-submenu-4",
+        "is_active": false,
+        "link": {
+          "path": "app.e-commerce.wishlist"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Transferencias",
+        "name": "sidebar.menu-2-submenu-5",
+        "is_active": false,
+        "link": {
+          "path": "app.e-commerce.wishlist"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      }
+    ]
+  },
+  {
+    "title": "Reportes",
+    "name": "sidebar.menu-3",
+    "is_heading": false,
+    "is_active": false,
+    "link": "",
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "fa fa-file",
+    "children": [
+      {
+        "title": "Cargados",
+        "name": "sidebar.menu-3-submenu-1",
+        "is_active": false,
+        "link": {
+          "path": "familias/crear-familias"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Pendientes por ayuda",
+        "name": "sidebar.menu-3-submenu-2",
+        "is_active": false,
+        "link": {
+          "path": "app.e-commerce.detail"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Con ayudas entregadas",
+        "name": "sidebar.menu-3-submenu-3",
+        "is_active": false,
+        "link": {
+          "path": "app.e-commerce.cart"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Integrantes de familia",
+        "name": "sidebar.menu-3-submenu-4",
+        "is_active": false,
+        "link": {
+          "path": "app.e-commerce.cart"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      }
+    ]
+  },
+  {
+    "title": "Georreferenciación",
+    "name": "sidebar.menu-4",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "path": "app.todo"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "fa fa-globe"
+  }
+]
