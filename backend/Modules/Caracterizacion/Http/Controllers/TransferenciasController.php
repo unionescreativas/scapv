@@ -142,6 +142,11 @@ class TransferenciasController extends Controller
         //   Borrando Ciudadano------------------------------------->
         $nuevoGrupo = DB::table('ciudadanos')->where('id', $request->ciudadano_id)->get();
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo},se Transfiere a {$anteriorGrupo}, para el grupo de familia: {$nuevoGrupo} ,  Datos Guardados:{$nuevoGrupo}, -> Metodo Store.");
+        $newTransferencia = new Transferencia;
+        $newTransferencia->ciudadano_id = $request->ciudadano_id;
+        $newTransferencia->familia_id = $newCiudadano->id;
+        $newTransferencia->parentesco = $request->parentesco;
+        $newTransferencia->save();
         return ['data' => $variableConsulta, 'status' => '202'];
     }
     public function update(Request $request, $id)

@@ -31,7 +31,7 @@
     "icon": "fa fa-list",
     "children": [
       {
-        "title": "Crear Familias",
+        "title": "Crear Ciudadano",
         "name": "sidebar.menu-2-submenu-1",
         "is_active": false,
         "link": {
@@ -42,7 +42,7 @@
         "icon": ""
       },
       {
-        "title": "Familias",
+        "title": "Ciudadanos",
         "name": "sidebar.menu-2-submenu-2",
         "is_active": false,
         "link": {
@@ -68,7 +68,7 @@
         "name": "sidebar.menu-2-submenu-4",
         "is_active": false,
         "link": {
-          "path": ""
+          "path": "/caracterizacion/ayudas"
         },
         "class_name": "",
         "is_icon_class": true,
@@ -79,7 +79,7 @@
         "name": "sidebar.menu-2-submenu-5",
         "is_active": false,
         "link": {
-          "path": ""
+          "path": "/caracterizacion/transferencias"
         },
         "class_name": "",
         "is_icon_class": true,
