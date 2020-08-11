@@ -46,7 +46,7 @@
         "name": "sidebar.menu-2-submenu-2",
         "is_active": false,
         "link": {
-          "path": ""
+          "path": "/caracterizacion/ciudadanos"
         },
         "class_name": "",
         "is_icon_class": true,
@@ -57,7 +57,7 @@
         "name": "sidebar.menu-2-submenu-3",
         "is_active": false,
         "link": {
-          "path": ""
+          "path": "/caracterizacion/integrantes"
         },
         "class_name": "",
         "is_icon_class": true,

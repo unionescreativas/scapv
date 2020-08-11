@@ -4,7 +4,7 @@
       <b-col sm="12">
         <iq-card>
           <template v-slot:headerTitle>
-            <h4 class="card-title">Ciudadanos</h4>
+            <h4 class="card-title">Integrantes</h4>
           </template>
           <template v-slot:headerAction>
             <a class="text-primary float-right" v-b-toggle.collapse-1 role="button">
@@ -28,7 +28,7 @@ export default {
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}/api/ciudadanos`,
+      ruta: `${process.env.API_URL}/api/familias`,
       columns: [
         {
           label: "CONSULTAR",
@@ -43,6 +43,24 @@ export default {
           handler: this.displayRow,
           component: tablas,
         },
+        {
+          label: "CEDULA CIUDADANO",
+          name: "ciudadano.numero_documento",
+          orderable: true,
+        },
+        {
+          label: "NOMBRE CIUDADANO",
+          name: "ciudadano.nombres",
+          orderable: true,
+        },
+        {
+          label: "APELLIDO CIUDADANO",
+          name: "ciudadano.apellidos",
+          orderable: true,
+        },
+
+        { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
+        { label: "PARENTESCO", name: "parentesco", orderable: true },
         { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
         {
           label: "NUMERO DE DOCUMENTO",
@@ -94,8 +112,6 @@ export default {
           name: "dirrecion",
           orderable: true,
         },
-        { label: "LATITUD", name: "lat", orderable: true },
-        { label: "LONGITUD", name: "let", orderable: true },
         { label: "ACTIVIDAD", name: "actividad", orderable: true },
         { label: "CIUDAD DE ORIGEN", name: "ciudad_origen", orderable: true },
         { label: "PAIS DE ORIGEN", name: "pais_origen", orderable: true },
@@ -112,6 +128,11 @@ export default {
         {
           label: "FECHA DE LLEGADA AL PAIS",
           name: "respuesta_intencion",
+          orderable: true,
+        },
+        {
+          label: "SE ENCUENTRA EMBARAZA ACTUALMENTE",
+          name: "fecha_llegada",
           orderable: true,
         },
         {

@@ -56,6 +56,7 @@ export default {
     { src: "~/plugins/general/vee-validate.js" },
     { src: "~/plugins/general/vue-grid.js", mode: "client" },
     { src: "~/plugins/general/vue-select.js" },
+    { src: "~/plugins/general/vue-datatable" },
   ],
   /*
    ** Auto import components

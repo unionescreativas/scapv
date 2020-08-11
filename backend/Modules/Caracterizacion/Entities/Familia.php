@@ -68,10 +68,10 @@ class Familia extends Model
                 "model" => \Modules\Caracterizacion\Entities\Ciudadano::class,
                 "foreign_key" => "ciudadano_id",
                 "columns" => [
-                    "lat" => [
-                        "searchable" => true,
-                        "orderable" => true,
-                    ],
+                    'numero_documento' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'pep' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'nombres' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'apellidos' => ['searchable' => true, 'order_term' => 'orderable'],
                 ],
             ],
         ],
