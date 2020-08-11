@@ -108,7 +108,7 @@ export default {
     },
     consultarCiudadano(numero_documento) {
       this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
-        if (this.ciudadano) {
+        if (this.ciudadano != "no existe") {
           this.$nuxt.$router.push("/familias/perfil");
           this.numero_documento = "";
           this.$children[6].inputValue = "";

@@ -65,7 +65,7 @@ export default {
     },
     consultarCiudadano(numero_documento) {
       this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
-        if (this.ciudadano) {
+        if (this.ciudadano != "no existe") {
           Swal.fire({
             title: "Registrado!",
             text: "Ya te encuentras registrado, se cargarán tus datos personales",
