@@ -4,7 +4,7 @@
       <b-col sm="12">
         <iq-card>
           <template v-slot:headerTitle>
-            <h4 class="card-title">Integrantes</h4>
+            <h4 class="card-title">Integrantes Cargados</h4>
           </template>
           <template v-slot:headerAction>
             <a class="text-primary float-right" v-b-toggle.collapse-1 role="button">
@@ -12,7 +12,7 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table :columns="columns" :url="ruta"></data-table>
+            <data-table :columns="columns" :url="ruta+ciudadano[0].id"></data-table>
           </template>
         </iq-card>
       </b-col>
@@ -22,12 +22,13 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
+import { mapState } from "vuex";
 export default {
   name: "ciudadanos",
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}/api/nucleofamiliar/60400e2b-5df7-4eaa-a728-5f8f1359f0e8`,
+      ruta: `${process.env.API_URL}/api/nucleofamiliar/`,
       columns: [
         {
           label: "CEDULA CIUDADANO",
@@ -150,6 +151,9 @@ export default {
   methods: {},
   mounted() {
     vito.index();
+  },
+  computed: {
+    ...mapState("Familias", ["ciudadano"]),
   },
 };
 </script>

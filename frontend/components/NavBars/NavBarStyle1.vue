@@ -6,7 +6,7 @@
         <div class="top-logo">
           <nuxt-link :to="homeURL">
             <img :src="logo" class="img-fluid" alt="logo" />
-            <span>Vito</span>
+            <span>SCAPV</span>
           </nuxt-link>
         </div>
       </div>

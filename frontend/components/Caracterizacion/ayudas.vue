@@ -4,7 +4,7 @@
       <b-col sm="12">
         <iq-card>
           <template v-slot:headerTitle>
-            <h4 class="card-title">Ayudas</h4>
+            <h4 class="card-title">Ayudas Entregadas</h4>
           </template>
           <template v-slot:headerAction>
             <a class="text-primary float-right" v-b-toggle.collapse-1 role="button">
@@ -12,10 +12,7 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table
-              :columns="columns"
-              :url="ruta"
-            ></data-table>
+            <data-table :columns="columns" :url="ruta+ciudadano[0].id"></data-table>
           </template>
         </iq-card>
       </b-col>
@@ -25,12 +22,13 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
+import { mapState } from "vuex";
 export default {
   name: "ayudas",
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}/api/ayudas/60400e2b-5df7-4eaa-a728-5f8f1359f0e8`,
+      ruta: `${process.env.API_URL}/api/ayudas/`,
       columns: [
         { label: "AYUDA", name: "lista.valor_campo_1", orderable: true },
         {
@@ -57,9 +55,18 @@ export default {
       ],
     };
   },
-  methods: {},
+  // watch: {
+  //   ciudadano(value) {
+  //     if (this.ciudadano != "no existe") {
+  //       this.ruta += this.ciudadano[0].id;
+  //     }
+  //   },
+  // },
   mounted() {
     vito.index();
+  },
+  computed: {
+    ...mapState("Familias", ["ciudadano"]),
   },
 };
 </script>
