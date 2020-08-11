@@ -17,12 +17,15 @@ class CreateDocumentosTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             //aqui van los campos------------------>
-            $table->uuid('modulo_id');
+            $table->string('modulo_id');
             $table->string('modulo');
-            $table->uuid('nombre');
-            $table->string('nombre_archivo');
+            $table->uuid('nombre_archivo');
+            $table->string('nombre_carga');
             $table->string('url');
             $table->string('extension');
+            $table->string('tamano');
+            $table->string('aplicacion');
+            $table->string('ruta_carga');
             //aqui van los campos------------------>
             $table->boolean('estado')->default(1);
             $table->uuid('usuario_creacion')->nullable();

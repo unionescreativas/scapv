@@ -7,11 +7,11 @@ use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
-class Transferencia extends Model
+class Lista extends Model
 {
     use SoftDeletes, LaravelVueDatatableTrait;
     //nombre de la table --------------------------------------------------------->
-    protected $table = 'transferencias';
+    protected $table = 'listas';
     //nombre de la table --------------------------------------------------------->
     protected $keyType = 'string';
     public $incrementing = false;
@@ -21,7 +21,12 @@ class Transferencia extends Model
 
     protected $dataTableColumns = [
         'id' => ['searchable' => false,],
-        'parentesco' => ['searchable' => true, 'order_term' => 'orderable'],
+        'codigo_lista' => ['searchable' => true, 'order_term' => 'orderable'],
+        'codigo_campo' => ['searchable' => true, 'order_term' => 'orderable'],
+        'valor_campo_1' => ['searchable' => true, 'order_term' => 'orderable'],
+        'valor_campo_2' => ['searchable' => true, 'order_term' => 'orderable'],
+        'valor_campo_3' => ['searchable' => true, 'order_term' => 'orderable'],
+        'valor_campo_4' => ['searchable' => true, 'order_term' => 'orderable'],
     ];
 
     //Campos Para mostrar en Api, con filtro --------------------------------------------------------->
@@ -30,30 +35,11 @@ class Transferencia extends Model
     //Relaciones --------------------------------------------------------->
 
 
-    protected $dataTableRelationships = [
-        "belongsTo" => [
-            "familia" => [
-                "model" => \Modules\Caracterizacion\Entities\Familia::class,
-                "foreign_key" => "familia_id",
-                "columns" => [],
-            ],
-            "ciudadano" => [
-                "model" => \Modules\Caracterizacion\Entities\Ciudadano::class,
-                "foreign_key" => "ciudadano_id",
-                "columns" => [],
-            ],
-        ],
-    ];
-
-    public function familia()
+    public function ayuda()
     {
-        return $this->belongsTo(\Modules\Caracterizacion\Entities\Familia::class);
+        return $this->belongsTo('\Modules\Caracterizacion\Entities\Ayuda');
     }
 
-    public function ciudadano()
-    {
-        return $this->belongsTo(\Modules\Caracterizacion\Entities\Ciudadano::class);
-    }
     //Relaciones --------------------------------------------------------->
 
 

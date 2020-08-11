@@ -55,3 +55,104 @@ Route::group(['middleware' => ['activity']], function () {
 |--------------------------------------------------------------------------
 
 */
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Listas
+|--------------------------------------------------------------------------
+
+*/
+Route::put('listas/{id}/inactivar', 'ListasController@inactivar')->name('listas.inactivar');
+Route::put('listas/{id}/activar', 'ListasController@activar')->name('listas.activar');
+Route::put('listas/{id}/restore', 'ListasController@restore')->name('listas.restore');
+Route::group(['middleware' => ['activity']], function () {
+    Route::apiResources(
+        [
+            'listas' => 'ListasController'
+        ]
+    );
+});
+/*
+|--------------------------------------------------------------------------
+| Rutas Listas
+|--------------------------------------------------------------------------
+
+*/
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Transeferencias
+|--------------------------------------------------------------------------
+
+*/
+Route::put('transferencias/{id}/inactivar', 'TransferenciasController@inactivar')->name('transferencias.inactivar');
+Route::put('transferencias/{id}/activar', 'TransferenciasController@activar')->name('transferencias.activar');
+Route::put('transferencias/{id}/restore', 'TransferenciasController@restore')->name('transferencias.restore');
+Route::group(['middleware' => ['activity']], function () {
+    Route::apiResources(
+        [
+            'transferencias' => 'TransferenciasController'
+        ]
+    );
+});
+/*
+|--------------------------------------------------------------------------
+| Rutas Transeferencias
+|--------------------------------------------------------------------------
+
+*/
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Documentos----------------->
+|--------------------------------------------------------------------------
+
+*/
+Route::put('documentos/{id}/inactivar', 'DocumentosController@inactivar')->name('documentos.inactivar');
+Route::put('documentos/{id}/activar', 'DocumentosController@activar')->name('documentos.activar');
+Route::put('documentos/{id}/restore', 'DocumentosController@restore')->name('documentos.restore');
+Route::group(['middleware' => ['activity']], function () {
+    Route::apiResources(
+        [
+            'documentos' => 'DocumentosController'
+        ]
+    );
+});
+/*
+|--------------------------------------------------------------------------
+| Rutas Documentos----------------->
+|--------------------------------------------------------------------------
+
+*/
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Ayudas----------------->
+|--------------------------------------------------------------------------
+
+*/
+Route::put('ayudas/{id}/inactivar', 'AyudasController@inactivar')->name('ayudas.inactivar');
+Route::put('ayudas/{id}/activar', 'AyudasController@activar')->name('ayudas.activar');
+Route::put('ayudas/{id}/restore', 'AyudasController@restore')->name('ayudas.restore');
+Route::group(['middleware' => ['activity']], function () {
+    Route::apiResources(
+        [
+            'ayudas' => 'AyudasController'
+        ]
+    );
+});
+/*
+|--------------------------------------------------------------------------
+| Rutas Ayudas----------------->
+|--------------------------------------------------------------------------
+
+*/

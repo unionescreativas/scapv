@@ -5,12 +5,14 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Modules\Caracterizacion\Entities\Ayuda;
 use Illuminate\Contracts\Support\Renderable;
-use Modules\Caracterizacion\Entities\Lista;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
-class ListasController extends Controller
+class AyudasController extends Controller
 {
 
     protected $configModelo;
@@ -19,8 +21,8 @@ class ListasController extends Controller
     public function __construct()
     {
         // Variables Globales---------------------------->
-        $this->configModelo = new Lista;
-        $this->modulo = "Listas";
+        $this->configModelo = new Ayuda;
+        $this->modulo = "Ayudas";
         // Variables Globales---------------------------->
 
     }
@@ -32,15 +34,23 @@ class ListasController extends Controller
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
-        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)->where('estado', '1');
+        $variableConsulta = $this->configModelo::eloquentQuery(
+            $sortBy,
+            $orderBy,
+            $searchValue,
+            [
+                "lista", "ciudadano"
+            ]
+        )->where('ayudas.estado', '1');
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
     public function show($id)
     {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
+
         if ($variableConsulta->isEmpty()) {
-            $variableConsulta = $this->configModelo::where('codigo_lista', $id)->get();
+            $variableConsulta = $this->configModelo::where('ciudadano_id', $id)->get();
             ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
         } else {
             ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
@@ -51,44 +61,76 @@ class ListasController extends Controller
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-
     public function store(Request $request)
     {
+        $cantidadDisponibles = 0;
+        $cantidadEntregadas = 0;
+        $ayudasEntregadas = DB::table('ayudas')
+            ->where('lista_id', $request->lista_id)
+            ->where('ciudadano_id', $request->ciudadano_id)->sum('cantidad_entregada');
+        if (!is_null($ayudasEntregadas)) {
+            $cantidadEntregadas = (int)$ayudasEntregadas;
+        }
+        $disponibilidad = DB::table('listas')->where('id', $request->lista_id)
+            ->first();
+        $cantidadDisponibles = (int) $disponibilidad->valor_campo_2;
+        //
 
-        $variableConsulta = $this->configModelo;
+        //
 
-        //Campos a guardar aquí--------------->
-        $variableConsulta->codigo_lista = $request->codigo_lista;
-        $variableConsulta->codigo_campo = $request->codigo_campo;
-        $variableConsulta->valor_campo_1 = $request->valor_campo_1;
-        $variableConsulta->valor_campo_2 = $request->valor_campo_2;
-        $variableConsulta->valor_campo_3 = $request->valor_campo_3;
-        $variableConsulta->valor_campo_4 = $request->valor_campo_4;
-
-        //Campos a guardar aquí--------------->
-
-        $variableConsulta->save();
-        ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
-        return ['data' => $variableConsulta, 'status' => '202'];
+        if ($cantidadDisponibles <= $cantidadEntregadas) {
+            return ['data' =>  'sin stock', 'status' => '202'];
+        } else {
+            $variableConsulta = $this->configModelo;
+            //Campos a guardar aquí--------------->
+            $variableConsulta->lista_id = $request->lista_id;
+            $variableConsulta->ciudadano_id = $request->ciudadano_id;
+            $variableConsulta->cantidad_entregada = $request->cantidad_entregada;
+            $variableConsulta->fecha_entrega = $request->fecha_entrega;
+            $variableConsulta->usuario_creacion = Auth::id();
+            //Campos a guardar aquí--------------->
+            $variableConsulta->save();
+            ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
+            return ['data' =>  $variableConsulta, 'status' => '202'];
+        }
     }
     public function update(Request $request, $id)
     {
         //
-        $datosAnteriores = $this->configModelo::find($id);
-        $variableConsulta = $this->configModelo::find($id);
 
-        //Campos Actualizar aquí--------------->
-        $variableConsulta->codigo_lista = $request->codigo_lista;
-        $variableConsulta->codigo_campo = $request->codigo_campo;
-        $variableConsulta->valor_campo_1 = $request->valor_campo_1;
-        $variableConsulta->valor_campo_2 = $request->valor_campo_2;
-        $variableConsulta->valor_campo_3 = $request->valor_campo_3;
-        $variableConsulta->valor_campo_4 = $request->valor_campo_4;
-        //Campos Actualizar aquí--------------->
+        $cantidadDisponibles = 0;
+        $cantidadEntregadas = 0;
+        $ayudasEntregadas = DB::table('ayudas')
+            ->where('lista_id', $request->lista_id)
+            ->where('ciudadano_id', $request->ciudadano_id)->sum('cantidad_entregada');
+        if (!is_null($ayudasEntregadas)) {
+            $cantidadEntregadas = (int)$ayudasEntregadas;
+        }
+        $disponibilidad = DB::table('listas')->where('id', $request->lista_id)
+            ->first();
+        $cantidadDisponibles = (int) $disponibilidad->valor_campo_2;
+        //
 
-        $variableConsulta->save();
-        ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
-        return ['data' => $variableConsulta, 'status' => '203'];
+        //
+
+        if ($cantidadDisponibles <= $cantidadEntregadas) {
+            return ['data' =>  'sin stock', 'status' => '202'];
+        } else {
+            $datosAnteriores = $this->configModelo::find($id);
+            $variableConsulta = $this->configModelo::find($id);
+            //Campos a guardar aquí--------------->
+            $variableConsulta->lista_id = $request->lista_id;
+            $variableConsulta->ciudadano_id = $request->ciudadano_id;
+            $variableConsulta->cantidad_entregada = $request->cantidad_entregada;
+            $variableConsulta->fecha_entrega = $request->fecha_entrega;
+            $variableConsulta->usuario_actualizacion = Auth::id();
+
+
+            //Campos a guardar aquí--------------->
+            $variableConsulta->save();
+            ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
+            return ['data' => $variableConsulta, 'status' => '203'];
+        }
     }
     public function destroy($id)
     {

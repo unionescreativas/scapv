@@ -59,6 +59,10 @@ class Ciudadano extends Model
 
     ];
 
+    public function transferencia()
+    {
+        return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
+    }
 
     public function familias()
     {

@@ -27,6 +27,10 @@ class CreateTransferenciasTable extends Migration
             $table->uuid('usuario_actualizacion')->nullable();
             $table->softDeletesTz();
             $table->timestamps();
+            $table->foreign('ciudadano_id')
+            ->references('id')->on('ciudadanos');
+            $table->foreign('familia_id')
+            ->references('id')->on('familias');
         });
     }
 
