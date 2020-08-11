@@ -58,8 +58,6 @@ export default {
           name: "ciudadano.apellidos",
           orderable: true,
         },
-
-        { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
         { label: "PARENTESCO", name: "parentesco", orderable: true },
         { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
         {
@@ -128,11 +126,6 @@ export default {
         {
           label: "FECHA DE LLEGADA AL PAIS",
           name: "respuesta_intencion",
-          orderable: true,
-        },
-        {
-          label: "SE ENCUENTRA EMBARAZA ACTUALMENTE",
-          name: "fecha_llegada",
           orderable: true,
         },
         {
