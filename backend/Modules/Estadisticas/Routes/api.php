@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/estadisticas', function (Request $request) {
     return $request->user();
 });
+
+Route::get('datosgenerales', 'DatosGeneralesController@nucleofamiliar')->name('datos.generales');
