@@ -81,3 +81,28 @@ Route::group(['middleware' => ['activity']], function () {
 |--------------------------------------------------------------------------
 
 */
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Transeferencias
+|--------------------------------------------------------------------------
+
+*/
+Route::put('transferencias/{id}/inactivar', 'TransferenciasController@inactivar')->name('transferencias.inactivar');
+Route::put('transferencias/{id}/activar', 'TransferenciasController@activar')->name('transferencias.activar');
+Route::put('transferencias/{id}/restore', 'TransferenciasController@restore')->name('transferencias.restore');
+Route::group(['middleware' => ['activity']], function () {
+    Route::apiResources(
+        [
+            'transferencias' => 'TransferenciasController'
+        ]
+    );
+});
+/*
+|--------------------------------------------------------------------------
+| Rutas Transeferencias
+|--------------------------------------------------------------------------
+
+*/

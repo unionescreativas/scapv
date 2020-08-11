@@ -40,15 +40,17 @@ class TransferenciasController extends Controller
     {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
 
-        // if ($variableConsulta->isEmpty()) {
-        //     $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
-        // } else {
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
-        // }
-        // if ($variableConsulta->isEmpty()) {
-        //     return ['data' => 'no existe', 'status' => '201'];
-        // }
+        if ($variableConsulta->isEmpty()) {
+            $variableConsulta = $this->configModelo::where('ciudadano_id', $id)->get();
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
+        } else {
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
+        }
+        if ($variableConsulta->isEmpty()) {
+            $variableConsulta = $this->configModelo::where('familia_id', $id)->get();
+        } else {
+            return ['data' => 'no existe', 'status' => '201'];
+        }
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
@@ -58,7 +60,9 @@ class TransferenciasController extends Controller
         $variableConsulta = $this->configModelo;
 
         //Campos a guardar aquí--------------->
-        $variableConsulta->tipo_documento = $request->tipo_documento;
+        $variableConsulta->ciudadano_id = $request->ciudadano_id;
+        $variableConsulta->familia_id = $request->familia_id;
+        $variableConsulta->parentesco = $request->parentesco;
         //Campos a guardar aquí--------------->
 
         $variableConsulta->save();
@@ -72,7 +76,9 @@ class TransferenciasController extends Controller
         $variableConsulta = $this->configModelo::find($id);
 
         //Campos Actualizar aquí--------------->
-        $variableConsulta->tipo_documento = $request->tipo_documento;
+        $variableConsulta->ciudadano_id = $request->ciudadano_id;
+        $variableConsulta->familia_id = $request->familia_id;
+        $variableConsulta->parentesco = $request->parentesco;
         //Campos Actualizar aquí--------------->
 
         $variableConsulta->save();

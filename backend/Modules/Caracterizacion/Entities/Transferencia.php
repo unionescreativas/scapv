@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+
 class Transferencia extends Model
 {
     use SoftDeletes, LaravelVueDatatableTrait;
@@ -16,26 +17,29 @@ class Transferencia extends Model
     public $incrementing = false;
     //protected $fillable = [];
 
-//Campos Para mostrar en Api, con filtro --------------------------------------------------------->
+    //Campos Para mostrar en Api, con filtro --------------------------------------------------------->
 
     protected $dataTableColumns = [
         'id' => ['searchable' => false,],
+        'ciudadano_id' => ['searchable' => true, 'order_term' => 'orderable'],
+        'familia_id' => ['searchable' => true, 'order_term' => 'orderable'],
+        'parentesco' => ['searchable' => true, 'order_term' => 'orderable'],
     ];
 
-//Campos Para mostrar en Api, con filtro --------------------------------------------------------->
+    //Campos Para mostrar en Api, con filtro --------------------------------------------------------->
 
 
-//Relaciones --------------------------------------------------------->
-
-
-
-
-//Relaciones --------------------------------------------------------->
+    //Relaciones --------------------------------------------------------->
 
 
 
 
-//Creacion del campo id Uuid --------------------------------------------------------->
+    //Relaciones --------------------------------------------------------->
+
+
+
+
+    //Creacion del campo id Uuid --------------------------------------------------------->
     public static function boot()
     {
         parent::boot();
@@ -49,6 +53,6 @@ class Transferencia extends Model
     protected $casts = [
         'id' => 'string'
     ];
-//Creacion del campo id Uuid --------------------------------------------------------->
+    //Creacion del campo id Uuid --------------------------------------------------------->
 
 }
