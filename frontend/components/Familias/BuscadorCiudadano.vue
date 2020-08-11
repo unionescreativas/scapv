@@ -9,49 +9,29 @@
             </div>
           </div>
           <div class="iq-search-bar">
-            <b-form autocomplete="off" ref="form">
-              <b-row>
-                <b-col sm="8" lg="8">
-                  <vue-bootstrap-typeahead
-                    backgroundVariant="white"
-                    textVariant="dark"
-                    v-model="form.numero_documento"
-                    :data="data"
-                    placeholder="Por favor ingrese su número de documento"
-                    prepend="Número de documento: *"
-                  >
-                    <template slot="append">
-                      <b-button class="text-primary" variant="light" @click="consultarCiudadano(form)">
-                        <i class="fa fa-search"></i>
-                      </b-button>
-                    </template>
-                    <template slot="suggestion" slot-scope="{ htmlText }">
-                      <div class="d-flex align-items-center">
-                        <span v-html="htmlText"></span>
-                      </div>
-                    </template>
-                  </vue-bootstrap-typeahead>
-                </b-col>
-              </b-row>
-
-              <b-row class="mt-3" v-if="mostrarFechaExpedicion">
-                <b-col sm="8" lg="8">
-                  <b-form-group label="FECHA DE EXPEDICION DEL DOCUMENTO: *" label-for="fecha_expedicion">
-                    <b-form-input type="date" id="fecha_expedicion" v-model="form.fecha_expedicion" />
-                  </b-form-group>
-
-                  <b-button @click="actualizarDatos()">
-                    <i class="fa fa-sync"></i>
-                    <span>Actualizar Datos</span>
-                  </b-button>
-
-                  <b-button class="text-primary" variant="light" @click="limpiarDatos()">
-                    <i class="fa fa-trash"></i>
-                    <span>Limpiar Datos</span>
-                  </b-button>
-                </b-col>
-              </b-row>
-            </b-form>
+            <b-row>
+              <b-col sm="8" lg="8">
+                <vue-bootstrap-typeahead
+                  backgroundVariant="white"
+                  textVariant="dark"
+                  v-model="numero_documento"
+                  :data="data"
+                  placeholder="Por favor ingrese su número de documento"
+                  prepend="Número de documento: *"
+                >
+                  <template slot="append">
+                    <b-button class="text-primary" variant="light" @click="consultarCiudadano(numero_documento)">
+                      <i class="fa fa-search"></i>
+                    </b-button>
+                  </template>
+                  <template slot="suggestion" slot-scope="{ htmlText }">
+                    <div class="d-flex align-items-center">
+                      <span v-html="htmlText"></span>
+                    </div>
+                  </template>
+                </vue-bootstrap-typeahead>
+              </b-col>
+            </b-row>
           </div>
         </div>
       </b-col>
@@ -60,7 +40,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 import Swal from "sweetalert2";
 
@@ -69,73 +49,40 @@ export default {
     VueBootstrapTypeahead,
   },
   data: () => ({
-    form: {
-      numero_documento: "",
-      fecha_expedicion: "",
-    },
-    mostrarFechaExpedicion: false,
+    numero_documento: "",
     data: ["1107516836", "1151959229", "1135678956", "1135785905", "1167596907"],
   }),
-  watch: {
-    ciudadano(value) {
-      this.mostrarFechaExpedicion = false;
-      this.$emit("mostrarFormFamilias", false);
-
-      if (value) {
-        Swal.fire({
-          title: "Registrado!",
-          text: "Ya te encuentras registrado, para actualizar tus datos personales, debes ingresar tu fecha de expedición",
-          icon: "info",
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-        });
-
-        this.mostrarFechaExpedicion = true;
-      } else {
-        this.$emit("mostrarFormFamilias", true);
-      }
-    },
-  },
   computed: {
     ...mapState("Familias", ["ciudadano"]),
   },
   methods: {
     limpiarDatos() {
-      this.form.numero_documento = "";
-      this.form.fecha_expedicion = "";
-      this.$refs.form.reset();
+      this.numero_documento = "";
       // SE ACCEDE AL COMPONENTE: VueBootstrapTypeahead
       // Y SE REINICIA EL VALOR DEL INPUT SEARCH
       this.$children[0].inputValue = "";
-      this.mostrarFechaExpedicion = false;
       this.$emit("mostrarFormFamilias", false);
     },
-    actualizarDatos() {
-      let mostrarFormFamilias = false;
-
-      if (this.form.fecha_expedicion) {
-        if (this.form.fecha_expedicion == this.ciudadano.fecha_expedicion) {
-          mostrarFormFamilias = true;
-        } else {
+    consultarCiudadano(numero_documento) {
+      this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
+        if (this.ciudadano) {
           Swal.fire({
-            html: "<h5>La fecha de expedición no corresponde con el número de documento digitado</h5>",
-            icon: "warning",
+            title: "Registrado!",
+            text: "Ya te encuentras registrado, se cargarán tus datos personales",
+            icon: "info",
             allowOutsideClick: false,
             allowEscapeKey: false,
+          }).then((result) => {
+            if (result.value) {
+              this.$emit("mostrarFormFamilias", true);
+            }
           });
+        } else {
+          this.$emit("mostrarFormFamilias", true);
         }
-      } else {
-        Swal.fire({
-          html: "<h5>Debe ingresar la fecha de expedición</h5>",
-          icon: "warning",
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-        });
-      }
-
-      this.$emit("mostrarFormFamilias", mostrarFormFamilias);
+      });
+      this.$emit("mostrarFormFamilias", false);
     },
-    ...mapActions("Familias", ["consultarCiudadano"]),
   },
 };
 </script>

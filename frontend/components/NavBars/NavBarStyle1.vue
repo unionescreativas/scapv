@@ -12,11 +12,11 @@
       </div>
       <div class="iq-menu-horizontal" v-if="horizontal">
         <div class="iq-sidebar-menu">
-          <ListStyle1 :items="items" class="d-flex"></ListStyle1>
+          <ListStyle1 :items="items" class="d-flex" />
         </div>
       </div>
       <nav class="navbar navbar-expand-lg navbar-light p-0">
-        <div class="navbar-left">
+        <div class="navbar-left col-6">
           <ul id="topbar-data-icon" class="d-flex p-0 topbar-menu-icon">
             <li v-for="(item, index) in bookmark" :key="index">
               <nuxt-link :to="item.link" class="nav-link" style="color: var(--iq-primary);">
@@ -25,17 +25,24 @@
             </li>
           </ul>
           <div class="iq-search-bar">
-            <form action="#" class="searchbox">
-              <input
-                type="text"
-                class="text search-input"
-                @click="openSearch"
-                v-model="globalSearch"
-                :placeholder="$t('nav.globalSearchPlaceholder')"
-              />
-              <a class="search-link" href="javascript:void(0)"><i class="ri-search-line"></i></a>
-              <GlobalSearch :search="globalSearch" @closeSearch="removeClass" />
-            </form>
+            <vue-bootstrap-typeahead
+              backgroundVariant="white"
+              textVariant="dark"
+              v-model="numero_documento"
+              :data="data"
+              :placeholder="$t('nav.globalSearchPlaceholder')"
+            >
+              <template slot="append">
+                <b-button class="text-primary" variant="light" @click="consultarCiudadano(numero_documento)">
+                  <i class="fa fa-search"></i>
+                </b-button>
+              </template>
+              <template slot="suggestion" slot-scope="{ htmlText }">
+                <div class="d-flex align-items-center">
+                  <span v-html="htmlText"></span>
+                </div>
+              </template>
+            </vue-bootstrap-typeahead>
           </div>
         </div>
         <b-navbar-toggle target="nav-collapse">
@@ -61,8 +68,10 @@
   <!-- TOP Nav Bar END -->
 </template>
 <script>
+import { mapState, mapGetters } from "vuex";
+import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
+import Swal from "sweetalert2";
 import verticalMenu from "~/plugins/FackApi/json/VerticalMenu";
-import { mapGetters } from "vuex";
 
 export default {
   name: "NavBarStyle1",
@@ -79,43 +88,39 @@ export default {
     horizontal: { type: Boolean, default: false },
     items: { type: Array },
   },
-  mounted() {
-    document.addEventListener("click", this.closeSearch, true);
+  components: {
+    VueBootstrapTypeahead,
   },
+  data: () => ({
+    sidebar: verticalMenu,
+    numero_documento: "",
+    data: ["1107516836", "1151959229", "1135678956", "1135785905", "1167596907"],
+  }),
   computed: {
+    ...mapState("Familias", ["ciudadano"]),
     ...mapGetters({
       bookmark: "Setting/bookmarkState",
     }),
-  },
-  data() {
-    return {
-      sidebar: verticalMenu,
-      globalSearch: "",
-      showSearch: false,
-      showMenu: false,
-    };
   },
   methods: {
     miniSidebar() {
       this.$emit("toggle");
     },
-    openSearch() {
-      this.showSearch = true;
-      this.showMenu = "iq-show";
-      this.globalSearch = "";
-      $("#searchbox-datalink").addClass("show-data");
-    },
-    closeSearch(event) {
-      let classList = event.target.classList;
-      if (!classList.contains("searchbox") && !classList.contains("search-input")) {
-        this.removeClass();
-      }
-    },
-    removeClass() {
-      this.showSearch = false;
-      this.showMenu = "";
-      this.globalSearch = "";
-      $("#searchbox-datalink").removeClass("show-data");
+    consultarCiudadano(numero_documento) {
+      this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
+        if (this.ciudadano) {
+          this.$nuxt.$router.push("/familias/perfil");
+          this.numero_documento = "";
+          this.$children[6].inputValue = "";
+        } else {
+          Swal.fire({
+            html: "<h5>Esta persona no se encuentra registrada</h5>",
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          });
+        }
+      });
     },
   },
 };

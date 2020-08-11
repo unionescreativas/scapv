@@ -51,6 +51,9 @@
                         :ariaSelected="false"
                         title="Otra Información"
                       />
+                      <div class="align-self-center" style="cursor: pointer;" title="Georreferenciación">
+                        <i class="fa fa-2x fa-globe"></i>
+                      </div>
                     </tab-nav>
                   </b-col>
                 </b-row>
@@ -78,7 +81,7 @@
               </template>
             </iq-card>
           </tab-content-item>
-          
+
           <tab-content-item :active="false" id="otra-informacion" aria-labelled-by="otra-informacion">
             <iq-card>
               <template v-slot:headerTitle>

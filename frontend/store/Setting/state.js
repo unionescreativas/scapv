@@ -1,5 +1,3 @@
-import SideBarItems from "~/plugins/FackApi/json/GlobalSearch";
-
 export default () => ({
   horizontalMenu: false,
   miniSidebarMenu: false,
@@ -105,7 +103,6 @@ export default () => ({
       password: "admin123",
     },
   ],
-  globalSearch: SideBarItems,
   bookmark: [
     {
       title: "Video Chat",

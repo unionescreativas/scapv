@@ -104,12 +104,12 @@
     </RightSideBar>
     <div class="wrapper">
       <!-- Sidebar  -->
-      <SideBarStyle1 :items="verticalMenu" :horizontal="horizontal" :logo="logo" @toggle="sidebarMini()" />
+      <SideBarStyle1 :items="verticalMenu" :horizontal="horizontal" :logo="logo" @toggle="sidebarMini" />
       <!-- TOP Nav Bar -->
       <NavBarStyle1
         title="Dashboard"
         :homeURL="{ path: '/' }"
-        @toggle="sidebarMini()"
+        @toggle="sidebarMini"
         :logo="logo"
         :horizontal="horizontal"
         :items="horizontalMenu"
@@ -144,11 +144,6 @@
                         </div>
                       </div>
                     </div>
-                    <nuxt-link :to="{ name: 'app.e-commerce.cart' }"
-                      ><b-button variant=" iq-bg-primary" block
-                        ><i class="fas fa-cart-plus" />{{ $t("nav.viewCarts") }}</b-button
-                      ></nuxt-link
-                    >
                   </div>
                 </div>
               </div>

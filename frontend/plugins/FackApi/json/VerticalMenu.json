@@ -14,7 +14,7 @@
     "is_heading": false,
     "is_active": false,
     "link": {
-      "path": "estadisticas"
+      "path": "/estadisticas"
     },
     "class_name": "",
     "is_icon_class": true,
@@ -35,7 +35,7 @@
         "name": "sidebar.menu-2-submenu-1",
         "is_active": false,
         "link": {
-          "path": "crear-familias"
+          "path": "/familias/crear-familias"
         },
         "class_name": "",
         "is_icon_class": true,
@@ -46,7 +46,7 @@
         "name": "sidebar.menu-2-submenu-2",
         "is_active": false,
         "link": {
-          "path": "app.e-commerce.detail"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -57,7 +57,7 @@
         "name": "sidebar.menu-2-submenu-3",
         "is_active": false,
         "link": {
-          "path": "app.e-commerce.cart"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -68,7 +68,7 @@
         "name": "sidebar.menu-2-submenu-4",
         "is_active": false,
         "link": {
-          "path": "app.e-commerce.wishlist"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -79,7 +79,7 @@
         "name": "sidebar.menu-2-submenu-5",
         "is_active": false,
         "link": {
-          "path": "app.e-commerce.wishlist"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -102,7 +102,7 @@
         "name": "sidebar.menu-3-submenu-1",
         "is_active": false,
         "link": {
-          "path": "familias/crear-familias"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -113,7 +113,7 @@
         "name": "sidebar.menu-3-submenu-2",
         "is_active": false,
         "link": {
-          "path": "app.e-commerce.detail"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -124,7 +124,7 @@
         "name": "sidebar.menu-3-submenu-3",
         "is_active": false,
         "link": {
-          "path": "app.e-commerce.cart"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -135,7 +135,7 @@
         "name": "sidebar.menu-3-submenu-4",
         "is_active": false,
         "link": {
-          "path": "app.e-commerce.cart"
+          "path": ""
         },
         "class_name": "",
         "is_icon_class": true,
@@ -149,7 +149,7 @@
     "is_heading": false,
     "is_active": false,
     "link": {
-      "path": "app.todo"
+      "path": ""
     },
     "class_name": "",
     "is_icon_class": true,

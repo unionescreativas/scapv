@@ -101,7 +101,7 @@
     "submenuThree": "子菜单3"
   },
   "nav": {
-	"globalSearchPlaceholder": "在此處輸入內容進行搜索...",
+    "globalSearchPlaceholder": "在此處輸入內容進行搜索 ...",
     "allNotifications": "所有通知",
     "allMessages": "所有消息",
     "allCarts": "所有车",

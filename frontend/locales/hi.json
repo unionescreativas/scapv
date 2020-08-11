@@ -101,7 +101,7 @@
     "submenuThree": "उप-मेनू 3"
   },
   "nav": {
-	"globalSearchPlaceholder": "खोजने के लिए यहां टाइप करें...",
+    "globalSearchPlaceholder": "खोजने के लिए यहां टाइप करें ...",
     "allNotifications": "सभी सूचनाएं",
     "allMessages": "सभी संदेश",
     "allCarts": "सभी गाड़ियां",

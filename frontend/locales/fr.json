@@ -101,7 +101,7 @@
     "submenuThree": "Sous-menu 3"
   },
   "nav": {
-	"globalSearchPlaceholder": "Tapez ici pour rechercher...",
+    "globalSearchPlaceholder": "Tapez ici pour rechercher ...",
     "allNotifications": "Toutes Les Notifications",
     "allMessages": "Tous Les Messages",
     "allCarts": "Tous Les Chariots",
