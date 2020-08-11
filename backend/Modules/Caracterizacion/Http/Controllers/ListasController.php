@@ -6,8 +6,10 @@ namespace Modules\Caracterizacion\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Caracterizacion\Entities\Listas;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
+
 class ListasController extends Controller
 {
 
@@ -17,8 +19,8 @@ class ListasController extends Controller
     public function __construct()
     {
         // Variables Globales---------------------------->
-        $this->configModelo = new Modificar;
-        $this->modulo = "Modificar";
+        $this->configModelo = new Listas;
+        $this->modulo = "Listas";
         // Variables Globales---------------------------->
 
     }
