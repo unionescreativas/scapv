@@ -11,7 +11,7 @@ class Ayuda extends Model
 {
     use SoftDeletes, LaravelVueDatatableTrait;
     //nombre de la table --------------------------------------------------------->
-    protected $table = '';
+    protected $table = 'ayudas';
     //nombre de la table --------------------------------------------------------->
     protected $keyType = 'string';
     public $incrementing = false;
@@ -20,8 +20,7 @@ class Ayuda extends Model
     //Campos Para mostrar en Api, con filtro --------------------------------------------------------->
 
     protected $dataTableColumns = [
-        'lista_ayuda_id' => ['searchable' => true, 'order_term' => 'orderable'],
-        'ciudadano_id' => ['searchable' => true, 'order_term' => 'orderable'],
+        // 'lista_ayuda_id' => ['searchable' => true,'order_term' => 'orderable'],
         'cantidad_entregada' => ['searchable' => true, 'order_term' => 'orderable'],
         'fecha_entrega' => ['searchable' => true, 'order_term' => 'orderable'],
     ];
@@ -31,6 +30,32 @@ class Ayuda extends Model
 
     //Relaciones --------------------------------------------------------->
 
+
+    protected $dataTableRelationships = [
+        "belongsTo" => [
+            "ciudadano" => [
+                "model" => \Modules\Caracterizacion\Entities\Ciudadano::class,
+                "foreign_key" => "ciudadano_id",
+                "columns" => [],
+            ],
+            "lista" => [
+                "model" => \Modules\Caracterizacion\Entities\Lista::class,
+                "foreign_key" => "lista_id",
+                "columns" => [],
+            ],
+        ],
+    ];
+
+
+    public function ciudadano()
+    {
+        return $this->belongsTo('\Modules\Caracterizacion\Entities\Ciudadano');
+    }
+
+    public function lista()
+    {
+        return $this->belongsTo('\Modules\Caracterizacion\Entities\Lista');
+    }
 
 
 
@@ -49,6 +74,8 @@ class Ayuda extends Model
             }
         );
     }
+
+
 
     protected $casts = [
         'id' => 'string'

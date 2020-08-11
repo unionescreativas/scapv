@@ -7,7 +7,7 @@ use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
-class Listas extends Model
+class Lista extends Model
 {
     use SoftDeletes, LaravelVueDatatableTrait;
     //nombre de la table --------------------------------------------------------->
@@ -35,7 +35,10 @@ class Listas extends Model
     //Relaciones --------------------------------------------------------->
 
 
-
+    public function ayuda()
+    {
+        return $this->belongsTo('\Modules\Caracterizacion\Entities\Ayuda');
+    }
 
     //Relaciones --------------------------------------------------------->
 
