@@ -4,7 +4,7 @@
       <b-col sm="12">
         <iq-card>
           <template v-slot:headerTitle>
-            <h4 class="card-title">Integrantes Cargados</h4>
+            <h4 class="card-title">Mis Integrantes</h4>
           </template>
           <template v-slot:headerAction>
             <a class="text-primary float-right" v-b-toggle.collapse-1 role="button">
