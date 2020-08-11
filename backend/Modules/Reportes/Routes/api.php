@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/reportes', function (Request $request) {
     return $request->user();
 });
+
+Route::get('reportes/ciudadanos/', 'GenerarReportesController@exportarCiudadanos');
+Route::get('reportes/familias/', 'GenerarReportesController@exportarFamilias');
+Route::get('reportes/ayudasentregadas/', 'GenerarReportesController@exportarAyudas');
+Route::get('reportes/ayudaspendientes/', 'GenerarReportesController@exportarAyudasPendientes');
+
+
