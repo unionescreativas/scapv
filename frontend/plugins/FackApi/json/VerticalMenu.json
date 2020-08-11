@@ -109,6 +109,17 @@
         "icon": ""
       },
       {
+        "title": "Ciudadanos",
+        "name": "sidebar.menu-3-submenu-1",
+        "is_active": false,
+        "link": {
+          "path": "/a"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
         "title": "Pendientes por ayuda",
         "name": "sidebar.menu-3-submenu-2",
         "is_active": false,
