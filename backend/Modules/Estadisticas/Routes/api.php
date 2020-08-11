@@ -17,4 +17,6 @@ Route::middleware('auth:api')->get('/estadisticas', function (Request $request) 
     return $request->user();
 });
 
-Route::get('datosgenerales', 'DatosGeneralesController@index')->name('datos.generales');
+Route::group(['middleware' => ['activity']], function () {
+    Route::get('datosgenerales', 'DatosGeneralesController@index')->name('datos.generales');
+});
