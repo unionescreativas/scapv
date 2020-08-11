@@ -5,10 +5,11 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Caracterizacion\Entities\Transferencia;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
-use Modules\Caracterizacion\Entities\Transferencia;
 
 class TransferenciasController extends Controller
 {
@@ -32,13 +33,20 @@ class TransferenciasController extends Controller
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
-        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)->where('estado', '1');
+        $variableConsulta = $this->configModelo::eloquentQuery(
+            $sortBy,
+            $orderBy,
+            $searchValue,
+            [
+                "familia", "ciudadano"
+            ]
+        )->where('transferencias.estado', '1');
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
     public function show($id)
     {
-        $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
+        $variableConsulta = $this->configModelo::where('id', $id)->where('transferencias.estado', '1')->get();
 
         if ($variableConsulta->isEmpty()) {
             $variableConsulta = $this->configModelo::where('ciudadano_id', $id)->get();
@@ -63,6 +71,11 @@ class TransferenciasController extends Controller
         $variableConsulta->ciudadano_id = $request->ciudadano_id;
         $variableConsulta->familia_id = $request->familia_id;
         $variableConsulta->parentesco = $request->parentesco;
+
+        DB::table('familias')
+            ->where('ciudadano_id', $request->familia_id)
+            ->update(['ciudadano_id' => $request->ciudadano_id]);
+
         //Campos a guardar aquí--------------->
 
         $variableConsulta->save();

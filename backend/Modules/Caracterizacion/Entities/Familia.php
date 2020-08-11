@@ -85,6 +85,10 @@ class Familia extends Model
     {
         return $this->belongsTo('\Modules\Caracterizacion\Entities\Ciudadano');
     }
+    public function transferencia()
+    {
+        return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
+    }
 
 
 

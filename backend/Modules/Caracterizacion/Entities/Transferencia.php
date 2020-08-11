@@ -21,8 +21,6 @@ class Transferencia extends Model
 
     protected $dataTableColumns = [
         'id' => ['searchable' => false,],
-        'ciudadano_id' => ['searchable' => true, 'order_term' => 'orderable'],
-        'familia_id' => ['searchable' => true, 'order_term' => 'orderable'],
         'parentesco' => ['searchable' => true, 'order_term' => 'orderable'],
     ];
 
@@ -32,8 +30,30 @@ class Transferencia extends Model
     //Relaciones --------------------------------------------------------->
 
 
+    protected $dataTableRelationships = [
+        "belongsTo" => [
+            "familia" => [
+                "model" => \Modules\Caracterizacion\Entities\Familia::class,
+                "foreign_key" => "familia_id",
+                "columns" => [],
+            ],
+            "ciudadano" => [
+                "model" => \Modules\Caracterizacion\Entities\Ciudadano::class,
+                "foreign_key" => "ciudadano_id",
+                "columns" => [],
+            ],
+        ],
+    ];
 
+    public function familia()
+    {
+        return $this->belongsTo(\Modules\Caracterizacion\Entities\Familia::class);
+    }
 
+    public function ciudadano()
+    {
+        return $this->belongsTo(\Modules\Caracterizacion\Entities\Ciudadano::class);
+    }
     //Relaciones --------------------------------------------------------->
 
 
