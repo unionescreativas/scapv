@@ -20,6 +20,15 @@ class Documento extends Model
 
     protected $dataTableColumns = [
         'id' => ['searchable' => false,],
+        'modulo' => ['searchable' => false,],
+        'modulo_id' => ['searchable' => false,],
+        'nombre_archivo' => ['searchable' => false,],
+        'nombre_carga' => ['searchable' => false,],
+        'url' => ['searchable' => false,],
+        'extension' => ['searchable' => false,],
+        'tamano' => ['searchable' => false,],
+        'aplicacion' => ['searchable' => false,],
+        'ruta_carga' => ['searchable' => false,],
     ];
 
 //Campos Para mostrar en Api, con filtro --------------------------------------------------------->
