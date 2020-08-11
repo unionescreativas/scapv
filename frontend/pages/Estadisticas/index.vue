@@ -127,19 +127,25 @@
 <script>
 import { vito } from "~/plugins/config/pluginInit";
 import { mapState, mapActions } from "vuex";
+
 export default {
   name: "Estadisticas",
   layout: "LightLayout",
-  data: () => ({}),
+  data: () => ({
+    estadisticas: {}
+  }),
   methods: {
-    ...mapActions("Estadisticas", ["consultarEstadisticas"]),
+    // ...mapActions("Estadisticas", ["consultarEstadisticas"]),
   },
   computed: {
-    ...mapState("Estadisticas", ["estadisticas"]),
+    // ...mapState("Estadisticas", ["estadisticas"]),
   },
   mounted() {
     vito.index();
-    this.consultarEstadisticas();
+    // this.consultarEstadisticas();
+    this.$axios.get("/api/datosgenerales").then((response) => {
+      this.estadisticas = response.data.data;
+    });
   },
 };
 </script>
