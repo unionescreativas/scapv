@@ -41,7 +41,7 @@ Route::group(['middleware' => ['activity']], function () {
 Route::put('familias/{id}/inactivar', 'FamiliasController@inactivar')->name('familias.inactivar');
 Route::put('familias/{id}/activar', 'FamiliasController@activar')->name('familias.activar');
 Route::put('familias/{id}/restore', 'FamiliasController@restore')->name('familias.restore');
-Route::get('nucleofamiliar', 'FamiliasController@nucleofamiliar')->name('familias.nucleofamiliar');
+Route::get('nucleofamiliar/{id}', 'FamiliasController@nucleofamiliar')->name('familias.nucleofamiliar');
 Route::group(['middleware' => ['activity']], function () {
     Route::apiResources(
         [

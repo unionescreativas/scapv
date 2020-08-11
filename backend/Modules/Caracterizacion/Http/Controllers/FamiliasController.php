@@ -38,15 +38,16 @@ class FamiliasController extends Controller
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
-    public function nucleofamiliar(Request $request)
+    public function nucleofamiliar(Request $request, $id)
     {
         $length = $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
-        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)
-            ->where('ciudadano_id', $request->ciudadano_id)
+        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue, [
+            "ciudadano",
+        ])->where('ciudadano_id', $id)
             ->where('familias.estado', '1');
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);

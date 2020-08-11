@@ -49,8 +49,21 @@ class AyudasController extends Controller
     {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
 
+        $sortBy = "id";
+        $orderBy = "asc";
+        $searchValue = "";
+        $length = 20;
         if ($variableConsulta->isEmpty()) {
-            $variableConsulta = $this->configModelo::where('ciudadano_id', $id)->get();
+            $variableConsulta = $this->configModelo::eloquentQuery(
+                $sortBy,
+                $orderBy,
+                $searchValue,
+                [
+                    "lista", "ciudadano"
+                ]
+            )->where('ciudadano_id', $id);
+            $data = $variableConsulta->paginate($length);
+            return new DataTableCollectionResource($data);
             ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
         } else {
             ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
