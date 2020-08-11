@@ -55,3 +55,30 @@ Route::group(['middleware' => ['activity']], function () {
 |--------------------------------------------------------------------------
 
 */
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Listas
+|--------------------------------------------------------------------------
+
+*/
+Route::put('listas/{id}/inactivar', 'ListasController@inactivar')->name('listas.inactivar');
+Route::put('listas/{id}/activar', 'ListasController@activar')->name('listas.activar');
+Route::put('listas/{id}/restore', 'ListasController@restore')->name('listas.restore');
+Route::get('consultarlistas', 'ListasController@consultarlistas')->name('listas.consultarlistas');
+Route::group(['middleware' => ['activity']], function () {
+    Route::apiResources(
+        [
+            'listas' => 'ListasController'
+        ]
+    );
+});
+/*
+|--------------------------------------------------------------------------
+| Rutas Listas
+|--------------------------------------------------------------------------
+
+*/
