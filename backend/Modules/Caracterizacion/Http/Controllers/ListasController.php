@@ -39,16 +39,15 @@ class ListasController extends Controller
     public function show($id)
     {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
-
-        // if ($variableConsulta->isEmpty()) {
-        //     $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
-        // } else {
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
-        // }
-        // if ($variableConsulta->isEmpty()) {
-        //     return ['data' => 'no existe', 'status' => '201'];
-        // }
+        if ($variableConsulta->isEmpty()) {
+            $variableConsulta = $this->configModelo::where('codigo_lista', $id)->get();
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
+        } else {
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
+        }
+        if ($variableConsulta->isEmpty()) {
+            return ['data' => 'no existe', 'status' => '201'];
+        }
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
@@ -78,7 +77,12 @@ class ListasController extends Controller
         $variableConsulta = $this->configModelo::find($id);
 
         //Campos Actualizar aquí--------------->
-        $variableConsulta->tipo_documento = $request->tipo_documento;
+        $variableConsulta->codigo_lista = $request->codigo_lista;
+        $variableConsulta->codigo_campo = $request->codigo_campo;
+        $variableConsulta->valor_campo_1 = $request->valor_campo_1;
+        $variableConsulta->valor_campo_2 = $request->valor_campo_2;
+        $variableConsulta->valor_campo_3 = $request->valor_campo_3;
+        $variableConsulta->valor_campo_4 = $request->valor_campo_4;
         //Campos Actualizar aquí--------------->
 
         $variableConsulta->save();
