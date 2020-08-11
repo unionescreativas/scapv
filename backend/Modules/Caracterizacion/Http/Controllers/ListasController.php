@@ -58,7 +58,13 @@ class ListasController extends Controller
         $variableConsulta = $this->configModelo;
 
         //Campos a guardar aquí--------------->
-        $variableConsulta->tipo_documento = $request->tipo_documento;
+        $variableConsulta->codigo_lista = $request->codigo_lista;
+        $variableConsulta->codigo_campo = $request->codigo_campo;
+        $variableConsulta->valor_campo_1 = $request->valor_campo_1;
+        $variableConsulta->valor_campo_2 = $request->valor_campo_2;
+        $variableConsulta->valor_campo_3 = $request->valor_campo_3;
+        $variableConsulta->valor_campo_4 = $request->valor_campo_4;
+
         //Campos a guardar aquí--------------->
 
         $variableConsulta->save();
