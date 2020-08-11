@@ -15,8 +15,24 @@ class DatosGeneralesController extends Controller
 
     public function index(Request $request)
     {
-        $ayudasEntregadas = DB::table('ayudas')
-            ->where('lista_id', $request->lista_id)
-            ->where('ciudadano_id', $request->ciudadano_id)->sum('cantidad_entregada');
+        $ciudadanos = DB::table('ciudadanos')
+            ->count('id');
+
+        $familias = DB::table('familias')
+            ->count('id');
+        $total_nucleo = $ciudadanos + $familias;
+
+        $total_ayudas = DB::table('ayudas')
+            ->sum('cantidad_entregada');
+        // $libros = DB::select('select * from books where 1');
+
+        $datos = (object) [
+            'ciudadanos' => $ciudadanos,
+            'familias' => $familias,
+            'total_nucleo' => (int) $total_nucleo,
+            'total_ayudas' => (int)$total_ayudas,
+            'pendiente_ayudas' => $total_nucleo - $total_ayudas
+        ];
+        return ['data' =>  $datos, 'status' => '202'];
     }
 }
