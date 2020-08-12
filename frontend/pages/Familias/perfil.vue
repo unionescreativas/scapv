@@ -49,11 +49,11 @@
                       class="profile-feed-items d-flex justify-content-end"
                     >
                       <tab-nav-items
-                        :active="false"
+                        :active="true"
                         id="pills-feed-tab"
                         href="#informacion-personal"
                         role="tab"
-                        :ariaSelected="false"
+                        :ariaSelected="true"
                         title="Información Personal"
                       />
                       <tab-nav-items
@@ -85,7 +85,7 @@
       <b-col sm="12">
         <tab-content>
           <tab-content-item
-            :active="false"
+            :active="true"
             id="informacion-personal"
             aria-labelled-by="informacion-personal"
           >
