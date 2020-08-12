@@ -110,17 +110,6 @@
       },
       {
         "title": "Ciudadanos",
-        "name": "sidebar.menu-3-submenu-1",
-        "is_active": false,
-        "link": {
-          "path": "/a"
-        },
-        "class_name": "",
-        "is_icon_class": true,
-        "icon": ""
-      },
-      {
-        "title": "Pendientes por ayuda",
         "name": "sidebar.menu-3-submenu-2",
         "is_active": false,
         "link": {
@@ -131,7 +120,7 @@
         "icon": ""
       },
       {
-        "title": "Con ayudas entregadas",
+        "title": "Pendientes por ayuda",
         "name": "sidebar.menu-3-submenu-3",
         "is_active": false,
         "link": {
@@ -142,8 +131,19 @@
         "icon": ""
       },
       {
-        "title": "Integrantes de familia",
+        "title": "Con ayudas entregadas",
         "name": "sidebar.menu-3-submenu-4",
+        "is_active": false,
+        "link": {
+          "path": ""
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      },
+      {
+        "title": "Integrantes de familia",
+        "name": "sidebar.menu-3-submenu-5",
         "is_active": false,
         "link": {
           "path": ""

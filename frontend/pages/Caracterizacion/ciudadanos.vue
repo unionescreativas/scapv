@@ -12,7 +12,7 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table :columns="columns" :url="ruta"></data-table>
+            <data-table :columns="columns" :url="ruta" />
           </template>
         </iq-card>
       </b-col>
@@ -22,13 +22,14 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-import tablas from "~/components/Caracterizacion/tablas.vue";
+import tablas from "~/components/Caracterizacion/Tablas.vue";
+
 export default {
   name: "ciudadanos",
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}/api/ciudadanos`,
+      ruta: `${process.env.API_URL}api/ciudadanos`,
       columns: [
         {
           label: "CONSULTAR",
@@ -151,11 +152,7 @@ export default {
     displayRow(data) {
       let ruta = `/Familias/perfil/${data.id}`;
       $nuxt.$router.push(ruta);
-      // alert(`You clicked row ${data.id}`);
     },
-  },
-  components: {
-    tablas,
   },
   mounted() {
     vito.index();

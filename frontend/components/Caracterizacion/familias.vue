@@ -12,7 +12,7 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table :columns="columns" :url="ruta+ciudadano[0].id"></data-table>
+            <data-table :columns="columns" :url="ruta + ciudadano[0].id" />
           </template>
         </iq-card>
       </b-col>
@@ -23,12 +23,13 @@
 <script>
 import { vito } from "~/plugins/config/pluginInit";
 import { mapState } from "vuex";
+
 export default {
   name: "ciudadanos",
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}/api/nucleofamiliar/`,
+      ruta: `${process.env.API_URL}api/nucleofamiliar/`,
       columns: [
         {
           label: "CEDULA CIUDADANO",

@@ -124,6 +124,7 @@
           </tab-content-item>
         </tab-content>
       </b-col>
+
       <familias />
       <ayudas />
     </b-row>
@@ -132,15 +133,10 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-import ayudas from "~/components/Caracterizacion/ayudas.vue";
-import familias from "~/components/Caracterizacion/familias.vue";
 import { mapState } from "vuex";
+
 export default {
   layout: "LightLayout",
-  components: {
-    ayudas,
-    familias,
-  },
   data: () => ({
     user: {
       profile: require("~/assets/images/user/avatar.png"),
@@ -158,7 +154,6 @@ export default {
   },
   mounted() {
     vito.index();
-    console.log(this.ciudadano);
   },
 };
 </script>

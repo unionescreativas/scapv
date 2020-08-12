@@ -132,7 +132,7 @@ export default {
   name: "Estadisticas",
   layout: "LightLayout",
   data: () => ({
-    estadisticas: {}
+    estadisticas: {},
   }),
   methods: {
     // ...mapActions("Estadisticas", ["consultarEstadisticas"]),
@@ -143,7 +143,7 @@ export default {
   mounted() {
     vito.index();
     // this.consultarEstadisticas();
-    this.$axios.get("/api/datosgenerales").then((response) => {
+    this.$axios.get("api/datosgenerales").then((response) => {
       this.estadisticas = response.data.data;
     });
   },

@@ -1,0 +1,15 @@
+@import "node_modules/vue-select/dist/vue-select.css";
+
+.vs__dropdown-option--highlight {
+  background-color: var(--iq-primary);
+}
+.vs__dropdown-toggle {
+  font-size: 14px;
+  border-radius: 10px;
+}
+.vs__dropdown-menu {
+  font-size: 14px;
+}
+.vs__search {
+  line-height: 2;
+}

@@ -12,7 +12,7 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table :columns="columns" :url="ruta+ciudadano[0].id"></data-table>
+            <data-table :columns="columns" :url="ruta + ciudadano[0].id" />
           </template>
         </iq-card>
       </b-col>
@@ -23,12 +23,13 @@
 <script>
 import { vito } from "~/plugins/config/pluginInit";
 import { mapState } from "vuex";
+
 export default {
   name: "ayudas",
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}/api/ayudas/`,
+      ruta: `${process.env.API_URL}api/ayudas/`,
       columns: [
         { label: "AYUDA", name: "lista.valor_campo_1", orderable: true },
         {
@@ -55,13 +56,6 @@ export default {
       ],
     };
   },
-  // watch: {
-  //   ciudadano(value) {
-  //     if (this.ciudadano != "no existe") {
-  //       this.ruta += this.ciudadano[0].id;
-  //     }
-  //   },
-  // },
   mounted() {
     vito.index();
   },

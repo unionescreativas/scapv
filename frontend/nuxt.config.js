@@ -9,24 +9,24 @@ export default {
   },
   /*
    ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
+   ** See https://nuxtjs.orgapi/configuration-mode
    */
   mode: "universal",
   /*
    ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
+   ** See https://nuxtjs.orgapi/configuration-target
    */
   target: "static",
   /*
    ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
+   ** See https://nuxtjs.orgapi/configuration-head
    */
   head: {
     htmlAttrs: {
       lang: "es",
       dir: "ltr",
     },
-    title: process.env.npm_package_name || "",
+    title: "scapv" || process.env.npm_package_name,
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -60,7 +60,7 @@ export default {
   ],
   /*
    ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
+   ** See https://nuxtjs.orgapi/configuration-components
    */
   components: true,
   /*
@@ -109,7 +109,7 @@ export default {
   },
   /*
    ** Build configuration
-   ** See https://nuxtjs.org/api/configuration-build/
+   ** See https://nuxtjs.orgapi/configuration-build/
    */
   build: {
     transpile: ["vee-validate", "vue-bootstrap-typeahead"],

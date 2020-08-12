@@ -297,7 +297,7 @@
 </template>
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-// import { Users } from "~/plugins/FackApi/api/chat";
+// import { Users } from "~/plugins/FackApiapi/chat";
 import horizontalMenu from "~/plugins/FackApi/json/HorizontalMenu";
 import verticalMenu from "~/plugins/FackApi/json/VerticalMenu";
 import userProfile from "~/assets/images/user/user-1.jpeg";
