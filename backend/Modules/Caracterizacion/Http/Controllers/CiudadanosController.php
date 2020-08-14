@@ -175,4 +175,10 @@ class CiudadanosController extends Controller
         $variableConsulta->restore();
         return ['data' => $variableConsulta, 'status' => '207'];
     }
+    public function buscadogeneral()
+    {
+        $user = $this->configModelo::all();
+
+        return $user->toArray();
+    }
 }
