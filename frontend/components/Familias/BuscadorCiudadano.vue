@@ -15,7 +15,7 @@
                   backgroundVariant="white"
                   textVariant="dark"
                   v-model="numero_documento"
-                  :data="data"
+                  :data="ciudadanos"
                   placeholder="Por favor ingrese su número de documento"
                   prepend="Número de documento: *"
                 >
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 import Swal from "sweetalert2";
 
@@ -48,9 +48,12 @@ export default {
   components: {
     VueBootstrapTypeahead,
   },
+  // asyncData({ $axios }) {
+  //   return this.$axios.get("/api/ciudadanos/").then((res) => ({ciudadanos: res.data.data}));
+  // },
   data: () => ({
     numero_documento: "",
-    data: ["1107516836", "1151959229", "1135678956", "1135785905", "1167596907"],
+    ciudadanos: []
   }),
   computed: {
     ...mapState("Familias", ["ciudadano"]),
@@ -84,5 +87,12 @@ export default {
       this.$emit("mostrarFormFamilias", false);
     },
   },
+  async mounted(){
+    await this.$axios.get("/api/ciudadanos/").then((res) => {
+      let data = res.data.data;
+      let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
+      this.ciudadanos = ciudadanos;
+    });
+  }
 };
 </script>

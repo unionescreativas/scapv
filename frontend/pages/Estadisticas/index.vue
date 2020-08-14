@@ -131,21 +131,16 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "Estadisticas",
   layout: "LightLayout",
-  data: () => ({
-    estadisticas: {},
-  }),
-  methods: {
-    // ...mapActions("Estadisticas", ["consultarEstadisticas"]),
+  async asyncData({ $axios }) {
+    let res = await $axios.get("/api/datosgenerales/");
+    let estadisticas = res.data.data;
+    return { estadisticas };
   },
-  computed: {
-    // ...mapState("Estadisticas", ["estadisticas"]),
-  },
+  data: () => ({}),
+  methods: {},
+  computed: {},
   mounted() {
     vito.index();
-    // this.consultarEstadisticas();
-    this.$axios.get("api/datosgenerales").then((response) => {
-      this.estadisticas = response.data.data;
-    });
   },
 };
 </script>

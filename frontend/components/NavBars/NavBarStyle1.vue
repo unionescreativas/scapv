@@ -29,7 +29,7 @@
               backgroundVariant="white"
               textVariant="dark"
               v-model="numero_documento"
-              :data="data"
+              :data="ciudadanos"
               :placeholder="$t('nav.globalSearchPlaceholder')"
             >
               <template slot="append">
@@ -94,7 +94,7 @@ export default {
   data: () => ({
     sidebar: verticalMenu,
     numero_documento: "",
-    data: ["1107516836", "1151959229", "1135678956", "1135785905", "1167596907"],
+    ciudadanos: [],
   }),
   computed: {
     ...mapState("Familias", ["ciudadano"]),
@@ -123,5 +123,12 @@ export default {
       });
     },
   },
+  async mounted(){
+    await this.$axios.get("/api/ciudadanos/").then((res) => {
+      let data = res.data.data;
+      let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
+      this.ciudadanos = ciudadanos;
+    });
+  }
 };
 </script>

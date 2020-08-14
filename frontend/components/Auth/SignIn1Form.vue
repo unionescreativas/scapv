@@ -10,8 +10,8 @@
             v-model="form.email"
             placeholder="Ingresa tú Correo"
           />
-          <div class="text-danger">
-            <span>{{ errors[0] }}</span>
+          <div class="text-danger" v-if="errors[0]">
+            {{ errors[0].replace("email", "") }}
           </div>
         </b-form-group>
       </ValidationProvider>
@@ -25,8 +25,8 @@
             v-model="form.password"
             placeholder="Ingresa tú Contraseña"
           />
-          <div class="text-danger">
-            <span>{{ errors[0] }}</span>
+          <div class="text-danger" v-if="errors[0]">
+            {{ errors[0].replace("password", "") }}
           </div>
         </b-form-group>
       </ValidationProvider>
@@ -73,10 +73,7 @@ export default {
     },
   },
   data: () => ({
-    form: {
-      email: "",
-      password: "",
-    },
+    form: {},
   }),
   methods: {
     ...mapActions(["login"]),
