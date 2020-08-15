@@ -88,11 +88,10 @@ export default {
     },
   },
   async mounted(){
-    await this.$axios.get("/api/ciudadanos/").then((res) => {
-      let data = res.data.data;
-      let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
-      this.ciudadanos = ciudadanos;
-    });
+    let res = await this.$axios.get("/api/ciudadanos/");
+    let data = res.data.data;
+    let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
+    this.ciudadanos = ciudadanos;
   }
 };
 </script>
