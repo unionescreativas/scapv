@@ -98,8 +98,8 @@ export default {
       },
     },
     redirect: {
-      login: "/login",
-      logout: "/login",
+      login: "/auth/iniciar-sesion",
+      logout: "/auth/iniciar-sesion",
       callback: false,
       home: false,
     },
