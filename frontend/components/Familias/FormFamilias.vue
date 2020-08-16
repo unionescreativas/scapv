@@ -3,7 +3,7 @@
     <b-row>
       <b-col sm="12" lg="12">
         <div class="iq-card">
-          <ValidationObserver server tag="form" ref="observer" autocomplete="off">
+          <ValidationObserver tag="form" ref="observer" autocomplete="off">
             <form-wizard ref="formWizard" title="Por favor Completar todos los Campos" subtitle="" back-button-text="Atrás"
               next-button-text="Siguiente" finish-button-text="Finalizar" :start-index.sync="stepIndex">
               <tab-content title="Datos Personales" icon="fa fa-search">
