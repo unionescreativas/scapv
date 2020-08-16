@@ -7,8 +7,7 @@ export default () => ({
     value: "sp",
     image: require("~/assets/images/small/flag-600.png"),
   },
-  langOption: [
-    {
+  langOption: [{
       title: "Spanish",
       value: "sp",
       image: require("~/assets/images/small/flag-600.png"),
@@ -44,8 +43,7 @@ export default () => ({
       image: require("~/assets/images/small/flag-200.png"),
     },
   ],
-  colors: [
-    {
+  colors: [{
       primary: "#827af3",
       primaryLight: "#b47af3",
       bodyBgLight: "#efeefd",
@@ -93,54 +91,62 @@ export default () => ({
     authType: false,
     user: {},
   },
-  users: [
-    {
-      id: "sh46s546sdg564sdffs4hsd6fh",
-      name: "Admin Vito",
-      mobileNo: null,
-      email: "admin@vito.com",
-      profileImage: null,
-      password: "admin123",
-    },
-  ],
-  bookmark: [
-    {
+  users: [{
+    id: "sh46s546sdg564sdffs4hsd6fh",
+    name: "Admin Vito",
+    mobileNo: null,
+    email: "admin@vito.com",
+    profileImage: null,
+    password: "admin123",
+  }, ],
+  bookmark: [{
       title: "Video Chat",
-      link: { name: "app.chat" },
+      link: {
+        path: ""
+      },
       is_icon_class: true,
       icon: "ri-message-line",
     },
     {
       title: "Product Listing",
-      link: { name: "app.e-commerce.index" },
+      link: {
+        path: ""
+      },
       is_icon_class: true,
       icon: "ri-file-list-line",
     },
     {
       title: "Social App",
-      link: { name: "social.list" },
+      link: {
+        path: ""
+      },
       is_icon_class: true,
       icon: "ri-question-answer-line",
     },
     {
       title: "Todo",
-      link: { name: "app.todo" },
+      link: {
+        path: ""
+      },
       is_icon_class: true,
       icon: "ri-chat-check-line",
     },
     {
       title: "Inbox",
-      link: { name: "app.email" },
+      link: {
+        path: ""
+      },
       is_icon_class: true,
       icon: "ri-inbox-line",
     },
   ],
   activePage: {
-    name: "Dashboard",
-    breadCrumb: [
-      {
+    path: "Dashboard",
+    breadCrumb: [{
         html: '<i class="ri-home-4-line mr-1 float-left"></i>Home',
-        to: { name: "mini.dashboard.home-1" },
+        to: {
+          path: ""
+        },
       },
       {
         text: "",
