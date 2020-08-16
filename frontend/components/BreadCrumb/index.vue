@@ -35,13 +35,13 @@ export default {
       this.checkRoute();
     },
   },
-  mounted() {
-    this.currentRoute = this.navList.find((item) => item.link.name === this.$route.name);
-    let book = this.bookmark.find((item) => item.link.name === this.$route.name);
-    if (book !== undefined) {
-      this.selectedBookmark = true;
-    }
-  },
+  // mounted() {
+  //   this.currentRoute = this.navList.find((item) => item.link.name === this.$route.name);
+  //   let book = this.bookmark.find((item) => item.link.name === this.$route.name);
+  //   if (book !== undefined) {
+  //     this.selectedBookmark = true;
+  //   }
+  // },
   computed: {
     ...mapGetters({
       page: "Setting/activePage",
@@ -69,15 +69,15 @@ export default {
       this.addToBookmarkState(item);
       this.selectedBookmark = true;
     },
-    checkRoute() {
-      this.currentRoute = this.navList.find((item) => item.link.name === this.$route.name);
-      let book = this.bookmark.find((item) => item.link.name === this.$route.name);
-      if (book !== undefined) {
-        this.selectedBookmark = true;
-      } else {
-        this.selectedBookmark = false;
-      }
-    },
+    // checkRoute() {
+    //   this.currentRoute = this.navList.find((item) => item.link.name === this.$route.name);
+    //   let book = this.bookmark.find((item) => item.link.name === this.$route.name);
+    //   if (book !== undefined) {
+    //     this.selectedBookmark = true;
+    //   } else {
+    //     this.selectedBookmark = false;
+    //   }
+    // },
   },
 };
 </script>
