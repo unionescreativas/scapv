@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref>
     <div id="show-overlay"></div>
     <Loader />
     <RightSideBar toggleClass="top-50 setting-toggle iq-card">
@@ -18,7 +18,7 @@
               <div class="text-center">
                 <div v-for="(item, index) in colors" :key="index" class="d-inline-flex justify-content-between">
                   <div
-                    :style="`background: ${item.primary};border-radius: 4px;`"
+                    :style="`background: ${item.primary};border-radius: 50%;`"
                     @click="changeColor(item)"
                     class="p-3 mx-1"
                   ></div>
@@ -306,7 +306,7 @@ import darkLoader from "~/assets/images/darkMode/dark-logo.gif";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "DarkLayout1",
+  name: "DarkLayout",
   head() {
     return {
       title: "Inicio",
@@ -485,17 +485,21 @@ export default {
         this.rtlRemove(lang);
       }
     },
-
     ...mapActions({
       removeToCart: "Ecommerce/removeToCartAction",
       langChangeState: "Setting/setLangAction",
       rtlAdd: "Setting/setRtlAction",
       rtlRemove: "Setting/removeRtlAction",
+      modeChange: "Setting/darkModeAction",
       logout: "logout",
     }),
   },
+  mounted(){
+    vito.navBarAction(this.$refs[""]);
+  },
 };
 </script>
+
 <style>
 @import "~/assets/css/custom.css";
 @import "~/assets/css/PriceSlider.css";

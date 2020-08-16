@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref>
     <div id="show-overlay"></div>
     <Loader />
     <RightSideBar toggleClass="top-50 setting-toggle iq-card">
@@ -302,6 +302,11 @@
       </NavBarStyle1>
       <!-- TOP Nav Bar END -->
       <div id="content-page" class="content-page" :class="horizontal ? 'ml-0' : ''">
+        <b-container fluid="" v-if="$route.name !== 'dark.dashboard.home-2'">
+          <b-row>
+            <BreadCrumb />
+          </b-row>
+        </b-container>
         <transition
           name="router-anim"
           :enter-active-class="`animated ${animated.enter}`"
@@ -333,7 +338,7 @@ import darkLoader from "~/assets/images/darkMode/dark-logo.gif";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "Layout1",
+  name: "LightLayout",
   head() {
     return {
       title: "Inicio",
@@ -364,6 +369,7 @@ export default {
       horizontal: false,
       mini: false,
       darkMode: false,
+      rtl: false,
       animated: { enter: "zoomIn", exit: "zoomOut" },
       animateClass: [
         { value: { enter: "zoomIn", exit: "zoomOut" }, text: "Zoom" },
@@ -382,7 +388,6 @@ export default {
       userProfile: userProfile,
       logo: loader,
       // usersList: Users,
-      rtl: false,
       message: [
         {
           image: require("~/assets/images/user/user-01.jpg"),
@@ -524,6 +529,9 @@ export default {
       modeChange: "Setting/darkModeAction",
       logout: "logout",
     }),
+  },
+  mounted(){
+    vito.navBarAction(this.$refs[""]);
   },
 };
 </script>
