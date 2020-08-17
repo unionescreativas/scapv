@@ -29,7 +29,7 @@ export default {
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}api/ciudadanos`,
+      ruta: `${process.env.API_URL}/api/ciudadanos`,
       columns: [
         {
           label: "CONSULTAR",
