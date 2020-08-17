@@ -29,7 +29,7 @@ export default {
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}api/ayudas/`,
+      ruta: `${process.env.API_URL}/api/ayudas/`,
       columns: [
         { label: "AYUDA", name: "lista.valor_campo_1", orderable: true },
         {
