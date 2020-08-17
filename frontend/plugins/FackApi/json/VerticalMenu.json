@@ -31,22 +31,22 @@
     "icon": "fa fa-list",
     "children": [
       {
-        "title": "Crear Ciudadano",
+        "title": "Crear Familias",
         "name": "sidebar.menu-2-submenu-1",
         "is_active": false,
         "link": {
-          "path": "/familias/crear-familias"
+          "path": "/caracterizacion/crear-familias"
         },
         "class_name": "",
         "is_icon_class": true,
         "icon": ""
       },
       {
-        "title": "Ciudadanos",
+        "title": "Familias",
         "name": "sidebar.menu-2-submenu-2",
         "is_active": false,
         "link": {
-          "path": "/caracterizacion/ciudadanos"
+          "path": "/caracterizacion/familias"
         },
         "class_name": "",
         "is_icon_class": true,

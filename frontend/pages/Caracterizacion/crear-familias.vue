@@ -11,6 +11,9 @@ import Swal from "sweetalert2";
 
 export default {
   layout: "LightLayout",
+  head: () => ({
+    title: "Crear Familias",
+  }),
   data: () => ({
     mostrar: false,
   }),
@@ -24,3 +27,11 @@ export default {
   },
 };
 </script>
+
+<router>
+  {
+    meta: {
+      name: "Crear Familias"
+    }
+  }
+</router>

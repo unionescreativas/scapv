@@ -129,14 +129,15 @@ import { vito } from "~/plugins/config/pluginInit";
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "Estadisticas",
   layout: "LightLayout",
+  head: () => ({
+    title: "Estadísticas"
+  }),
   async asyncData({ $axios }) {
     let res = await $axios.get("/api/datosgenerales/");
     let estadisticas = res.data.data;
     return { estadisticas };
   },
-  data: () => ({}),
   methods: {},
   computed: {},
   mounted() {
@@ -144,6 +145,14 @@ export default {
   },
 };
 </script>
+
+<router>
+  {
+    meta: {
+      name: "Estadísticas"
+    }
+  }
+</router>
 
 <style>
 .iq-card-body {

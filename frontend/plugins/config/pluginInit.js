@@ -1,3 +1,4 @@
+import SideBarItems from "~/plugins/FackApi/json/VerticalMenu.json";
 import Scrollbar from "smooth-scrollbar";
 import Snackbar from "node-snackbar";
 const $ = require("jquery");
@@ -74,8 +75,8 @@ export const vito = {
       name: $nuxt._router.currentRoute.meta.name,
       breadCrumb: [
         {
-          html: '<i class="ri-home-4-line mr-1 float-left"></i>Home',
-          to: { path: "" },
+          html: `<i class="ri-home-4-line mr-1 float-left"></i>Inicio`,
+          to: { path: "/" },
         },
         {
           text: $nuxt._router.currentRoute.meta.name,

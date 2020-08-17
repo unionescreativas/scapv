@@ -109,7 +109,7 @@ export default {
     consultarCiudadano(numero_documento) {
       this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
         if (this.ciudadano != "no existe") {
-          this.$nuxt.$router.push("/familias/perfil");
+          this.$router.push("/familias/perfil");
           this.numero_documento = "";
           this.$children[6].inputValue = "";
         } else {
@@ -123,11 +123,11 @@ export default {
       });
     },
   },
-  async mounted(){
+  async mounted() {
     let res = await this.$axios.get("/api/ciudadanos/");
     let data = res.data.data;
     let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
     this.ciudadanos = ciudadanos;
-  }
+  },
 };
 </script>

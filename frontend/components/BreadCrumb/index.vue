@@ -17,11 +17,14 @@
           ></b-button>
         </b-col>
       </b-row>
+      HOLAA - {{ currentRoute }}
     </iq-card>
   </b-col>
 </template>
+
 <script>
 import { mapGetters, mapActions } from "vuex";
+import SideBarItems from "~/plugins/FackApi/json/VerticalMenu.json";
 
 export default {
   name: "BreadCrumb",
@@ -30,31 +33,21 @@ export default {
       type: Array,
     },
   },
+  data: () => ({
+    bookmarkSearch: "",
+    currentRoute: {},
+    selectedBookmark: false,
+  }),
   watch: {
     $route(to, from) {
       this.checkRoute();
     },
   },
-  // mounted() {
-  //   this.currentRoute = this.navList.find((item) => item.link.name === this.$route.name);
-  //   let book = this.bookmark.find((item) => item.link.name === this.$route.name);
-  //   if (book !== undefined) {
-  //     this.selectedBookmark = true;
-  //   }
-  // },
   computed: {
     ...mapGetters({
       page: "Setting/activePage",
-      navList: "Setting/globalSearchState",
       bookmark: "Setting/bookmarkState",
     }),
-  },
-  data() {
-    return {
-      bookmarkSearch: "",
-      currentRoute: {},
-      selectedBookmark: false,
-    };
   },
   methods: {
     ...mapActions({
@@ -69,15 +62,47 @@ export default {
       this.addToBookmarkState(item);
       this.selectedBookmark = true;
     },
-    // checkRoute() {
-    //   this.currentRoute = this.navList.find((item) => item.link.name === this.$route.name);
-    //   let book = this.bookmark.find((item) => item.link.name === this.$route.name);
-    //   if (book !== undefined) {
-    //     this.selectedBookmark = true;
-    //   } else {
-    //     this.selectedBookmark = false;
-    //   }
-    // },
+    checkRoute() {
+      // let routes = SideBarItems.find((route) => !route.is_heading && !route.children && route.link.path);
+      // let childRoutes = SideBarItems.forEach((route) => {
+      //   if (!route.is_heading && route.children) {
+
+      //   }
+      // });
+      SideBarItems.forEach((route) => {
+        if (!route.is_heading) {
+          if (!route.children) {
+            if (route.link.path) {
+              if (route.link.path == this.$route.path) {
+                this.currentRoute = route;
+              }
+            }
+          } else {
+            route.children.forEach((child) => {
+              if (child.link.path) {
+                if (child.link.path == this.$route.path) {
+                  this.currentRoute = child;
+                }
+              }
+            });
+          }
+        }
+      })
+      // this.currentRoute = this.navList.find((item) => item.link.name === this.$route.path);
+      // let book = this.bookmark.find((item) => item.link.name === this.$route.path);
+      // if (book !== undefined) {
+      //   this.selectedBookmark = true;
+      // } else {
+      //   this.selectedBookmark = false;
+      // }
+    },
+  },
+  mounted() {
+    // this.currentRoute = this.navList.find((item) => item.link.name === this.$route.path);
+    // let book = this.bookmark.find((item) => item.link.name === this.$route.path);
+    // if (book !== undefined) {
+    //   this.selectedBookmark = true;
+    // }
   },
 };
 </script>

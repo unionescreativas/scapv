@@ -151,7 +151,7 @@ export default {
   methods: {
     displayRow(data) {
       let ruta = `/Familias/perfil/${data.id}`;
-      $nuxt.$router.push(ruta);
+      this.$router.push(ruta);
     },
   },
   mounted() {

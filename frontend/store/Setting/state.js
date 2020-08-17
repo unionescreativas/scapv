@@ -7,7 +7,8 @@ export default () => ({
     value: "sp",
     image: require("~/assets/images/small/flag-600.png"),
   },
-  langOption: [{
+  langOption: [
+    {
       title: "Spanish",
       value: "sp",
       image: require("~/assets/images/small/flag-600.png"),
@@ -43,7 +44,8 @@ export default () => ({
       image: require("~/assets/images/small/flag-200.png"),
     },
   ],
-  colors: [{
+  colors: [
+    {
       primary: "#827af3",
       primaryLight: "#b47af3",
       bodyBgLight: "#efeefd",
@@ -91,18 +93,21 @@ export default () => ({
     authType: false,
     user: {},
   },
-  users: [{
-    id: "sh46s546sdg564sdffs4hsd6fh",
-    name: "Admin Vito",
-    mobileNo: null,
-    email: "admin@vito.com",
-    profileImage: null,
-    password: "admin123",
-  }, ],
-  bookmark: [{
+  users: [
+    {
+      id: "sh46s546sdg564sdffs4hsd6fh",
+      name: "Admin Vito",
+      mobileNo: null,
+      email: "admin@vito.com",
+      profileImage: null,
+      password: "admin123",
+    },
+  ],
+  bookmark: [
+    {
       title: "Video Chat",
       link: {
-        path: ""
+        path: "",
       },
       is_icon_class: true,
       icon: "ri-message-line",
@@ -110,7 +115,7 @@ export default () => ({
     {
       title: "Product Listing",
       link: {
-        path: ""
+        path: "",
       },
       is_icon_class: true,
       icon: "ri-file-list-line",
@@ -118,7 +123,7 @@ export default () => ({
     {
       title: "Social App",
       link: {
-        path: ""
+        path: "",
       },
       is_icon_class: true,
       icon: "ri-question-answer-line",
@@ -126,7 +131,7 @@ export default () => ({
     {
       title: "Todo",
       link: {
-        path: ""
+        path: "",
       },
       is_icon_class: true,
       icon: "ri-chat-check-line",
@@ -134,18 +139,19 @@ export default () => ({
     {
       title: "Inbox",
       link: {
-        path: ""
+        path: "",
       },
       is_icon_class: true,
       icon: "ri-inbox-line",
     },
   ],
   activePage: {
-    path: "Dashboard",
-    breadCrumb: [{
-        html: '<i class="ri-home-4-line mr-1 float-left"></i>Home',
+    path: "Inicio",
+    breadCrumb: [
+      {
+        html: `<i class="ri-home-4-line mr-1 float-left"></i>Inicio`,
         to: {
-          path: ""
+          path: "",
         },
       },
       {

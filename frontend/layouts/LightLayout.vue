@@ -302,7 +302,7 @@
       </NavBarStyle1>
       <!-- TOP Nav Bar END -->
       <div id="content-page" class="content-page" :class="horizontal ? 'ml-0' : ''">
-        <b-container fluid="" v-if="$route.name !== 'dark.dashboard.home-2'">
+        <b-container fluid="" v-if="$route.name !== 'index'">
           <b-row>
             <BreadCrumb />
           </b-row>
@@ -339,14 +339,11 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "LightLayout",
-  head() {
-    return {
-      title: "Inicio",
-      bodyAttrs: {
-        class: "light",
-      },
-    };
-  },
+  head: () => ({
+    bodyAttrs: {
+      class: "light",
+    },
+  }),
   created() {
     this.updateRadio();
     if (this.darkMode) {
