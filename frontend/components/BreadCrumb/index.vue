@@ -17,7 +17,7 @@
           ></b-button>
         </b-col>
       </b-row>
-      HOLAA - {{ currentRoute }}
+      <!-- HOLAA - {{ currentRoute }} -->
     </iq-card>
   </b-col>
 </template>
