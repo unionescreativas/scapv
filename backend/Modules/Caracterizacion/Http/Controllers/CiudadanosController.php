@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Caracterizacion\Entities\Ciudadano;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+use Modules\Caracterizacion\Http\Requests\CrearCiudadanoRequest;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class CiudadanosController extends Controller
@@ -48,9 +49,8 @@ class CiudadanosController extends Controller
         }
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(Request $request)
+    public function store(CrearCiudadanoRequest $request)
     {
-
         $variableConsulta = new Ciudadano;
         $variableConsulta->tipo_documento = $request->tipo_documento;
         $variableConsulta->numero_documento = $request->numero_documento;
@@ -68,9 +68,9 @@ class CiudadanosController extends Controller
         $variableConsulta->correo_electronico = $request->correo_electronico;
         $variableConsulta->departamento = $request->departamento;
         $variableConsulta->ciudad = $request->ciudad;
-        $variableConsulta->barrrio = $request->barrrio;
+        $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->dirrecion = $request->dirrecion;
+        $variableConsulta->direcion = $request->direcion;
         $variableConsulta->lat = $request->lat;
         $variableConsulta->let = $request->let;
         $variableConsulta->actividad = $request->actividad;
@@ -114,9 +114,9 @@ class CiudadanosController extends Controller
         $variableConsulta->correo_electronico = $request->correo_electronico;
         $variableConsulta->departamento = $request->departamento;
         $variableConsulta->ciudad = $request->ciudad;
-        $variableConsulta->barrrio = $request->barrrio;
+        $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->dirrecion = $request->dirrecion;
+        $variableConsulta->direcion = $request->direcion;
         $variableConsulta->lat = $request->lat;
         $variableConsulta->let = $request->let;
         $variableConsulta->actividad = $request->actividad;

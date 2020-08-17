@@ -39,7 +39,7 @@ class CiudadanosExport implements FromQuery, WithHeadings
             'CIUDAD DE RESIDENCIA',
             'BARRIO DE RESIDENCIA',
             'COMUNA DE RESIDENCIA',
-            'DIRRECION DE RESIDENCIA',
+            'direcion DE RESIDENCIA',
             'LATITUD',
             'LONGITUD',
             'ACTIVIDAD',
