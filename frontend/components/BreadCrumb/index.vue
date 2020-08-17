@@ -32,7 +32,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.checkRoute();
+      // this.checkRoute();
     },
   },
   // mounted() {
