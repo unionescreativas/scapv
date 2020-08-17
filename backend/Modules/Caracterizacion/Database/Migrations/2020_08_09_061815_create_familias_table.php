@@ -35,9 +35,9 @@ class CreateFamiliasTable extends Migration
             $table->string('correo_electronico');
             $table->string('departamento')->nullable();
             $table->string('ciudad');
-            $table->string('barrrio');
+            $table->string('bario');
             $table->string('comuna');
-            $table->string('dirrecion');
+            $table->string('direcion');
             $table->string('actividad')->nullable();
             $table->string('ciudad_origen')->nullable();
             $table->string('pais_origen')->nullable();

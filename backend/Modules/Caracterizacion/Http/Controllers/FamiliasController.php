@@ -92,9 +92,9 @@ class FamiliasController extends Controller
         $variableConsulta->correo_electronico = $request->correo_electronico;
         $variableConsulta->departamento = $request->departamento;
         $variableConsulta->ciudad = $request->ciudad;
-        $variableConsulta->barrrio = $request->barrrio;
+        $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->dirrecion = $request->dirrecion;
+        $variableConsulta->direcion = $request->direcion;
         $variableConsulta->actividad = $request->actividad;
         $variableConsulta->ciudad_origen = $request->ciudad_origen;
         $variableConsulta->pais_origen = $request->pais_origen;
@@ -143,9 +143,9 @@ class FamiliasController extends Controller
         $variableConsulta->correo_electronico = $request->correo_electronico;
         $variableConsulta->departamento = $request->departamento;
         $variableConsulta->ciudad = $request->ciudad;
-        $variableConsulta->barrrio = $request->barrrio;
+        $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->dirrecion = $request->dirrecion;
+        $variableConsulta->direcion = $request->direcion;
         $variableConsulta->actividad = $request->actividad;
         $variableConsulta->ciudad_origen = $request->ciudad_origen;
         $variableConsulta->pais_origen = $request->pais_origen;

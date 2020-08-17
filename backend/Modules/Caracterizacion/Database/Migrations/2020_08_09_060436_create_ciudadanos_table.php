@@ -33,9 +33,9 @@ class CreateCiudadanosTable extends Migration
             $table->string('correo_electronico');
             $table->string('departamento')->nullable();
             $table->string('ciudad');
-            $table->string('barrrio');
+            $table->string('barrio');
             $table->string('comuna');
-            $table->string('dirrecion');
+            $table->string('direcion');
             $table->double('lat')->nullable();
             $table->double('let')->nullable();
             $table->string('actividad')->nullable();

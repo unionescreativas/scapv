@@ -29,7 +29,7 @@ export default {
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}api/transferencias`,
+      ruta: `${process.env.API_URL}/api/transferencias`,
       columns: [
         {
           label: "CIUDADANO DOCUMENTO",

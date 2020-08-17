@@ -36,20 +36,32 @@ class ListasController extends Controller
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
-        if ($variableConsulta->isEmpty()) {
-            $variableConsulta = $this->configModelo::where('codigo_lista', $id)->get();
-            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
-        } else {
-            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
-        }
-        if ($variableConsulta->isEmpty()) {
-            return ['data' => 'no existe', 'status' => '201'];
-        }
 
-        return ['data' => $variableConsulta, 'status' => '201'];
+        $length = $request->input('length');
+        $sortBy = $request->input('column');
+        $orderBy = $request->input('dir');
+        $searchValue = $request->input('search');
+        ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
+        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)
+        ->where('estado', '1')->where('nombre_lista',$id);
+        $data = $variableConsulta->paginate(100);
+        return new DataTableCollectionResource($data);
+
+
+        // $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
+        // if ($variableConsulta->isEmpty()) {
+        //     $variableConsulta = $this->configModelo::where('nombre_lista', $id)->get();
+        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
+        // } else {
+        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
+        // }
+        // if ($variableConsulta->isEmpty()) {
+        //     return ['data' => 'no existe', 'status' => '201'];
+        // }
+
+        // return ['data' => $variableConsulta, 'status' => '201'];
     }
 
     public function store(Request $request)
@@ -58,7 +70,7 @@ class ListasController extends Controller
         $variableConsulta = $this->configModelo;
 
         //Campos a guardar aquí--------------->
-        $variableConsulta->codigo_lista = $request->codigo_lista;
+        $variableConsulta->nombre_lista = $request->nombre_lista;
         $variableConsulta->codigo_campo = $request->codigo_campo;
         $variableConsulta->valor_campo_1 = $request->valor_campo_1;
         $variableConsulta->valor_campo_2 = $request->valor_campo_2;
@@ -78,7 +90,7 @@ class ListasController extends Controller
         $variableConsulta = $this->configModelo::find($id);
 
         //Campos Actualizar aquí--------------->
-        $variableConsulta->codigo_lista = $request->codigo_lista;
+        $variableConsulta->nombre_lista = $request->nombre_lista;
         $variableConsulta->codigo_campo = $request->codigo_campo;
         $variableConsulta->valor_campo_1 = $request->valor_campo_1;
         $variableConsulta->valor_campo_2 = $request->valor_campo_2;

@@ -17,7 +17,7 @@ class CreateListasTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             //aqui van los campos------------------>
-            $table->string('codigo_lista');
+            $table->string('nombre_lista');
             $table->string('codigo_campo');
             $table->string('valor_campo_1');
             $table->string('valor_campo_2')->nullable();

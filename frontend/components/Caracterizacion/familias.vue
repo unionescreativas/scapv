@@ -29,7 +29,7 @@ export default {
   layout: "LightLayout",
   data() {
     return {
-      ruta: `${process.env.API_URL}api/nucleofamiliar/`,
+      ruta: `${process.env.API_URL}/api/nucleofamiliar/`,
       columns: [
         {
           label: "CEDULA CIUDADANO",

@@ -97,9 +97,9 @@ class TransferenciasController extends Controller
         $newCiudadano->correo_electronico = $ciudadano->correo_electronico;
         $newCiudadano->departamento = $ciudadano->departamento;
         $newCiudadano->ciudad = $ciudadano->ciudad;
-        $newCiudadano->barrrio = $ciudadano->barrrio;
+        $newCiudadano->barrio = $ciudadano->barrio;
         $newCiudadano->comuna = $ciudadano->comuna;
-        $newCiudadano->dirrecion = $ciudadano->dirrecion;
+        $newCiudadano->direcion = $ciudadano->direcion;
         $newCiudadano->actividad = $ciudadano->actividad;
         $newCiudadano->ciudad_origen = $ciudadano->ciudad_origen;
         $newCiudadano->pais_origen = $ciudadano->pais_origen;
