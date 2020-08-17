@@ -75,7 +75,7 @@ export const vito = {
       breadCrumb: [
         {
           html: '<i class="ri-home-4-line mr-1 float-left"></i>Home',
-          to: { name: "dashboard.home-1" },
+          to: { path: "" },
         },
         {
           text: $nuxt._router.currentRoute.meta.name,
