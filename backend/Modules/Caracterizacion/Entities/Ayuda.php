@@ -80,7 +80,7 @@ class Ayuda extends Model
                 "model" => \Modules\Caracterizacion\Entities\Lista::class,
                 "foreign_key" => "lista_id",
                 "columns" => [
-                    'codigo_lista' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'nombre_lista' => ['searchable' => true, 'order_term' => 'orderable'],
                     'codigo_campo' => ['searchable' => true, 'order_term' => 'orderable'],
                     'valor_campo_1' => ['searchable' => true, 'order_term' => 'orderable'],
                     'valor_campo_2' => ['searchable' => true, 'order_term' => 'orderable'],

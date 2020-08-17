@@ -39,33 +39,33 @@ export default {
           $nuxt.resetFormVeeValidate(payload);
         }
       });
-    } catch (a) {
-      let res = {
-        response: {
-          data: {
-            errors: {
-              "tipo_documento": ["The tipo_documento field is required."], "numero_documento": ["The numero_documento field is required."],
-              "pep": ["The pep field is required."], "nombres": ["The nombres field is required."],
-              "apellidos": ["The apellidos field is required."], "fecha_expedicion": ["The fecha_expedicion field is required."],
-              "fecha_vencimiento": ["The fecha_vencimiento field is required."], "fecha_nacimiento": ["The fecha_nacimiento field is required."],
-              "edad": ["The edad field is required."], "genero": ["The genero field is required."],
-              "estado_civil": ["The estado_civil field is required."], "telefono": ["The telefono field is required."],
-              "celular": ["The celular field is required."], "correo_electronico": ["The correo_electronico field is required."],
-              "departamento": ["The departamento field is required."], "ciudad": ["The ciudad field is required."],
-              "barrrio": ["The barrrio field is required."], "comuna": ["The comuna field is required."],
-              "dirrecion": ["The dirrecion field is required."], "actividad": ["The actividad field is required."],
-              "ciudad_origen": ["The ciudad_origen field is required."], "pais_origen": ["The pais_origen field is required."],
-              "fecha_llegada": ["The fecha_llegada field is required."], "intencion_ciudad": ["The intencion_ciudad field is required."],
-              "respuesta_intencion": ["The respuesta_intencion field is required."], "fecha_llegada": ["The fecha_llegada field is required."],
-              "discapacidad": ["The discapacidad field is required."], "salud": ["The salud field is required."],
-              "estudia_actualmente": ["The estudia_actualmente field is required."], "nivel_escolaridad": ["The nivel_escolaridad field is required."],
-              "tipo_profesion": ["The tipo_profesion field is required."], "comunidad_lgtbi": ["The comunidad_lgtbi field is required."],
-              "comunidad_etnica": ["The comunidad_etnica field is required."], "trabajo": ["The trabajo field is required."],
-              "tipo_empleo": ["The tipo_empleo field is required."], "observaciones": ["The observaciones field is required."],
-            }
-          }
-        }
-      };
+    } catch (res) {
+      // let res = {
+      //   response: {
+      //     data: {
+      //       errors: {
+      //         "tipo_documento": ["The tipo_documento field is required."], "numero_documento": ["The numero_documento field is required."],
+      //         "pep": ["The pep field is required."], "nombres": ["The nombres field is required."],
+      //         "apellidos": ["The apellidos field is required."], "fecha_expedicion": ["The fecha_expedicion field is required."],
+      //         "fecha_vencimiento": ["The fecha_vencimiento field is required."], "fecha_nacimiento": ["The fecha_nacimiento field is required."],
+      //         "edad": ["The edad field is required."], "genero": ["The genero field is required."],
+      //         "estado_civil": ["The estado_civil field is required."], "telefono": ["The telefono field is required."],
+      //         "celular": ["The celular field is required."], "correo_electronico": ["The correo_electronico field is required."],
+      //         "departamento": ["The departamento field is required."], "ciudad": ["The ciudad field is required."],
+      //         "barrrio": ["The barrrio field is required."], "comuna": ["The comuna field is required."],
+      //         "dirrecion": ["The dirrecion field is required."], "actividad": ["The actividad field is required."],
+      //         "ciudad_origen": ["The ciudad_origen field is required."], "pais_origen": ["The pais_origen field is required."],
+      //         "fecha_llegada": ["The fecha_llegada field is required."], "intencion_ciudad": ["The intencion_ciudad field is required."],
+      //         "respuesta_intencion": ["The respuesta_intencion field is required."], "fecha_llegada": ["The fecha_llegada field is required."],
+      //         "discapacidad": ["The discapacidad field is required."], "salud": ["The salud field is required."],
+      //         "estudia_actualmente": ["The estudia_actualmente field is required."], "nivel_escolaridad": ["The nivel_escolaridad field is required."],
+      //         "tipo_profesion": ["The tipo_profesion field is required."], "comunidad_lgtbi": ["The comunidad_lgtbi field is required."],
+      //         "comunidad_etnica": ["The comunidad_etnica field is required."], "trabajo": ["The trabajo field is required."],
+      //         "tipo_empleo": ["The tipo_empleo field is required."], "observaciones": ["The observaciones field is required."],
+      //       }
+      //     }
+      //   }
+      // };
 
       let errors = _.pick(res.response.data.errors, _.keys(payload.$refs.observer.fields));
 

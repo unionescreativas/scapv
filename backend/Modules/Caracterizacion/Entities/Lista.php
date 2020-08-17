@@ -21,7 +21,7 @@ class Lista extends Model
 
     protected $dataTableColumns = [
         'id' => ['searchable' => false,],
-        'codigo_lista' => ['searchable' => true, 'order_term' => 'orderable'],
+        'nombre_lista' => ['searchable' => true, 'order_term' => 'orderable'],
         'codigo_campo' => ['searchable' => true, 'order_term' => 'orderable'],
         'valor_campo_1' => ['searchable' => true, 'order_term' => 'orderable'],
         'valor_campo_2' => ['searchable' => true, 'order_term' => 'orderable'],
