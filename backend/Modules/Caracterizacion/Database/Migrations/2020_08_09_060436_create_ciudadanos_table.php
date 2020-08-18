@@ -25,10 +25,10 @@ class CreateCiudadanosTable extends Migration {
             $table->date('fecha_nacimiento');
             $table->integer('edad');
             $table->string('genero');
-            $table->string('estado_civil');
+            $table->string('estado_civil')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('celular');
-            $table->string('correo_electronico');
+            $table->string('celular')->nullable();
+            $table->string('correo_electronico')->nullable();
             $table->string('departamento')->nullable();
             $table->string('ciudad');
             $table->string('barrio');

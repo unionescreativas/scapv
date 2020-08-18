@@ -4,10 +4,10 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
-use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use Modules\Caracterizacion\Entities\Ciudadano;
-use Modules\Caracterizacion\Http\Requests\CrearCiudadanoRequest;
+use Modules\Caracterizacion\Http\Requests\CiudadanoRequest;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class CiudadanosController extends Controller {
 
@@ -44,7 +44,7 @@ class CiudadanosController extends Controller {
         }
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(CrearCiudadanoRequest $request) {
+    public function store(CiudadanoRequest $request) {
         $variableConsulta = new Ciudadano;
         $variableConsulta->tipo_documento = $request->tipo_documento;
         $variableConsulta->numero_documento = $request->numero_documento;
@@ -87,7 +87,7 @@ class CiudadanosController extends Controller {
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
     }
-    public function update(CrearCiudadanoRequest $request, $id) {
+    public function update(CiudadanoRequest $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);

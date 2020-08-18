@@ -4,13 +4,10 @@ namespace Modules\Caracterizacion\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CrearCiudadanoRequest extends FormRequest {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules() {
+class FamiliaRequest extends FormRequest
+{
+    public function rules()
+    {
         return [
             //
             'tipo_documento' => 'required',
@@ -18,26 +15,26 @@ class CrearCiudadanoRequest extends FormRequest {
             'pep' => 'numeric',
             'nombres' => 'required|string',
             'apellidos' => 'required|string',
-            'fecha_expedicion' => 'required|date',
-            'fecha_vencimiento' => 'date',
-            'fecha_nacimiento' => 'date',
+            // 'fecha_expedicion' => 'required|date|date_format:Y-m-d|date_format:Y-m-d',
+            'fecha_vencimiento' => 'date|date_format:Y-m-d',
+            'fecha_nacimiento' => 'required|date|date_format:Y-m-d',
             'edad' => 'required|numeric',
             'genero' => 'required',
             'estado_civil' => 'string',
             'telefono' => 'numeric',
             'celular' => 'numeric',
             'correo_electronico' => 'email',
-            'departamento' => 'required',
-            'ciudad' => 'required',
-            'barrio' => 'required',
-            'comuna' => 'required',
-            'direccion' => 'required',
+            // 'departamento' => 'required',
+            // 'ciudad' => 'required',
+            // 'barrio' => 'required',
+            // 'comuna' => 'required',
+            // 'direccion' => 'required',
             // 'lat' => 'required',
             // 'let' => 'required',
             'actividad' => 'string',
             'ciudad_origen' => 'string',
             'pais_origen' => 'string',
-            'fecha_llegada' => 'date',
+            'fecha_llegada' => 'date|date_format:Y-m-d',
             'intencion_ciudad' => 'string',
             'respuesta_intencion' => 'string',
             'discapacidad' => 'string',
@@ -54,10 +51,12 @@ class CrearCiudadanoRequest extends FormRequest {
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
-    public function messages() {
+    public function messages()
+    {
         return [
             // 'tipo_documento.required' => 'es requerido',
             // 'numero_documento.required' => '',
