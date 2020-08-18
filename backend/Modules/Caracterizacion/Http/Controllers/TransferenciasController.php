@@ -5,11 +5,12 @@ namespace Modules\Caracterizacion\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
-use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-use Modules\Caracterizacion\Entities\Ciudadano;
 use Modules\Caracterizacion\Entities\Familia;
+use Modules\Caracterizacion\Entities\Ciudadano;
 use Modules\Caracterizacion\Entities\Transferencia;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+use Modules\Caracterizacion\Http\Requests\TransferenciaRequest;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class TransferenciasController extends Controller {
 
@@ -58,7 +59,7 @@ class TransferenciasController extends Controller {
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(Request $request) {
+    public function store(TransferenciaRequest $request) {
 
         $variableConsulta = $this->configModelo;
 
@@ -142,7 +143,7 @@ class TransferenciasController extends Controller {
         $newTransferencia->save();
         return ['data' => $variableConsulta, 'status' => '202'];
     }
-    public function update(Request $request, $id) {
+    public function update(TransferenciaRequest $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);

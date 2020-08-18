@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Modules\Caracterizacion\Entities\Ayuda;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Caracterizacion\Http\Requests\AyudaRequest;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
@@ -74,7 +75,7 @@ class AyudasController extends Controller
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(Request $request)
+    public function store(AyudaRequest $request)
     {
         $cantidadDisponibles = 0;
         $cantidadEntregadas = 0;
@@ -107,7 +108,7 @@ class AyudasController extends Controller
             return ['data' =>  $variableConsulta, 'status' => '202'];
         }
     }
-    public function update(Request $request, $id)
+    public function update(AyudaRequest $request, $id)
     {
         //
 

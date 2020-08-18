@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Caracterizacion\Entities\Documento;
+use Modules\Caracterizacion\Http\Requests\DocumentoRequest;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
@@ -51,7 +52,7 @@ class DocumentosController extends Controller
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(Request $request)
+    public function store(DocumentoRequest $request)
     {
 
         // ------------------------>Datos Archivo
@@ -99,7 +100,7 @@ class DocumentosController extends Controller
 
 
     }
-    public function update(Request $request, $id)
+    public function update(DocumentoRequest $request, $id)
     {
         //
         $datosAnteriores = $this->configModelo::find($id);
