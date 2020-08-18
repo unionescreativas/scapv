@@ -94,8 +94,8 @@ export default {
         { label: "BARRIO DE RESIDENCIA", name: "barrrio", orderable: true },
         { label: "COMUNA DE RESIDENCIA", name: "comuna", orderable: true },
         {
-          label: "DIRRECION DE RESIDENCIA",
-          name: "dirrecion",
+          label: "direccion DE RESIDENCIA",
+          name: "direccion",
           orderable: true,
         },
         { label: "ACTIVIDAD", name: "actividad", orderable: true },

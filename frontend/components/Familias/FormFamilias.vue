@@ -4,15 +4,27 @@
       <b-col sm="12" lg="12">
         <div class="iq-card">
           <ValidationObserver tag="form" ref="observer" autocomplete="off">
-            <form-wizard ref="formWizard" title="Por favor Completar todos los Campos" subtitle="" back-button-text="Atrás"
-              next-button-text="Siguiente" finish-button-text="Finalizar" :start-index.sync="stepIndex">
+            <form-wizard
+              ref="formWizard"
+              title="Por favor Completar todos los Campos"
+              subtitle=""
+              back-button-text="Atrás"
+              next-button-text="Siguiente"
+              finish-button-text="Finalizar"
+              :start-index.sync="stepIndex"
+            >
               <tab-content title="Datos Personales" icon="fa fa-search">
                 <template v-if="stepIndex == 0">
                   <ValidationProvider name="tipo_documento" v-slot="{ errors }">
                     <b-form-group label="TIPO DE DOCUMENTO: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('tipos_documentos', $event)"
-                        :options="options.tipos_documentos" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.tipo_documento">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('tipos_documentos', $event)"
+                        :options="options.tipos_documentos"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.tipo_documento"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -55,8 +67,11 @@
 
                   <ValidationProvider name="fecha_expedicion" v-slot="{ errors }">
                     <b-form-group label="FECHA DE EXPEDICION DEL DOCUMENTO: *">
-                      <b-form-input type="date" placeholder="INGRESE FECHA DE EXPEDICION DEL DOCUMENTO"
-                        v-model="form.fecha_expedicion" />
+                      <b-form-input
+                        type="date"
+                        placeholder="INGRESE FECHA DE EXPEDICION DEL DOCUMENTO"
+                        v-model="form.fecha_expedicion"
+                      />
                       <div class="text-danger" v-if="errors[0]">
                         {{ errors[0].replace("fecha_expedicion", "") }}
                       </div>
@@ -65,8 +80,11 @@
 
                   <ValidationProvider name="fecha_vencimiento" v-slot="{ errors }">
                     <b-form-group label="FECHA DE VENCIMIENTO DEL DOCUMENTO">
-                      <b-form-input type="date" placeholder="INGRESE FECHA DE VENCIMIENTO DEL DOCUMENTO"
-                        v-model="form.fecha_vencimiento" />
+                      <b-form-input
+                        type="date"
+                        placeholder="INGRESE FECHA DE VENCIMIENTO DEL DOCUMENTO"
+                        v-model="form.fecha_vencimiento"
+                      />
                       <div class="text-danger" v-if="errors[0]">
                         {{ errors[0].replace("fecha_vencimiento", "") }}
                       </div>
@@ -91,9 +109,14 @@
 
                   <ValidationProvider name="genero" v-slot="{ errors }">
                     <b-form-group label="GÉNERO: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('generos', $event)"
-                        :options="options.generos" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.genero">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('generos', $event)"
+                        :options="options.generos"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.genero"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -104,9 +127,14 @@
 
                   <ValidationProvider name="estado_civil" v-slot="{ errors }">
                     <b-form-group label="ESTADO CIVIL: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('estados_civiles', $event)"
-                        :options="options.estados_civiles" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.estado_civil">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('estados_civiles', $event)"
+                        :options="options.estados_civiles"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.estado_civil"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -131,7 +159,11 @@
 
                   <ValidationProvider name="correo_electronico" v-slot="{ errors }">
                     <b-form-group label="CORREO ELECTRONICO: *">
-                      <b-form-input type="email" placeholder="INGRESE CORREO ELECTRONICO" v-model="form.correo_electronico" />
+                      <b-form-input
+                        type="email"
+                        placeholder="INGRESE CORREO ELECTRONICO"
+                        v-model="form.correo_electronico"
+                      />
                       <div class="text-danger" v-if="errors[0]">
                         {{ errors[0].replace("correo_electronico", "") }}
                       </div>
@@ -140,7 +172,11 @@
 
                   <ValidationProvider name="departamento" v-slot="{ errors }">
                     <b-form-group label="DEPARTAMENTO DE RESIDENCIA: *">
-                      <b-form-input type="text" placeholder="INGRESE DEPARTAMENTO DE RESIDENCIA" v-model="form.departamento" />
+                      <b-form-input
+                        type="text"
+                        placeholder="INGRESE DEPARTAMENTO DE RESIDENCIA"
+                        v-model="form.departamento"
+                      />
                       <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("departamento", "") }}</div>
                     </b-form-group>
                   </ValidationProvider>
@@ -152,16 +188,21 @@
                     </b-form-group>
                   </ValidationProvider>
 
-                  <ValidationProvider name="barrrio" v-slot="{ errors }">
+                  <ValidationProvider name="barrio" v-slot="{ errors }">
                     <b-form-group label="BARRIO DE RESIDENCIA: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('barrios', $event)"
-                        :options="options.barrios" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.barrrio">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('barrios', $event)"
+                        :options="options.barrios"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.barrio"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
                       </v-select>
-                      <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("barrrio", "") }}</div>
+                      <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("barrio", "") }}</div>
                     </b-form-group>
                   </ValidationProvider>
 
@@ -172,10 +213,10 @@
                     </b-form-group>
                   </ValidationProvider>
 
-                  <ValidationProvider name="dirrecion" v-slot="{ errors }">
+                  <ValidationProvider name="direccion" v-slot="{ errors }">
                     <b-form-group label="DIRECCIÓN DE RESIDENCIA: *">
-                      <b-form-input type="text" placeholder="INGRESE DIRECCIÓN DE RESIDENCIA" v-model="form.dirrecion" />
-                      <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("dirrecion", "") }}</div>
+                      <b-form-input type="text" placeholder="INGRESE DIRECCIÓN DE RESIDENCIA" v-model="form.direccion" />
+                      <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("direccion", "") }}</div>
                     </b-form-group>
                   </ValidationProvider>
                 </template>
@@ -192,9 +233,14 @@
 
                   <ValidationProvider name="ciudad_origen" v-slot="{ errors }">
                     <b-form-group label="CIUDAD DE ORIGEN: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('ciudades_origen', $event)"
-                        :options="options.ciudades_origen" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.ciudad_origen">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('ciudades_origen', $event)"
+                        :options="options.ciudades_origen"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.ciudad_origen"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -205,9 +251,14 @@
 
                   <ValidationProvider name="pais_origen" v-slot="{ errors }">
                     <b-form-group label="PAIS DE ORIGEN: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('paises_origen', $event)"
-                        :options="options.paises_origen" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.pais_origen">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('paises_origen', $event)"
+                        :options="options.paises_origen"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.pais_origen"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -218,23 +269,33 @@
 
                   <ValidationProvider name="fecha_llegada" v-slot="{ errors }">
                     <b-form-group label="FECHA DE LLEGADA AL PAIS: *">
-                      <b-form-input type="date" placeholder="INGRESE FECHA DE LLEGADA AL PAIS" v-model="form.fecha_llegada" />
+                      <b-form-input
+                        type="date"
+                        placeholder="INGRESE FECHA DE LLEGADA AL PAIS"
+                        v-model="form.fecha_llegada"
+                      />
                       <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("fecha_llegada", "") }}</div>
                     </b-form-group>
                   </ValidationProvider>
 
                   <ValidationProvider name="intencion_ciudad" v-slot="{ errors }">
                     <b-form-group label="INTENCIÓN DE ESTAR EN LA CIUDAD: *">
-                      <b-form-input type="date" placeholder="INGRESE INTENCIÓN DE ESTAR EN LA CIUDAD"
-                        v-model="form.intencion_ciudad" />
+                      <b-form-input
+                        type="date"
+                        placeholder="INGRESE INTENCIÓN DE ESTAR EN LA CIUDAD"
+                        v-model="form.intencion_ciudad"
+                      />
                       <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("intencion_ciudad", "") }}</div>
                     </b-form-group>
                   </ValidationProvider>
 
                   <ValidationProvider name="respuesta_intencion" v-slot="{ errors }">
                     <b-form-group label="RESPUESTA INTENCIÓN: *">
-                      <b-form-input type="date" placeholder="INGRESE RESPUESTA INTENCIÓN"
-                        v-model="form.respuesta_intencion" />
+                      <b-form-input
+                        type="date"
+                        placeholder="INGRESE RESPUESTA INTENCIÓN"
+                        v-model="form.respuesta_intencion"
+                      />
                       <div class="text-danger" v-if="errors[0]">
                         {{ errors[0].replace("respuesta_intencion", "") }}
                       </div>
@@ -243,9 +304,14 @@
 
                   <ValidationProvider name="discapacidad" v-slot="{ errors }">
                     <b-form-group label="TIENE ALGUNA DISCAPACIDAD: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('respuestas', $event)"
-                        :options="options.respuestas" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.discapacidad">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('respuestas', $event)"
+                        :options="options.respuestas"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.discapacidad"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -256,9 +322,14 @@
 
                   <ValidationProvider name="salud" v-slot="{ errors }">
                     <b-form-group label="TIENE SISTEMA DE SALUD: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('respuestas', $event)"
-                        :options="options.respuestas" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.salud">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('respuestas', $event)"
+                        :options="options.respuestas"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.salud"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -269,9 +340,14 @@
 
                   <ValidationProvider name="estudia_actualmente" v-slot="{ errors }">
                     <b-form-group label="SE ENCUENTRA ESTUDIANDO ACTUALMENTE: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('respuestas', $event)"
-                        :options="options.respuestas" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.estudia_actualmente">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('respuestas', $event)"
+                        :options="options.respuestas"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.estudia_actualmente"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -284,9 +360,14 @@
 
                   <ValidationProvider name="nivel_escolaridad" v-slot="{ errors }">
                     <b-form-group label="NIVEL DE ESCOLARIDAD: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('niveles_escolares', $event)"
-                        :options="options.niveles_escolares" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.nivel_escolar">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('niveles_escolares', $event)"
+                        :options="options.niveles_escolares"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.nivel_escolar"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -313,17 +394,25 @@
 
                   <ValidationProvider name="comunidad_etnica" v-slot="{ errors }">
                     <b-form-group label="PERTENECE ALGUNA COMUNA ETNICA ?: *">
-                      <b-form-input type="text" placeholder="INGRESE PERTENECE ALGUNA COMUNA ETNICA ?"
-                        v-model="form.comunidad_etnica" />
+                      <b-form-input
+                        type="text"
+                        placeholder="INGRESE PERTENECE ALGUNA COMUNA ETNICA ?"
+                        v-model="form.comunidad_etnica"
+                      />
                       <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("comunidad_etnica", "") }}</div>
                     </b-form-group>
                   </ValidationProvider>
 
                   <ValidationProvider name="trabajo" v-slot="{ errors }">
                     <b-form-group label="ACTUALMENTE SE ENCUENTRA LABORANDO: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('respuestas', $event)"
-                        :options="options.respuestas" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.trabajo">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('respuestas', $event)"
+                        :options="options.respuestas"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.trabajo"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -334,9 +423,14 @@
 
                   <ValidationProvider name="tipo_empleo" v-slot="{ errors }">
                     <b-form-group label="TIPO DE EMPLEO: *">
-                      <v-select placeholder="Seleccione ..." @search="consultarListas('tipos_empleos', $event)"
-                        :options="options.tipos_empleos" label="valor_campo_1" :reduce="option => option.codigo_campo"
-                        v-model="form.tipo_empleo">
+                      <v-select
+                        placeholder="Seleccione ..."
+                        @search="consultarListas('tipos_empleos', $event)"
+                        :options="options.tipos_empleos"
+                        label="valor_campo_1"
+                        :reduce="(option) => option.codigo_campo"
+                        v-model="form.tipo_empleo"
+                      >
                         <template slot="no-options">
                           <span>Escriba para buscar ...</span>
                         </template>
@@ -364,14 +458,28 @@
 
               <template slot="footer" slot-scope="props">
                 <div class="wizard-footer-left">
-                  <b-button v-if="props.activeTabIndex > 0 || props.isLastStep" @click="props.prevTab()"
-                    :style="props.fillButtonStyle">Atrás</b-button>
+                  <b-button
+                    v-if="props.activeTabIndex > 0 || props.isLastStep"
+                    @click="props.prevTab()"
+                    :style="props.fillButtonStyle"
+                    >Atrás</b-button
+                  >
                 </div>
                 <div class="wizard-footer-right">
-                  <b-button v-if="!props.isLastStep" @click="guardarCiudadano(_self)" class="wizard-footer-right"
-                    :style="props.fillButtonStyle">Siguiente</b-button>
-                  <b-button v-if="props.isLastStep" @click="guardarCiudadano(_self)"
-                    class="wicozard-footer-right finish-button" :style="props.fillButtonStyle">Finalizar</b-button>
+                  <b-button
+                    v-if="!props.isLastStep"
+                    @click="guardarCiudadano(_self)"
+                    class="wizard-footer-right"
+                    :style="props.fillButtonStyle"
+                    >Siguiente</b-button
+                  >
+                  <b-button
+                    v-if="props.isLastStep"
+                    @click="guardarCiudadano(_self)"
+                    class="wicozard-footer-right finish-button"
+                    :style="props.fillButtonStyle"
+                    >Finalizar</b-button
+                  >
                 </div>
               </template>
             </form-wizard>
@@ -387,6 +495,7 @@ import { mapState, mapActions } from "vuex";
 import { FormWizard, TabContent } from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 import Swal from "sweetalert2";
+import _ from "lodash";
 
 export default {
   components: {
@@ -405,7 +514,7 @@ export default {
       paises_origen: [],
       respuestas: [],
       niveles_escolares: [],
-      tipos_empleos: []
+      tipos_empleos: [],
     },
   }),
   computed: {
@@ -413,18 +522,28 @@ export default {
     ...mapState("Familias", ["ciudadano"]),
   },
   methods: {
-    consultarListas(option, search) {
-      this.$store.dispatch("Listas/consultarListas", option).then(() => {
+    consultarListas: _.debounce(function (option, search) {
+      let payload = { lista: option, search };
+      this.$store.dispatch("Listas/consultarListas", payload).then(() => {
         this.options[option] = this.lista;
       });
-    },
+    }, 300),
+    // consultarListas(option) {
+    //   let payload = { lista: option };
+    //   this.$store.dispatch("Listas/consultarListas", payload).then(() => {
+    //     this.options[option] = this.lista;
+    //   });
+    // },
     ...mapActions("Familias", ["guardarCiudadano"]),
   },
-  mounted(){
+  mounted() {
     // this.$store.dispatch("Familias/consultarCiudadano", "1151959229");
     if (this.ciudadano && this.ciudadano != "no existe") {
       this.form = { ...this.ciudadano[0] };
     }
-  }
+    // Object.keys(this.options).forEach((option) => {
+    //   this.$axios.get(`/api/listas/${option}`).then((res) => this.options[option] = res.data.data);
+    // });
+  },
 };
 </script>
