@@ -17,7 +17,7 @@ class CrearCiudadanoRequest extends FormRequest
             //
             'tipo_documento' => 'required',
             'numero_documento' => 'required|unique:ciudadanos|unique:familias',
-            'pep' => 'string',
+            'pep' => 'numeric',
             'nombres' => 'required|string',
             'apellidos' => 'required|string',
             'fecha_expedicion' => 'required|date',
