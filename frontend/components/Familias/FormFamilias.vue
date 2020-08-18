@@ -523,10 +523,10 @@ export default {
   },
   methods: {
     consultarListas: _.debounce(function (option, search) {
-      let payload = { lista: option, search };
-      this.$store.dispatch("Listas/consultarListas", payload).then(() => {
-        this.options[option] = this.lista;
-      });
+      // let payload = { lista: option, search };
+      // this.$store.dispatch("Listas/consultarListas", payload).then(() => {
+      //   this.options[option] = this.lista;
+      // });
     }, 300),
     // consultarListas(option) {
     //   let payload = { lista: option };
@@ -541,9 +541,9 @@ export default {
     if (this.ciudadano && this.ciudadano != "no existe") {
       this.form = { ...this.ciudadano[0] };
     }
-    // Object.keys(this.options).forEach((option) => {
-    //   this.$axios.get(`/api/listas/${option}`).then((res) => this.options[option] = res.data.data);
-    // });
+    Object.keys(this.options).forEach((option) => {
+      this.$axios.get(`/api/listas/${option}`).then((res) => this.options[option] = res.data.data);
+    });
   },
 };
 </script>
