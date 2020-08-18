@@ -93,7 +93,7 @@ class CiudadanosController extends Controller
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
     }
-    public function update(Request $request, $id)
+    public function update(CrearCiudadanoRequest $request, $id)
     {
         //
         $datosAnteriores = $this->configModelo::find($id);
