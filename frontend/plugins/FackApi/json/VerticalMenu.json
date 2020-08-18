@@ -165,5 +165,28 @@
     "class_name": "",
     "is_icon_class": true,
     "icon": "fa fa-globe"
+  },
+  {
+    "title": "Utilidades",
+    "name": "sidebar.menu-5",
+    "is_heading": false,
+    "is_active": false,
+    "link": "",
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "fa fa-wrench",
+    "children": [
+      {
+        "title": "Crear Listas",
+        "name": "sidebar.menu-5-submenu-1",
+        "is_active": false,
+        "link": {
+          "path": "/utilidades/crear-listas"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": ""
+      }
+    ]
   }
 ]

@@ -14,7 +14,9 @@
     "menu-3-submenu-3": "- Pendientes por ayuda",
     "menu-3-submenu-4": "- Con ayudas entregadas",
     "menu-3-submenu-5": "- Integrantes de familia",
-    "menu-4": "Georreferenciación"
+    "menu-4": "Georreferenciación",
+    "menu-5": "Utilidades",
+    "menu-5-submenu-1": "- Crear Listas"
   },
   "nav": {
     "globalSearchPlaceholder": "Escriba aquí para buscar ...",
