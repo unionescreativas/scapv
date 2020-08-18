@@ -2,23 +2,19 @@
 
 namespace Modules\Caracterizacion\Database\Seeders;
 
-use Webpatser\Uuid\Uuid;
-use Illuminate\Support\Str;
-
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Webpatser\Uuid\Uuid;
 
-class CaracterizacionDatabaseSeeder extends Seeder
-{
+class CaracterizacionDatabaseSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         $id = Uuid::generate(4);
         DB::table('ciudadanos')->insert([
             'id' => $id,
@@ -40,7 +36,7 @@ class CaracterizacionDatabaseSeeder extends Seeder
             'ciudad' => Str::random(10),
             'barrio' => Str::random(10),
             'comuna' => Str::random(10),
-            'direcion' => Str::random(10),
+            'direccion' => Str::random(10),
             'actividad' => Str::random(10),
             'ciudad_origen' => Str::random(10),
             'pais_origen' => Str::random(10),
@@ -56,7 +52,7 @@ class CaracterizacionDatabaseSeeder extends Seeder
             'comunidad_etnica' => Str::random(10),
             'trabajo' => Str::random(10),
             'tipo_empleo' => Str::random(10),
-            'observaciones' => Str::random(10)
+            'observaciones' => Str::random(10),
         ]);
     }
 }

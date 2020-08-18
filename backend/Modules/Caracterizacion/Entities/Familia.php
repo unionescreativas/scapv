@@ -3,12 +3,11 @@
 namespace Modules\Caracterizacion\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Webpatser\Uuid\Uuid;
 
-class Familia extends Model
-{
+class Familia extends Model {
     use SoftDeletes, LaravelVueDatatableTrait;
     //nombre de la table --------------------------------------------------------->
     protected $table = 'familias';
@@ -40,7 +39,7 @@ class Familia extends Model
         'ciudad' => ['searchable' => true, 'order_term' => 'orderable'],
         'barrio' => ['searchable' => true, 'order_term' => 'orderable'],
         'comuna' => ['searchable' => true, 'order_term' => 'orderable'],
-        'direcion' => ['searchable' => true, 'order_term' => 'orderable'],
+        'direccion' => ['searchable' => true, 'order_term' => 'orderable'],
         'actividad' => ['searchable' => true, 'order_term' => 'orderable'],
         'ciudad_origen' => ['searchable' => true, 'order_term' => 'orderable'],
         'pais_origen' => ['searchable' => true, 'order_term' => 'orderable'],
@@ -77,29 +76,19 @@ class Familia extends Model
         ],
     ];
 
-
     //Relaciones --------------------------------------------------------->
 
-
-    public function ciudadano()
-    {
+    public function ciudadano() {
         return $this->belongsTo('\Modules\Caracterizacion\Entities\Ciudadano');
     }
-    public function transferencia()
-    {
+    public function transferencia() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
     }
 
-
-
     //Relaciones --------------------------------------------------------->
 
-
-
-
     //Creacion del campo id Uuid --------------------------------------------------------->
-    public static function boot()
-    {
+    public static function boot() {
         parent::boot();
         self::creating(
             function ($model) {
@@ -109,7 +98,7 @@ class Familia extends Model
     }
 
     protected $casts = [
-        'id' => 'string'
+        'id' => 'string',
     ];
     //Creacion del campo id Uuid --------------------------------------------------------->
 

@@ -4,15 +4,13 @@ namespace Modules\Caracterizacion\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CrearCiudadanoRequest extends FormRequest
-{
+class CrearCiudadanoRequest extends FormRequest {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             //
             'tipo_documento' => 'required',
@@ -33,7 +31,7 @@ class CrearCiudadanoRequest extends FormRequest
             'ciudad' => 'required',
             'barrio' => 'required',
             'comuna' => 'required',
-            'direcion' => 'required',
+            'direccion' => 'required',
             'lat' => 'required',
             'let' => 'required',
             'actividad' => 'string',
@@ -56,12 +54,10 @@ class CrearCiudadanoRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
-    public function messages()
-    {
+    public function messages() {
         return [
             // 'tipo_documento.required' => 'es requerido',
             // 'numero_documento.required' => '',

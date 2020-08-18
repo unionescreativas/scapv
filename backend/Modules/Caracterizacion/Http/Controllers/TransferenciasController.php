@@ -2,25 +2,21 @@
 
 namespace Modules\Caracterizacion\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\Caracterizacion\Entities\Transferencia;
-use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use Modules\Caracterizacion\Entities\Ciudadano;
 use Modules\Caracterizacion\Entities\Familia;
+use Modules\Caracterizacion\Entities\Transferencia;
 
-class TransferenciasController extends Controller
-{
+class TransferenciasController extends Controller {
 
     protected $configModelo;
     protected $modulo;
 
-    public function __construct()
-    {
+    public function __construct() {
         // Variables Globales---------------------------->
         $this->configModelo = new Transferencia;
         $this->modulo = "Transferencias";
@@ -28,8 +24,7 @@ class TransferenciasController extends Controller
 
     }
 
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $length = $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
@@ -40,14 +35,13 @@ class TransferenciasController extends Controller
             $orderBy,
             $searchValue,
             [
-                "familia", "ciudadano"
+                "familia", "ciudadano",
             ]
         )->where('transferencias.estado', '1');
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
-    public function show($id)
-    {
+    public function show($id) {
         $variableConsulta = $this->configModelo::where('id', $id)->where('transferencias.estado', '1')->get();
 
         if ($variableConsulta->isEmpty()) {
@@ -64,8 +58,7 @@ class TransferenciasController extends Controller
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         $variableConsulta = $this->configModelo;
 
@@ -99,7 +92,7 @@ class TransferenciasController extends Controller
         $newCiudadano->ciudad = $ciudadano->ciudad;
         $newCiudadano->barrio = $ciudadano->barrio;
         $newCiudadano->comuna = $ciudadano->comuna;
-        $newCiudadano->direcion = $ciudadano->direcion;
+        $newCiudadano->direccion = $ciudadano->direccion;
         $newCiudadano->actividad = $ciudadano->actividad;
         $newCiudadano->ciudad_origen = $ciudadano->ciudad_origen;
         $newCiudadano->pais_origen = $ciudadano->pais_origen;
@@ -149,8 +142,7 @@ class TransferenciasController extends Controller
         $newTransferencia->save();
         return ['data' => $variableConsulta, 'status' => '202'];
     }
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);
@@ -165,8 +157,7 @@ class TransferenciasController extends Controller
         ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
     }
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
         $variableConsulta = $this->configModelo::destroy($id);
@@ -174,8 +165,7 @@ class TransferenciasController extends Controller
         return ['data' => $variableConsulta, 'status' => '204'];
     }
 
-    public function activar($id)
-    {
+    public function activar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
@@ -184,8 +174,7 @@ class TransferenciasController extends Controller
         return ['data' => $variableConsulta, 'status' => '205'];
     }
 
-    public function inactivar($id)
-    {
+    public function inactivar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo},Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
@@ -193,8 +182,7 @@ class TransferenciasController extends Controller
         $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '206'];
     }
-    public function restore($id)
-    {
+    public function restore($id) {
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;
         ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo},Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");

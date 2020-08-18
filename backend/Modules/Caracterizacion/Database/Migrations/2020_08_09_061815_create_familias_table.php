@@ -1,18 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateFamiliasTable extends Migration
-{
+class CreateFamiliasTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('familias', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
@@ -37,7 +35,7 @@ class CreateFamiliasTable extends Migration
             $table->string('ciudad');
             $table->string('bario');
             $table->string('comuna');
-            $table->string('direcion');
+            $table->string('direccion');
             $table->string('actividad')->nullable();
             $table->string('ciudad_origen')->nullable();
             $table->string('pais_origen')->nullable();
@@ -72,8 +70,7 @@ class CreateFamiliasTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('familias');
     }
 }

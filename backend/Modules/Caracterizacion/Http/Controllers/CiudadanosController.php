@@ -4,28 +4,24 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\Caracterizacion\Entities\Ciudadano;
-use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-use Modules\Caracterizacion\Http\Requests\CrearCiudadanoRequest;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+use Modules\Caracterizacion\Entities\Ciudadano;
+use Modules\Caracterizacion\Http\Requests\CrearCiudadanoRequest;
 
-class CiudadanosController extends Controller
-{
+class CiudadanosController extends Controller {
 
     // Variables Globales---------------------------->
     protected $configModelo;
     protected $modulo;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->configModelo = new Ciudadano;
         $this->modulo = "Ciudadanos";
 
     }
     // Variables Globales---------------------------->
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $length = $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
@@ -35,8 +31,7 @@ class CiudadanosController extends Controller
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
-    public function show($id)
-    {
+    public function show($id) {
         $variableConsulta = $this->configModelo::where('id', $id)->where('ciudadanos.estado', '1')->get();
         if ($variableConsulta->isEmpty()) {
             $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
@@ -49,8 +44,7 @@ class CiudadanosController extends Controller
         }
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(CrearCiudadanoRequest $request)
-    {
+    public function store(CrearCiudadanoRequest $request) {
         $variableConsulta = new Ciudadano;
         $variableConsulta->tipo_documento = $request->tipo_documento;
         $variableConsulta->numero_documento = $request->numero_documento;
@@ -70,7 +64,7 @@ class CiudadanosController extends Controller
         $variableConsulta->ciudad = $request->ciudad;
         $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->direcion = $request->direcion;
+        $variableConsulta->direccion = $request->direccion;
         $variableConsulta->lat = $request->lat;
         $variableConsulta->let = $request->let;
         $variableConsulta->actividad = $request->actividad;
@@ -93,8 +87,7 @@ class CiudadanosController extends Controller
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
     }
-    public function update(CrearCiudadanoRequest $request, $id)
-    {
+    public function update(CrearCiudadanoRequest $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);
@@ -116,7 +109,7 @@ class CiudadanosController extends Controller
         $variableConsulta->ciudad = $request->ciudad;
         $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->direcion = $request->direcion;
+        $variableConsulta->direccion = $request->direccion;
         $variableConsulta->lat = $request->lat;
         $variableConsulta->let = $request->let;
         $variableConsulta->actividad = $request->actividad;
@@ -139,8 +132,7 @@ class CiudadanosController extends Controller
         ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
     }
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
         $variableConsulta = $this->configModelo::destroy($id);
@@ -148,8 +140,7 @@ class CiudadanosController extends Controller
         return ['data' => $variableConsulta, 'status' => '204'];
     }
 
-    public function activar($id)
-    {
+    public function activar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
@@ -158,8 +149,7 @@ class CiudadanosController extends Controller
         return ['data' => $variableConsulta, 'status' => '205'];
     }
 
-    public function inactivar($id)
-    {
+    public function inactivar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo},Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
@@ -167,16 +157,14 @@ class CiudadanosController extends Controller
         $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '206'];
     }
-    public function restore($id)
-    {
+    public function restore($id) {
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;
         ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo},Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");
         $variableConsulta->restore();
         return ['data' => $variableConsulta, 'status' => '207'];
     }
-    public function buscadogeneral()
-    {
+    public function buscadogeneral() {
         $user = $this->configModelo::all();
 
         return $user->toArray();

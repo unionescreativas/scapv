@@ -5,16 +5,13 @@ namespace Modules\Reportes\Exports;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
-class CiudadanosExport implements FromQuery, WithHeadings
-{
+class CiudadanosExport implements FromQuery, WithHeadings {
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function query()
-    {
-        return DB::table('ciudadanos')->where('deleted_at', NULL)
+    public function query() {
+        return DB::table('ciudadanos')->where('deleted_at', null)
             ->orderBy("ciudadanos.created_at");
     }
     public function headings(): array
@@ -39,7 +36,7 @@ class CiudadanosExport implements FromQuery, WithHeadings
             'CIUDAD DE RESIDENCIA',
             'BARRIO DE RESIDENCIA',
             'COMUNA DE RESIDENCIA',
-            'direcion DE RESIDENCIA',
+            'direccion DE RESIDENCIA',
             'LATITUD',
             'LONGITUD',
             'ACTIVIDAD',

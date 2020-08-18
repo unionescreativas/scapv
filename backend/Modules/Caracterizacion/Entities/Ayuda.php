@@ -3,12 +3,11 @@
 namespace Modules\Caracterizacion\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Webpatser\Uuid\Uuid;
 
-class Ayuda extends Model
-{
+class Ayuda extends Model {
     use SoftDeletes, LaravelVueDatatableTrait;
     //nombre de la table --------------------------------------------------------->
     protected $table = 'ayudas';
@@ -27,9 +26,7 @@ class Ayuda extends Model
 
     //Campos Para mostrar en Api, con filtro --------------------------------------------------------->
 
-
     //Relaciones --------------------------------------------------------->
-
 
     protected $dataTableRelationships = [
         "belongsTo" => [
@@ -55,7 +52,7 @@ class Ayuda extends Model
                     'ciudad' => ['searchable' => true, 'order_term' => 'orderable'],
                     'barrio' => ['searchable' => true, 'order_term' => 'orderable'],
                     'comuna' => ['searchable' => true, 'order_term' => 'orderable'],
-                    'direcion' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'direccion' => ['searchable' => true, 'order_term' => 'orderable'],
                     'lat' => ['searchable' => true, 'order_term' => 'orderable'],
                     'let' => ['searchable' => true, 'order_term' => 'orderable'],
                     'actividad' => ['searchable' => true, 'order_term' => 'orderable'],
@@ -91,27 +88,18 @@ class Ayuda extends Model
         ],
     ];
 
-
-    public function ciudadano()
-    {
+    public function ciudadano() {
         return $this->belongsTo('\Modules\Caracterizacion\Entities\Ciudadano');
     }
 
-    public function lista()
-    {
+    public function lista() {
         return $this->belongsTo('\Modules\Caracterizacion\Entities\Lista');
     }
 
-
-
     //Relaciones --------------------------------------------------------->
 
-
-
-
     //Creacion del campo id Uuid --------------------------------------------------------->
-    public static function boot()
-    {
+    public static function boot() {
         parent::boot();
         self::creating(
             function ($model) {
@@ -120,10 +108,8 @@ class Ayuda extends Model
         );
     }
 
-
-
     protected $casts = [
-        'id' => 'string'
+        'id' => 'string',
     ];
     //Creacion del campo id Uuid --------------------------------------------------------->
 

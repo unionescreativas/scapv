@@ -2,23 +2,20 @@
 
 namespace Modules\Caracterizacion\Entities;
 
-use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
+use Webpatser\Uuid\Uuid;
 
-class Ciudadano extends Model
-{
+class Ciudadano extends Model {
     use SoftDeletes, LaravelVueDatatableTrait;
     protected $table = 'ciudadanos';
     protected $keyType = 'string';
     public $incrementing = false;
     //protected $fillable = [];
 
-
-
     protected $dataTableColumns = [
-        'id' => ['searchable' => false,],
+        'id' => ['searchable' => false],
         'tipo_documento' => ['searchable' => true, 'order_term' => 'orderable'],
         'numero_documento' => ['searchable' => true, 'order_term' => 'orderable'],
         'pep' => ['searchable' => true, 'order_term' => 'orderable'],
@@ -37,7 +34,7 @@ class Ciudadano extends Model
         'ciudad' => ['searchable' => true, 'order_term' => 'orderable'],
         'barrio' => ['searchable' => true, 'order_term' => 'orderable'],
         'comuna' => ['searchable' => true, 'order_term' => 'orderable'],
-        'direcion' => ['searchable' => true, 'order_term' => 'orderable'],
+        'direccion' => ['searchable' => true, 'order_term' => 'orderable'],
         'lat' => ['searchable' => true, 'order_term' => 'orderable'],
         'let' => ['searchable' => true, 'order_term' => 'orderable'],
         'actividad' => ['searchable' => true, 'order_term' => 'orderable'],
@@ -59,22 +56,18 @@ class Ciudadano extends Model
 
     ];
 
-    public function transferencia()
-    {
+    public function transferencia() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
     }
 
-    public function familias()
-    {
+    public function familias() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Familia');
     }
-    public function ayudas()
-    {
+    public function ayudas() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Ayuda');
     }
 
-    public static function boot()
-    {
+    public static function boot() {
         parent::boot();
         self::creating(
             function ($model) {
@@ -84,6 +77,6 @@ class Ciudadano extends Model
     }
 
     protected $casts = [
-        'id' => 'string'
+        'id' => 'string',
     ];
 }

@@ -5,15 +5,12 @@ namespace Modules\Reportes\Exports;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
-class AyudasPendientesExport implements FromQuery, WithHeadings
-{
+class AyudasPendientesExport implements FromQuery, WithHeadings {
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function query()
-    {
+    public function query() {
         return DB::table('ciudadanos')
             ->leftjoin('ayudas', 'ciudadanos.id', 'ayudas.ciudadano_id')
             ->whereNull('ayudas.cantidad_entregada')
@@ -36,7 +33,7 @@ class AyudasPendientesExport implements FromQuery, WithHeadings
                 'ciudadanos.ciudad',
                 'ciudadanos.barrio',
                 'ciudadanos.comuna',
-                'ciudadanos.direcion',
+                'ciudadanos.direccion',
                 'ciudadanos.lat',
                 'ciudadanos.let',
                 'ciudadanos.actividad',
@@ -81,7 +78,7 @@ class AyudasPendientesExport implements FromQuery, WithHeadings
             'CIUDAD DE RESIDENCIA',
             'BARRIO DE RESIDENCIA',
             'COMUNA DE RESIDENCIA',
-            'direcion DE RESIDENCIA',
+            'direccion DE RESIDENCIA',
             'LATITUD',
             'LONGITUD',
             'ACTIVIDAD',

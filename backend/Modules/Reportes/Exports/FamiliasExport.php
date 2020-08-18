@@ -5,15 +5,12 @@ namespace Modules\Reportes\Exports;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
-class FamiliasExport implements FromQuery, WithHeadings
-{
+class FamiliasExport implements FromQuery, WithHeadings {
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function query()
-    {
+    public function query() {
         // $libros = DB::select('select * from books where 1');
         return DB::table('familias as f')
             ->leftJoin('ciudadanos as c', 'c.id', '=', 'f.ciudadano_id')
@@ -36,7 +33,7 @@ class FamiliasExport implements FromQuery, WithHeadings
                 'c.ciudad',
                 'c.barrio',
                 'c.comuna',
-                'c.direcion',
+                'c.direccion',
                 'c.actividad',
                 'c.ciudad_origen',
                 'c.pais_origen',
@@ -67,7 +64,7 @@ class FamiliasExport implements FromQuery, WithHeadings
                 'f.ciudad as Familia_ciudad',
                 'f.barrio as Familia_barrio',
                 'f.comuna as Familia_comuna',
-                'f.direcion as Familia_direcion',
+                'f.direccion as Familia_direccion',
                 'f.actividad as Familia_actividad',
                 'f.ciudad_origen as Familia_ciudad_origen',
                 'f.pais_origen as Familia_pais_origen',
@@ -101,7 +98,7 @@ class FamiliasExport implements FromQuery, WithHeadings
             'CIUDAD',
             'barrio',
             'COMUNA',
-            'direcion',
+            'direccion',
             'ACTIVIDAD',
             'CIUDAD_ORIGEN',
             'PAIS_ORIGEN',
@@ -132,7 +129,7 @@ class FamiliasExport implements FromQuery, WithHeadings
             'CIUDAD',
             'barrio',
             'COMUNA',
-            'direcion',
+            'direccion',
             'ACTIVIDAD',
             'CIUDAD_ORIGEN',
             'PAIS_ORIGEN',

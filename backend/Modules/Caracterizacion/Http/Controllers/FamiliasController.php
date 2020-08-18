@@ -2,22 +2,18 @@
 
 namespace Modules\Caracterizacion\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\Caracterizacion\Entities\Familia;
-use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+use Modules\Caracterizacion\Entities\Familia;
 
-class FamiliasController extends Controller
-{
+class FamiliasController extends Controller {
 
     protected $configModelo;
     protected $modulo;
 
-    public function __construct()
-    {
+    public function __construct() {
         // Variables Globales---------------------------->
         $this->configModelo = new Familia;
         $this->modulo = "Familias";
@@ -25,8 +21,7 @@ class FamiliasController extends Controller
 
     }
 
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $length = $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
@@ -38,8 +33,7 @@ class FamiliasController extends Controller
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
-    public function nucleofamiliar(Request $request, $id)
-    {
+    public function nucleofamiliar(Request $request, $id) {
         $length = $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
@@ -52,8 +46,7 @@ class FamiliasController extends Controller
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
-    public function show($id)
-    {
+    public function show($id) {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
 
         // if ($variableConsulta->isEmpty()) {
@@ -68,8 +61,7 @@ class FamiliasController extends Controller
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         $variableConsulta = $this->configModelo;
 
@@ -94,7 +86,7 @@ class FamiliasController extends Controller
         $variableConsulta->ciudad = $request->ciudad;
         $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->direcion = $request->direcion;
+        $variableConsulta->direccion = $request->direccion;
         $variableConsulta->actividad = $request->actividad;
         $variableConsulta->ciudad_origen = $request->ciudad_origen;
         $variableConsulta->pais_origen = $request->pais_origen;
@@ -118,8 +110,7 @@ class FamiliasController extends Controller
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
     }
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);
@@ -145,7 +136,7 @@ class FamiliasController extends Controller
         $variableConsulta->ciudad = $request->ciudad;
         $variableConsulta->barrio = $request->barrio;
         $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->direcion = $request->direcion;
+        $variableConsulta->direccion = $request->direccion;
         $variableConsulta->actividad = $request->actividad;
         $variableConsulta->ciudad_origen = $request->ciudad_origen;
         $variableConsulta->pais_origen = $request->pais_origen;
@@ -169,8 +160,7 @@ class FamiliasController extends Controller
         ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
     }
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
         $variableConsulta = $this->configModelo::destroy($id);
@@ -178,8 +168,7 @@ class FamiliasController extends Controller
         return ['data' => $variableConsulta, 'status' => '204'];
     }
 
-    public function activar($id)
-    {
+    public function activar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
@@ -188,8 +177,7 @@ class FamiliasController extends Controller
         return ['data' => $variableConsulta, 'status' => '205'];
     }
 
-    public function inactivar($id)
-    {
+    public function inactivar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo},Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
@@ -197,8 +185,7 @@ class FamiliasController extends Controller
         $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '206'];
     }
-    public function restore($id)
-    {
+    public function restore($id) {
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;
         ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo},Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");
