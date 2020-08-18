@@ -12,7 +12,7 @@ export const actions = {
     this.$auth
       .loginWith("laravelSanctum", { data: payload.form })
       .then(() => {
-        this.$router.push("/");
+        this.$router.push("/estadisticas");
       })
       .catch((err) => {
         payload.$refs.observer.setErrors(err.response.data.errors);
