@@ -50,7 +50,7 @@ class CiudadanosController extends Controller
     public function validarCampos(CiudadanoRequest $request)
     {
 
-        return ['data' => 'true', 'status' => '202'];
+        return ['data' => ["valid" => true], 'status' => '202'];
     }
     public function store(CiudadanoRequest $request)
     {
