@@ -57,8 +57,10 @@ export default {
     { src: "~/plugins/general/vue-grid.js", mode: "client" },
     { src: "~/plugins/general/vue-select.js" },
     { src: "~/plugins/general/vue-datatable" },
+    { src: "~/plugins/general/vue-google-maps" },
+    { src: "~/plugins/general/vue-chartkick.js", mode: "client" },
   ],
-  /*
+  /*W
    ** Auto import components
    ** See https://nuxtjs.orgapi/configuration-components
    */
@@ -112,6 +114,9 @@ export default {
    ** See https://nuxtjs.orgapi/configuration-build/
    */
   build: {
-    transpile: ["vee-validate", "vue-bootstrap-typeahead"],
+    extend(config) {
+      config.resolve.alias["vue"] = "vue/dist/vue.common";
+    },
+    transpile: ["vee-validate", "vue-bootstrap-typeahead", "vue2-google-maps"],
   },
 };
