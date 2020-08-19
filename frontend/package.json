@@ -59,6 +59,7 @@
     "vue-select": "^3.4.0",
     "vue-slick": "^1.1.15",
     "vue-slider-component": "3.0.32",
+    "vue2-dropzone": "^3.6.0",
     "vuedraggable": "^2.23.2",
     "wowjs": "^1.1.3"
   },
