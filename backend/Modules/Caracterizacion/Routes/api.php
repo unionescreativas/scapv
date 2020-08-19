@@ -17,7 +17,7 @@ Route::put('ciudadanos/{id}/inactivar', 'CiudadanosController@inactivar')->name(
 Route::put('ciudadanos/{id}/activar', 'CiudadanosController@activar')->name('ciudadanos.activar');
 Route::put('ciudadanos/{id}/restore', 'CiudadanosController@restore')->name('ciudadanos.restore');
 Route::post('ciudadanosvalidar', 'CiudadanosController@validarCampos')->name('ciudadanos.validarCampos');
-Route::get('buscadorgeneral', 'CiudadanosController@buscadogeneral')->name('ciudadanos.buscadogeneral');
+Route::post('buscadorgeneral', 'CiudadanosController@buscadogeneral')->name('ciudadanos.buscadogeneral');
 
 Route::group(['middleware' => ['activity']], function () {
     Route::apiResources(
