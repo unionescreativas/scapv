@@ -150,7 +150,7 @@ export default {
   },
   methods: {
     displayRow(data) {
-      let ruta = `/Familias/perfil/${data.id}`;
+      let ruta = `/perfil/${data.id}`;
       this.$router.push(ruta);
     },
   },

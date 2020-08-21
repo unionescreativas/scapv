@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 export default {
   layout: "LightLayout",
   head: () => ({
-    title: "Crear Familias",
+    title: "Crear Núcleo",
   }),
   data: () => ({
     numero_documento: "",

@@ -31,22 +31,22 @@
     "icon": "fa fa-list",
     "children": [
       {
-        "title": "Crear Familias",
+        "title": "Crear Núcleo",
         "name": "sidebar.menu-2-submenu-1",
         "is_active": false,
         "link": {
-          "path": "/caracterizacion/crear-familias"
+          "path": "/caracterizacion/crear-nucleo"
         },
         "class_name": "",
         "is_icon_class": true,
         "icon": ""
       },
       {
-        "title": "Familias",
+        "title": "Cabeza de Familia",
         "name": "sidebar.menu-2-submenu-2",
         "is_active": false,
         "link": {
-          "path": "/caracterizacion/familias"
+          "path": "/caracterizacion/cabeza-familia"
         },
         "class_name": "",
         "is_icon_class": true,

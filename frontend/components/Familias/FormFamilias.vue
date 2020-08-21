@@ -91,7 +91,7 @@
 
                   <ValidationProvider name="fecha_nacimiento" v-slot="{ errors }">
                     <b-form-group label="FECHA DE NACIMIENTO: *">
-                      <b-form-input type="date" placeholder="INGRESE FECHA DE NACIMIENTO" v-model="form.fecha_nacimiento" />
+                      <b-form-input type="date" placeholder="INGRESE FECHA DE NACIMIENTO" v-model="form.fecha_nacimiento" @change="calcularEdad" />
                       <div class="text-danger" v-if="errors[0]">
                         {{ errors[0].replace("fecha nacimiento", "") }}
                       </div>
@@ -100,7 +100,7 @@
 
                   <ValidationProvider name="edad" v-slot="{ errors }">
                     <b-form-group label="EDAD: *">
-                      <b-form-input type="text" placeholder="INGRESE EDAD" v-model="form.edad" />
+                      <b-form-input type="text" v-model="form.edad" readonly />
                       <div class="text-danger" v-if="errors[0]">{{ errors[0].replace("edad", "") }}</div>
                     </b-form-group>
                   </ValidationProvider>
@@ -494,7 +494,7 @@ import { mapState, mapActions } from "vuex";
 import { FormWizard, TabContent } from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 import Swal from "sweetalert2";
-import _ from "lodash";
+import { calcularEdad } from "~/plugins/general/scripts";
 
 export default {
   props: {
@@ -547,6 +547,10 @@ export default {
     //   let comuna = this.$refs.vSelect.selectedValue[0].valor_campo_2;
     //   this.form.comuna = comuna;
     // },
+    calcularEdad(fecha){
+      let edad = calcularEdad(fecha);
+      this.form.edad = edad;
+    },
     async validate(func) {
       try {
         let res = await this.$axios.post("/api/ciudadanosvalidar", this.form);
