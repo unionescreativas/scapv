@@ -53,7 +53,7 @@ export default {
   // },
   data: () => ({
     numero_documento: "",
-    ciudadanos: []
+    ciudadanos: [],
   }),
   computed: {
     ...mapState("Familias", ["ciudadano"]),
@@ -64,34 +64,39 @@ export default {
       // SE ACCEDE AL COMPONENTE: VueBootstrapTypeahead
       // Y SE REINICIA EL VALOR DEL INPUT SEARCH
       this.$children[0].inputValue = "";
-      this.$emit("mostrarFormFamilias", false);
+      this.$emit("obtener_numero_documento", null);
     },
     consultarCiudadano(numero_documento) {
       this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
         if (this.ciudadano != "no existe") {
           Swal.fire({
             title: "Registrado!",
-            text: "Ya te encuentras registrado, se cargarán tus datos personales",
+            text: "Ya te encuentras registrado, deseas editar tus datos personales?",
             icon: "info",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Si",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "No",
+            showCancelButton: true,
             allowOutsideClick: false,
-            allowEscapeKey: false,
-          }).then((result) => {
+            allowEscapeKey: false
+          }).then(async (result) => {
             if (result.value) {
-              this.$emit("mostrarFormFamilias", true);
+              this.$emit("obtener_numero_documento", numero_documento);
             }
           });
         } else {
-          this.$emit("mostrarFormFamilias", true);
+          this.$emit("obtener_numero_documento", numero_documento);
         }
       });
-      this.$emit("mostrarFormFamilias", false);
+      this.$emit("obtener_numero_documento", null);
     },
   },
-  async mounted(){
+  async mounted() {
     let res = await this.$axios.get("/api/ciudadanos/");
     let data = res.data.data;
     let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
     this.ciudadanos = ciudadanos;
-  }
+  },
 };
 </script>

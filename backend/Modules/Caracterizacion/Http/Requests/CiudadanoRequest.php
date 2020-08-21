@@ -2,16 +2,16 @@
 
 namespace Modules\Caracterizacion\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CiudadanoRequest extends FormRequest
-{
-    public function rules()
-    {
+class CiudadanoRequest extends FormRequest {
+    public function rules() {
         return [
             //
             'tipo_documento' => 'required',
-            'numero_documento' => 'required|unique:ciudadanos|unique:familias',
+            // 'numero_documento' => 'required|unique:ciudadanos|unique:familias',
             'pep' => 'numeric',
             'nombres' => 'required|string',
             'apellidos' => 'required|string',
@@ -31,7 +31,7 @@ class CiudadanoRequest extends FormRequest
             'direccion' => 'required',
             // 'lat' => 'required',
             // 'let' => 'required',
-            'actividad' => 'string',
+            'actividad' => 'required|string',
             'ciudad_origen' => 'string',
             'pais_origen' => 'string',
             'fecha_llegada' => 'date|date_format:Y-m-d',
@@ -51,15 +51,17 @@ class CiudadanoRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
-    public function messages()
-    {
+    public function messages() {
         return [
             // 'tipo_documento.required' => 'es requerido',
             // 'numero_documento.required' => '',
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['data' => ["valid" => false, "errors" => $validator->errors()], 'status' => '202']));
     }
 }

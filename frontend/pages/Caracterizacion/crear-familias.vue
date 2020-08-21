@@ -1,7 +1,7 @@
 <template>
   <div>
-    <buscador-ciudadano @mostrarFormFamilias="mostrarFormFamilias" />
-    <form-familias v-if="mostrar" />
+    <buscador-ciudadano @obtener_numero_documento="obtener_numero_documento" />
+    <form-familias v-if="numero_documento" :numero_documento="numero_documento" />
   </div>
 </template>
 
@@ -15,14 +15,14 @@ export default {
     title: "Crear Familias",
   }),
   data: () => ({
-    mostrar: false,
+    numero_documento: "",
   }),
   mounted() {
     vito.index();
   },
   methods: {
-    mostrarFormFamilias(value) {
-      this.mostrar = value;
+    obtener_numero_documento(value) {
+      this.numero_documento = value;
     },
   },
 };
