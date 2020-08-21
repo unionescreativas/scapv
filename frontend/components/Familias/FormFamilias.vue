@@ -549,22 +549,6 @@ export default {
     // },
     async validate(func) {
       try {
-        // let res = await this.$axios.post("/api/ciudadanosvalidar", this.form);
-        // let valid = res.data.data.valid;
-
-        // if (this.formChanged) {
-        //   if (valid) {
-        //     this.formChanged = false;
-        //     return func();
-        //   }
-        // } else {
-        //   if (!this.$refs.formWizard.isLastStep) {
-        //     this.$refs.formWizard.nextTab();
-        //   } else {
-        //     return func();
-        //   }
-        // }
-
         let res = await this.$axios.post("/api/ciudadanosvalidar", this.form);
         let errors = _.pick(res.data.data.errors, _.keys(this.$refs.observer.fields));
 
@@ -590,26 +574,6 @@ export default {
         }
       } catch (res) {
         console.error(res);
-        // let errors = _.pick(res.response.data.errors, _.keys(this.$refs.observer.fields));
-
-        // if (Object.keys(errors).length) {
-        //   this.$refs.observer.setErrors(errors);
-        //   Swal.fire({
-        //     html: "<h4>Por favor revise los campos obligatorios!</h4>",
-        //     icon: "warning",
-        //     allowOutsideClick: false,
-        //     allowEscapeKey: false,
-        //   });
-        // } else {
-        //   if (this.formChanged) {
-        //     this.formChanged = false;
-        //     return func();
-        //   } else {
-        //     if (!this.$refs.formWizard.isLastStep) {
-        //       this.$refs.formWizard.nextTab();
-        //     }
-        //   }
-        // }
       }
     },
     prevTab(){
