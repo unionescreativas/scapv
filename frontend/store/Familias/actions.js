@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import _ from "lodash";
 
 export default {
   async consultarCiudadano({ commit }, payload) {
