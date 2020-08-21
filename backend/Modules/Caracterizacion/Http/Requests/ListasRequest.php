@@ -14,9 +14,9 @@ class ListasRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre_lista' => 'required',
-            'codigo_campo' => 'required',
-            'valor_campo_1' => 'required'
+            '*.nombre_lista' => 'required',
+            '*.codigo_campo' => 'required',
+            '*.valor_campo_1' => 'required'
         ];
     }
 

@@ -5,8 +5,9 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Support\Renderable;
 use Modules\Caracterizacion\Entities\Lista;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Caracterizacion\Http\Requests\ListasRequest;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
@@ -45,7 +46,7 @@ class ListasController extends Controller
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
         $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)
-        ->where('estado', '1')->where('nombre_lista',$id);
+            ->where('estado', '1')->where('nombre_lista', $id);
         $data = $variableConsulta->paginate(100);
         return new DataTableCollectionResource($data);
 
@@ -67,21 +68,28 @@ class ListasController extends Controller
     public function store(ListasRequest $request)
     {
 
-        $variableConsulta = $this->configModelo;
+        foreach ($request->all() as $key => $value) {
 
-        //Campos a guardar aquí--------------->
-        $variableConsulta->nombre_lista = $request->nombre_lista;
-        $variableConsulta->codigo_campo = $request->codigo_campo;
-        $variableConsulta->valor_campo_1 = $request->valor_campo_1;
-        $variableConsulta->valor_campo_2 = $request->valor_campo_2;
-        $variableConsulta->valor_campo_3 = $request->valor_campo_3;
-        $variableConsulta->valor_campo_4 = $request->valor_campo_4;
+            // dump($key, $value);
 
-        //Campos a guardar aquí--------------->
+            $variableConsulta = $this->configModelo;
 
-        $variableConsulta->save();
+            //Campos a guardar aquí--------------->
+            $variableConsulta->nombre_lista = $request[$key]->nombre_lista;
+            $variableConsulta->codigo_campo = $request[$key]->codigo_campo;
+            $variableConsulta->valor_campo_1 = $request[$key]->valor_campo_1;
+            $variableConsulta->valor_campo_2 = $request[$key]->valor_campo_2;
+            $variableConsulta->valor_campo_3 = $request[$key]->valor_campo_3;
+            $variableConsulta->valor_campo_4 = $request[$key]->valor_campo_4;
+
+            //Campos a guardar aquí--------------->
+
+            $variableConsulta->save();
+        }
+
+
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
-        return ['data' => $variableConsulta, 'status' => '202'];
+        return ['data' => $request->all(), 'status' => '202'];
     }
     public function update(ListasRequest $request, $id)
     {
