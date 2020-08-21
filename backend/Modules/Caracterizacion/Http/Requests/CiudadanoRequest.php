@@ -9,7 +9,6 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class CiudadanoRequest extends FormRequest {
     public function rules() {
         return [
-            //0000-00-00
             'tipo_documento' => 'required',
             'numero_documento' => 'required|unique:familias',
             'pep' => 'numeric|nullable',
@@ -29,8 +28,6 @@ class CiudadanoRequest extends FormRequest {
             'barrio' => 'required',
             'comuna' => 'required',
             'direccion' => 'required',
-            // 'lat' => 'required',
-            // 'let' => 'required',
             'actividad' => 'required|string',
             'ciudad_origen' => 'string|nullable',
             'pais_origen' => 'string|nullable',
