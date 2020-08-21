@@ -320,7 +320,9 @@
     <FooterStyle1>
       <template v-slot:left>
         <li class="list-inline-item">
-          <a href="https://www.unionescreativas.com/" target="_blank" class="text-danger"><u>Uniones Creativas</u></a>
+          <a href="https://www.unionescreativas.com/" target="_blank" style="color: var(--iq-danger-light);"
+            ><u>Uniones Creativas</u></a
+          >
         </li>
       </template>
       <template v-slot:right>Copyright &copy; 2020 - Todos los Derechos Reservados.</template>
@@ -527,7 +529,7 @@ export default {
       logout: "logout",
     }),
   },
-  mounted(){
+  mounted() {
     vito.navBarAction(this.$refs[""]);
   },
 };

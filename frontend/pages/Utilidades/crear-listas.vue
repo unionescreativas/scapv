@@ -15,3 +15,11 @@ export default {
   },
 };
 </script>
+
+<router>
+  {
+    meta: {
+      name: "Crear Listas"
+    }
+  }
+</router>

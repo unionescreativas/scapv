@@ -1,7 +1,7 @@
 <template>
   <div>
     <buscador-ciudadano @obtener_numero_documento="obtener_numero_documento" />
-    <form-familias v-if="numero_documento" :numero_documento="numero_documento" />
+    <form-nucleo v-if="numero_documento" :numero_documento="numero_documento" />
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
 <router>
   {
     meta: {
-      name: "Crear Familias"
+      name: "Crear Núcleo"
     }
   }
 </router>

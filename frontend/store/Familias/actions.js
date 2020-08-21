@@ -80,8 +80,8 @@ export default {
           }
         });
       }
-    } catch (res) {
-      console.error(res);
+    } catch (err) {
+      console.error(err);
     }
   },
 };
