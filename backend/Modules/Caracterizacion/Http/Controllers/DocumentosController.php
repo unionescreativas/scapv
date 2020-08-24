@@ -11,6 +11,7 @@ use Modules\Caracterizacion\Entities\Documento;
 use Modules\Caracterizacion\Http\Requests\DocumentoRequest;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentosController extends Controller
 {
@@ -39,75 +40,57 @@ class DocumentosController extends Controller
     public function show($id)
     {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
-
-        // if ($variableConsulta->isEmpty()) {
-        //     $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
-        // } else {
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
-        // }
-        // if ($variableConsulta->isEmpty()) {
-        //     return ['data' => 'no existe', 'status' => '201'];
-        // }
-
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(DocumentoRequest $request)
+    public function store(Request $request)
     {
-
-        // ------------------------>Datos Archivo
-        $nombreArchivo = (string) Uuid::generate(4);
-        $nombreCarga = $request->file->getClientOriginalName();
-        $extensionArchivo = $request->file->getClientOriginalExtension();
-        $tamañoArchivo = $request->file->getSize() / 1000;
-        $aplicacionArchivo = $request->file->getMimeType();
-        $ruta_carga = $request->file->getRealPath();
-        // ------------------------>Datos Archivo
 
         // ------------------------>Datos Ruta
         $modulo = $request->modulo;
         $moduloId = $request->modulo_id;
-        $ruta = "/{$modulo}/{$moduloId}/";
-        $request->file->move(public_path($ruta), $nombreArchivo . "." . $extensionArchivo);
+        $ruta = "/documentos/{$modulo}/{$moduloId}/";
         // ------------------------>Datos Ruta
-
+        $data = [];
         $variableConsulta = $this->configModelo;
-
-        //Campos a guardar aquí--------------->
-        $variableConsulta->modulo_id = $moduloId;
-        $variableConsulta->modulo = $modulo;
-        $variableConsulta->nombre_archivo = $nombreArchivo;
-        $variableConsulta->nombre_carga = $nombreCarga;
-        $variableConsulta->url = $ruta;
-        $variableConsulta->extension = $extensionArchivo;
-        $variableConsulta->tamano = $tamañoArchivo;
-        $variableConsulta->aplicacion = $aplicacionArchivo;
-        $variableConsulta->ruta_carga = $ruta_carga;
-
-
-
-        //Campos a guardar aquí--------------->
-
-        $variableConsulta->save();
+        foreach ($request->file as $key => $value) {
+            // // ------------------------>Datos Archivo
+            $extensionArchivo = $request->file[$key]->getClientOriginalExtension();
+            $nombreArchivo = (string) Uuid::generate(4) . "." . $extensionArchivo;
+            $nombre_carga = $request->file[$key]->getClientOriginalName();
+            $tamañoArchivo = $request->file[$key]->getSize();
+            $aplicacionArchivo = $request->file[$key]->getMimeType();
+            $ruta_carga = $request->file[$key]->getRealPath();
+            $ruta_descarga = "{$ruta}{$nombreArchivo}";
+            // ------------------------>Datos Archivo
+            // Mover Archivo--------------->
+            $path = $request->file[$key]->storeAs("public" . $ruta, $nombreArchivo);
+            // $request->file[$key]->move(public_path($ruta), $nombreArchivo . "." . $extensionArchivo);
+            //Mover Archivo--------------->
+            $data[$key] = $variableConsulta::create([
+                'modulo_id' => $moduloId,
+                'modulo' => $modulo,
+                'nombre_archivo' => $nombreArchivo,
+                'nombre_carga' =>  $nombre_carga,
+                'url' => $ruta,
+                'url_descarga' => $ruta_descarga,
+                'extension' => $extensionArchivo,
+                'tamano' => $tamañoArchivo,
+                'aplicacion' => $aplicacionArchivo,
+                'ruta_carga' => $ruta_carga,
+            ]);
+            //Campos a guardar aquí--------------->
+        }
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
-        return ['data' => $variableConsulta, 'status' => '202'];
-        // $fileName = time() . '.' . $request->file->getClientOriginalExtension();
-        // $request->file->move(public_path('files'), $fileName);
-
-        // return response()->json(['file' => $fileName]);
-
-
-
-
+        return ['data' => $data, 'status' => '202'];
     }
-    public function update(DocumentoRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);
 
         //Campos Actualizar aquí--------------->
-        $variableConsulta->tipo_documento = $request->tipo_documento;
+        $variableConsulta->nombre_carga = $request->nombre_carga;
         //Campos Actualizar aquí--------------->
 
         $variableConsulta->save();
@@ -149,5 +132,27 @@ class DocumentosController extends Controller
         ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo},Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");
         $variableConsulta->restore();
         return ['data' => $variableConsulta, 'status' => '207'];
+    }
+
+    public function cors()
+    {
+        if (!$this->corsEnabled) {
+            return;
+        }
+        header('Access-Control-Allow-Origin: *'); // Enable CORS
+        header('Access-Control-Allow-Methods: POST, PUT, DELETE, OPTIONS'); // Allow CORS methods
+        header('Access-Control-Allow-Headers: accept, content-type, x-test-header'); // Allow CORS methods
+
+        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            exit;
+        }
+    }
+
+    public function handle()
+    {
+        $this->cors();
+        $response = $this->handleRequest();
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }

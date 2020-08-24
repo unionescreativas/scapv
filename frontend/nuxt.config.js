@@ -58,7 +58,9 @@ export default {
     { src: "~/plugins/general/vue-select.js" },
     { src: "~/plugins/general/vue-datatable" },
     { src: "~/plugins/general/vue-google-maps" },
+    { src: "~/plugins/general/vue-fileagent" },
     { src: "~/plugins/general/vue-chartkick.js", mode: "client" },
+
   ],
   /*W
    ** Auto import components
