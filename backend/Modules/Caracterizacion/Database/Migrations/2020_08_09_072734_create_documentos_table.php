@@ -19,9 +19,10 @@ class CreateDocumentosTable extends Migration
             //aqui van los campos------------------>
             $table->string('modulo_id');
             $table->string('modulo');
-            $table->uuid('nombre_archivo');
+            $table->string('nombre_archivo');
             $table->string('nombre_carga');
             $table->string('url');
+            $table->string('url_descarga');
             $table->string('extension');
             $table->string('tamano');
             $table->string('aplicacion');
