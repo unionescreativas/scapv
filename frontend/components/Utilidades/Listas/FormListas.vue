@@ -2,10 +2,20 @@
   <ValidationObserver ref="observer" slim>
     <b-form autocomplete="off" @submit.prevent="registrarLista(_self)">
       <b-container fluid>
+        
+        <tabla-modal-listas :modalShow.sync="modalShow" />
+
         <b-row class="mb-4">
           <b-col sm="1" lg="1">
-            <b-button variant="dark" class="pr-2" @click="agregarFormulario()">
+            <b-button style="background-color: var(--iq-primary);" class="pr-2" @click="agregarFormulario()">
               <i class="fa fa-plus"></i>
+            </b-button>
+          </b-col>
+
+          <b-col sm="3" lg="3">
+            <b-button style="background-color: var(--iq-primary);" class="pr-2"
+              @click="$emit('update:modalShow', modalShow = !modalShow)" title="Buscar Listas">
+              <i class="fa fa-search"></i>
             </b-button>
           </b-col>
         </b-row>
@@ -27,7 +37,7 @@
                 </b-col>
 
                 <b-col sm="1" lg="1" v-if="index >= 1">
-                  <b-button variant="dark" class="pr-2" @click="removerFormulario(index)">
+                  <b-button style="background-color: var(--iq-primary);" class="pr-2" @click="removerFormulario(index)">
                     <i class="fa fa-minus"></i>
                   </b-button>
                 </b-col>
@@ -107,7 +117,7 @@
 
         <b-row class="mb-4">
           <b-col sm="1" lg="1" v-if="form.length >= 2">
-            <b-button variant="dark" class="pr-2" @click="agregarFormulario()">
+            <b-button style="background-color: var(--iq-primary);" class="pr-2" @click="agregarFormulario()">
               <i class="fa fa-plus"></i>
             </b-button>
           </b-col>
@@ -127,6 +137,7 @@ import { mapActions } from "vuex";
 export default {
   data: () => ({
     form: [{}],
+    modalShow: false,
   }),
   methods: {
     agregarFormulario() {
