@@ -119,7 +119,6 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-import tablas from "~/components/Caracterizacion/Tablas.vue";
 
 export default {
   layout: "LightLayout",
@@ -145,7 +144,7 @@ export default {
             classes: { btn: true, "btn-primary": true, "btn-sm": true },
             event: "click",
             handler: this.displayRow,
-            component: tablas,
+            component: () => import("~/components/Caracterizacion/Tablas.vue"),
           },
           { label: "CEDULA CIUDADANO", name: "ciudadano.numero_documento", orderable: true },
           { label: "NOMBRE CIUDADANO", name: "ciudadano.nombres", orderable: true },

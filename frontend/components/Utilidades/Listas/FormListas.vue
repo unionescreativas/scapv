@@ -2,8 +2,8 @@
   <ValidationObserver ref="observer" slim>
     <b-form autocomplete="off" @submit.prevent="registrarLista(_self)">
       <b-container fluid>
-        
-        <tabla-modal-listas :modalShow.sync="modalShow" />
+
+        <tabla-modal-listas :modalShow.sync="modalShow" @handleButtonModal="handleButtonModal" />
 
         <b-row class="mb-4">
           <b-col sm="1" lg="1">
@@ -135,6 +135,7 @@
 import { mapActions } from "vuex";
 
 export default {
+  props: ["prueba"],
   data: () => ({
     form: [{}],
     modalShow: false,
@@ -145,6 +146,12 @@ export default {
     },
     removerFormulario(indexRemove) {
       this.form = this.form.filter((item, index) => index !== indexRemove);
+    },
+    handleButtonModal(data) {
+      // this.form[0] = data;
+      let routeData = this.$router.resolve({path: "/utilidades/crear-listas"});
+      console.log(routeData)
+      // window.open(routeData.href, '_blank');
     },
     ...mapActions("Listas", ["registrarLista"]),
   },

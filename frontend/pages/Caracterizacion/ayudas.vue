@@ -119,7 +119,6 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-import tablas from "~/components/Caracterizacion/Tablas.vue";
 
 export default {
   layout: "LightLayout",
@@ -149,7 +148,7 @@ export default {
             },
             event: "click",
             handler: this.displayRow,
-            component: tablas,
+            component: () => import("~/components/Caracterizacion/Tablas.vue"),
           },
           { label: "TIPO AYUDA", name: "lista.codigo_lista", orderable: true },
           { label: "AYUDA", name: "lista.valor_campo_1", orderable: true },

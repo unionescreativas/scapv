@@ -128,26 +128,35 @@ export default {
       default: false,
     },
   },
-  data: () => ({
-    table: {
-      url: `${process.env.API_URL}/api/listas/`,
-      translate: { nextButton: "Siguiente", previousButton: "Anterior" },
-      tableProps: { dir: "desc" },
-      classes: {
-        "table-container": { "table-responsive": true },
-        table: { table: true, "table-hover": true, "table-bordered": true, "text-center": true },
-        "t-head": { "table-header-iq-primary": true },
+  data() {
+    return {
+      table: {
+        url: `${process.env.API_URL}/api/listas/`,
+        translate: { nextButton: "Siguiente", previousButton: "Anterior" },
+        tableProps: { dir: "desc" },
+        classes: {
+          "table-container": { "table-responsive": true },
+          table: { table: true, "table-hover": true, "table-bordered": true, "text-center": true },
+          "t-head": { "table-header-iq-primary": true },
+        },
+        columns: [
+          {
+            label: "CONSULTAR",
+            orderable: false,
+            event: "click",
+            handler: this.getRowData,
+            component: () => import("./BotonVer.vue"),
+          },
+          { label: "NOMBRE LISTA", name: "nombre_lista", orderable: true },
+          { label: "CÓDIGO CAMPO", name: "codigo_campo", orderable: true },
+          { label: "VALOR CAMPO 1", name: "valor_campo_1", orderable: true },
+          { label: "VALOR CAMPO 2", name: "valor_campo_2", orderable: true },
+          { label: "VALOR CAMPO 3", name: "valor_campo_3", orderable: true },
+          { label: "VALOR CAMPO 4", name: "valor_campo_4", orderable: true },
+        ],
       },
-      columns: [
-        { label: "NOMBRE LISTA", name: "nombre_lista", orderable: true },
-        { label: "CÓDIGO CAMPO", name: "codigo_campo", orderable: true },
-        { label: "VALOR CAMPO 1", name: "valor_campo_1", orderable: true },
-        { label: "VALOR CAMPO 2", name: "valor_campo_2", orderable: true },
-        { label: "VALOR CAMPO 3", name: "valor_campo_3", orderable: true },
-        { label: "VALOR CAMPO 4", name: "valor_campo_4", orderable: true },
-      ],
-    },
-  }),
+    };
+  },
   computed: {
     toggleModal: {
       set(value) {
@@ -156,6 +165,11 @@ export default {
       get() {
         return this.modalShow;
       },
+    },
+  },
+  methods: {
+    getRowData(data) {
+      this.$emit("handleButtonModal", data);
     },
   },
   mounted() {
