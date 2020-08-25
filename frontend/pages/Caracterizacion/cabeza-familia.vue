@@ -119,7 +119,6 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-import tablas from "~/components/Caracterizacion/Tablas.vue";
 
 export default {
   layout: "LightLayout",
@@ -149,7 +148,7 @@ export default {
             },
             event: "click",
             handler: this.displayRow,
-            component: tablas,
+            component: () => import("~/components/Caracterizacion/Tablas.vue"),
           },
           { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
           { label: "NUMERO DE DOCUMENTO", name: "numero_documento", orderable: true },

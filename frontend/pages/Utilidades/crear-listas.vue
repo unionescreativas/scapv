@@ -13,6 +13,9 @@ export default {
   mounted() {
     vito.index();
   },
+  created(){
+    console.log(this)
+  }
 };
 </script>
 

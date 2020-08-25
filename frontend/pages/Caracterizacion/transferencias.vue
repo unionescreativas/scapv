@@ -119,7 +119,6 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-import tablas from "~/components/Caracterizacion/Tablas.vue";
 
 export default {
   name: "ayudas",

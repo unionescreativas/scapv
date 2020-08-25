@@ -329,7 +329,7 @@
                         </template>
                         <template v-slot:body>
                             <div>
-                                <gmap-map :key="i" v-for="(m,i) in markers" :center="m.position" :zoom="15" style="width: 100%; height: 500px">
+                                <gmap-map v-for="(m,i) in markers" :key="i" :center="m.position" :zoom="15" style="width: 100%; height: 500px">
                                     <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false"></gmap-info-window>
                                     <gmap-marker :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
                                 </gmap-map>
@@ -409,6 +409,7 @@ export default {
         ciudadano() {
             let ciudadano = this.$store.state.Familias.ciudadano;
             let ciudadanoDatos = {};
+
             if (ciudadano && ciudadano != "no existe") {
                 ciudadanoDatos = {
                     ...ciudadano[0],
@@ -420,8 +421,8 @@ export default {
                     pais_origen: _.startCase(_.camelCase(ciudadano[0].pais_origen)),
                 };
             }
+
             this.modulo_id = ciudadanoDatos.id;
-            // console.log(Object.values(ciudadanoDatos).length);
             this.markers[0].position.lat = Object.values(ciudadanoDatos).length ? ciudadanoDatos.lat : 0;
             this.markers[0].position.lng = Object.values(ciudadanoDatos).length ? ciudadanoDatos.let : 0;
             this.markers[0].infoText = Object.values(ciudadanoDatos).length ? `Dirreción : ${ciudadanoDatos.direccion} , Comuna : ${ciudadanoDatos.comuna} ` : "";
