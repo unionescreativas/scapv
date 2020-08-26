@@ -126,7 +126,6 @@ export default {
     return {
       table: {
         url: `${process.env.API_URL}/api/familias/`,
-        translate: { nextButton: "Siguiente", previousButton: "Anterior" },
         tableProps: { dir: "desc" },
         classes: {
           "table-container": { "table-responsive": true },
@@ -168,7 +167,7 @@ export default {
           { label: "CIUDAD DE RESIDENCIA", name: "ciudad", orderable: true },
           { label: "BARRIO DE RESIDENCIA", name: "barrio", orderable: true },
           { label: "COMUNA DE RESIDENCIA", name: "comuna", orderable: true },
-          { label: "direccion DE RESIDENCIA", name: "direccion", orderable: true },
+          { label: "DIRECCIÓN DE RESIDENCIA", name: "direccion", orderable: true },
           { label: "ACTIVIDAD", name: "actividad", orderable: true },
           { label: "CIUDAD DE ORIGEN", name: "ciudad_origen", orderable: true },
           { label: "PAIS DE ORIGEN", name: "pais_origen", orderable: true },

@@ -150,8 +150,9 @@ export default {
     handleButtonModal(data) {
       // this.form[0] = data;
       let routeData = this.$router.resolve({path: "/utilidades/crear-listas"});
-      console.log(routeData)
-      // window.open(routeData.href, '_blank');
+      this.$router.push({path: routeData.href, data: {foo: 1}})
+      // console.log(routeData.href)
+      // window.open(routeData.href, "_blank");
     },
     ...mapActions("Listas", ["registrarLista"]),
   },

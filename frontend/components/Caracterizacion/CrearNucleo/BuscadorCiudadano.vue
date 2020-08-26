@@ -48,9 +48,6 @@ export default {
   components: {
     VueBootstrapTypeahead,
   },
-  // asyncData({ $axios }) {
-  //   return this.$axios.get("/api/ciudadanos/").then((res) => ({ciudadanos: res.data.data}));
-  // },
   data: () => ({
     numero_documento: "",
     ciudadanos: [],

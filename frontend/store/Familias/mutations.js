@@ -6,6 +6,9 @@ export default {
     state.ciudadanos = payload;
   },
   GUARDAR_CIUDADANO(state, payload) {
-    state.ciudadanos = payload;
+    state.ciudadano = payload;
+  },
+  GUARDAR_INTEGRANTE_FAMILIA(state, payload) {
+    state.integrante_familia = payload;
   },
 };

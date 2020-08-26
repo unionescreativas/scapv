@@ -127,7 +127,6 @@ export default {
     return {
       table: {
         url: `${process.env.API_URL}/api/transferencias`,
-        translate: { nextButton: "Siguiente", previousButton: "Anterior" },
         tableProps: { dir: "desc" },
         classes: {
           "table-container": { "table-responsive": true },

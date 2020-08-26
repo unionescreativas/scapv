@@ -1,6 +1,6 @@
 <template>
-  <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
-    <b-form autocomplete="off" class="mt-4" @submit.prevent="handleSubmit(() => login(_self))">
+  <ValidationObserver ref="observer">
+    <b-form autocomplete="off" class="mt-4" @submit.prevent="login(_self)">
       <ValidationProvider name="email" v-slot="{ errors }">
         <b-form-group id="email" label="Correo Electrónico" label-for="email">
           <b-form-input
@@ -10,7 +10,7 @@
             v-model="form.email"
             placeholder="Ingresa tú Correo"
           />
-          <div class="text-danger" v-if="errors[0]">
+          <div style="color: var(--iq-danger-light);" v-if="errors[0]">
             {{ errors[0].replace("email", "") }}
           </div>
         </b-form-group>
@@ -25,7 +25,7 @@
             v-model="form.password"
             placeholder="Ingresa tú Contraseña"
           />
-          <div class="text-danger" v-if="errors[0]">
+          <div style="color: var(--iq-danger-light);" v-if="errors[0]">
             {{ errors[0].replace("password", "") }}
           </div>
         </b-form-group>
@@ -59,7 +59,7 @@ export default {
   name: "SignIn1Form",
   head() {
     return {
-      title: "Iniciar Sesión"
+      title: "Iniciar Sesión",
     };
   },
   props: {

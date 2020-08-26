@@ -26,8 +26,8 @@ export default {
       let data = payload.form;
       let mensajeGuardar = "El registro se ha realizado con éxito!";
 
-      if (payload.ciudadano && payload.ciudadano != "no existe") {
-        url = `/api/ciudadanos/${payload.ciudadano[0].id}`;
+      if (data.id) {
+        url = `/api/ciudadanos/${data.id}`;
         method = "put";
         mensajeGuardar = "El registro se ha actualizado con éxito!";
       }
@@ -42,7 +42,7 @@ export default {
           cancelButtonText: "No",
           showCancelButton: true,
           allowOutsideClick: false,
-          allowEscapeKey: false
+          allowEscapeKey: false,
         }).then(async (result) => {
           if (result.value) {
             let res = await this.$axios({ method, url, data });
@@ -54,9 +54,7 @@ export default {
               allowEscapeKey: false,
             }).then((result) => {
               if (result.value) {
-                if (payload.ciudadano && payload.ciudadano == "no existe") {
-                  dispatch("consultarCiudadano", payload.form.numero_documento);
-                }
+                commit("GUARDAR_CIUDADANO", res.data.data);
               }
             });
           } else {
@@ -70,10 +68,11 @@ export default {
           html: `<h4>${mensajeGuardar}</h4>`,
           icon: "success",
           allowOutsideClick: false,
-          allowEscapeKey: false
+          allowEscapeKey: false,
         }).then((result) => {
           if (result.value) {
             if (method == "post") {
+              commit("GUARDAR_CIUDADANO", res.data.data);
               $nuxt.resetFormVeeValidate(payload);
               payload.$refs.formWizard.reset();
             }
@@ -82,6 +81,44 @@ export default {
       }
     } catch (err) {
       console.error(err);
+    }
+  },
+
+  async guardarIntegranteFamilia({ commit }, payload) {
+    try {
+      let url = "/api/familias";
+      let method = "post";
+      let data = payload.form;
+      let mensajeGuardar = "El registro se ha realizado con éxito!";
+
+      if (data.id) {
+        url = `/api/familias/${data.id}`;
+        method = "put";
+        mensajeGuardar = "El registro se ha actualizado con éxito!";
+      }
+
+      let res = await this.$axios({ method, url, data });
+
+      Swal.fire({
+        html: `<h4>${mensajeGuardar}</h4>`,
+        icon: "success",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.value) {
+          commit("GUARDAR_INTEGRANTE_FAMILIA", res.data.data);
+        }
+      });
+    } catch (err) {
+      if (Object.keys(err.response.data.errors).length) {
+        payload.$refs.observer.setErrors(err.response.data.errors);
+        Swal.fire({
+          html: "<h4>Por favor revise los campos en rojo!</h4>",
+          icon: "warning",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        });
+      }
     }
   },
 };

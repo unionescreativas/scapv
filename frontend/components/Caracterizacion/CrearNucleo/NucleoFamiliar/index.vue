@@ -1,17 +1,24 @@
 <template>
-  <b-modal v-model="toggleModal" size="xl" modal-class="container-fluid">
-    <template v-slot:modal-header="{ close }">
-      <h3 class="text-center w-100">Listas</h3>
-      <b-button-close title="Cerrar" @click="close()">
-        <i style="font-size: 50px;" class="text-danger ri-close-line"></i>
-      </b-button-close>
-    </template>
+  <b-container fluid>
+    <form-modal-integrante :modalShow.sync="modalShow" :options="options" :ciudadano="ciudadano" />
 
-    <b-row>
+    <b-row class="mt-5">
       <b-col sm="12">
-        <data-table :classes="table.classes" :translate="table.translate" :columns="table.columns" :url="table.url">
+        <data-table
+          :classes="table.classes"
+          :translate="table.translate"
+          :columns="table.columns"
+          :url="table.url + ciudadano.id"
+        >
           <div slot="filters" slot-scope="{ tableData }">
-            <div class="row justify-content-end mb-2">
+            <div class="row justify-content-between mb-2">
+              <div class="col-md-3">
+                <b-button variant="secondary" @click="modalShow = !modalShow">
+                  <i class="fa fa-user-plus"></i>
+                  <span>Agregar Integrante</span>
+                </b-button>
+              </div>
+
               <div class="col-md-3">
                 <input
                   name="name"
@@ -109,63 +116,61 @@
         </data-table>
       </b-col>
     </b-row>
-
-    <template v-slot:modal-footer>
-      <div></div>
-    </template>
-  </b-modal>
+  </b-container>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { vito } from "~/plugins/config/pluginInit";
 
 export default {
-  props: {
-    modalShow: {
-      required: true,
-      type: Boolean,
-      default: false,
-    },
-  },
+  props: ["form", "options", "ciudadano"],
   data() {
     return {
+      modalShow: false,
       table: {
-        url: `${process.env.API_URL}/api/listas/`,
-        translate: { nextButton: "Siguiente", previousButton: "Anterior" },
+        url: `${process.env.API_URL}/api/nucleofamiliar/`,
         tableProps: { dir: "desc" },
         classes: {
           "table-container": { "table-responsive": true },
           table: { table: true, "table-hover": true, "table-bordered": true, "text-center": true },
           "t-head": { "table-header-iq-primary": true },
+          th: {
+            "align-middle": true,
+          },
         },
         columns: [
           {
-            label: "CONSULTAR",
+            label: "EDITAR",
             orderable: false,
             event: "click",
             handler: this.getRowData,
-            component: () => import("./BotonVer.vue"),
+            component: () => import("./BotonEditar.vue"),
           },
-          { label: "NOMBRE LISTA", name: "nombre_lista", orderable: true },
-          { label: "CÓDIGO CAMPO", name: "codigo_campo", orderable: true },
-          { label: "VALOR CAMPO 1", name: "valor_campo_1", orderable: true },
-          { label: "VALOR CAMPO 2", name: "valor_campo_2", orderable: true },
-          { label: "VALOR CAMPO 3", name: "valor_campo_3", orderable: true },
-          { label: "VALOR CAMPO 4", name: "valor_campo_4", orderable: true },
+          { label: "PARENTESCO", name: "parentesco", orderable: true },
+          { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
+          { label: "NUMERO DE DOCUMENTO", name: "numero_documento", orderable: true },
+          { label: "# PERMISO ESPECIAL DE PERMANENCIA", name: "pep", orderable: true },
+          { label: "NOMBRES", name: "nombres", orderable: true },
+          { label: "APELLIDOS", name: "apellidos", orderable: true },
+          { label: "FECHA DE EXPEDICION DEL DOCUMENTO", name: "fecha_expedicion", orderable: true },
+          { label: "FECHA DE VENCIMIENTO DEL DOCUMENTO", name: "fecha_vencimiento", orderable: true },
+          { label: "FECHA DE NACIMIENTO", name: "fecha_nacimiento", orderable: true },
+          { label: "EDAD", name: "edad", orderable: true },
+          { label: "GENERO", name: "genero", orderable: true },
+          { label: "ESTADO CIVIL", name: "estado_civil", orderable: true },
+          { label: "TELEFONO", name: "telefono", orderable: true },
+          { label: "CELULAR", name: "celular", orderable: true },
+          { label: "CORREO ELECTRONICO", name: "correo_electronico", orderable: true },
+          { label: "ACTIVIDAD QUE REALIZA ACTUALMENTE", name: "actividad", orderable: true },
+          { label: "TIENE ALGUNA DISCAPACIDAD", name: "discapacidad", orderable: true },
+          { label: "TIENE SISTEMA DE SALUD", name: "salud", orderable: true },
+          { label: "SE ENCUENTRA ESTUDIANDO ACTUALMENTE", name: "estudia_actualmente", orderable: true },
+          { label: "NIVEL DE ESCOLARIDAD", name: "nivel_escolaridad", orderable: true },
+          { label: "ACTUALMENTE SE ENCUENTRA LABORANDO", name: "trabajo", orderable: true },
+          { label: "OBSERVACIONES", name: "observaciones", orderable: true },
         ],
       },
     };
-  },
-  computed: {
-    toggleModal: {
-      set(value) {
-        this.$emit("update:modalShow", value);
-      },
-      get() {
-        return this.modalShow;
-      },
-    },
   },
   methods: {
     getRowData(data) {
@@ -177,9 +182,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.iq-card-body {
-  flex: unset;
-}
-</style>
