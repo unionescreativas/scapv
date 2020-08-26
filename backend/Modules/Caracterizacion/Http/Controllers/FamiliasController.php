@@ -4,10 +4,10 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use Modules\Caracterizacion\Entities\Familia;
 use Modules\Caracterizacion\Http\Requests\FamiliaRequest;
-use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 
 class FamiliasController extends Controller {
 
@@ -98,11 +98,11 @@ class FamiliasController extends Controller {
         $variableConsulta->salud = $request->salud;
         $variableConsulta->estudia_actualmente = $request->estudia_actualmente;
         $variableConsulta->nivel_escolaridad = $request->nivel_escolaridad;
-        // $variableConsulta->tipo_profesion = $request->tipo_profesion;
-        // $variableConsulta->comunidad_lgtbi = $request->comunidad_lgtbi;
-        // $variableConsulta->comunidad_etnica = $request->comunidad_etnica;
+        $variableConsulta->tipo_profesion = $request->tipo_profesion;
+        $variableConsulta->comunidad_lgtbi = $request->comunidad_lgtbi;
+        $variableConsulta->comunidad_etnica = $request->comunidad_etnica;
         $variableConsulta->trabajo = $request->trabajo;
-        // $variableConsulta->tipo_empleo = $request->tipo_empleo;
+        $variableConsulta->tipo_empleo = $request->tipo_empleo;
         $variableConsulta->observaciones = $request->observaciones;
         //Campos a guardar aquí--------------->
 
@@ -132,18 +132,18 @@ class FamiliasController extends Controller {
         $variableConsulta->telefono = $request->telefono;
         $variableConsulta->celular = $request->celular;
         $variableConsulta->correo_electronico = $request->correo_electronico;
-        $variableConsulta->departamento = $request->departamento;
-        $variableConsulta->ciudad = $request->ciudad;
-        $variableConsulta->barrio = $request->barrio;
-        $variableConsulta->comuna = $request->comuna;
-        $variableConsulta->direccion = $request->direccion;
+        // $variableConsulta->departamento = $request->departamento;
+        // $variableConsulta->ciudad = $request->ciudad;
+        // $variableConsulta->barrio = $request->barrio;
+        // $variableConsulta->comuna = $request->comuna;
+        // $variableConsulta->direccion = $request->direccion;
         $variableConsulta->actividad = $request->actividad;
-        $variableConsulta->ciudad_origen = $request->ciudad_origen;
-        $variableConsulta->pais_origen = $request->pais_origen;
-        $variableConsulta->fecha_llegada = $request->fecha_llegada;
-        $variableConsulta->intencion_ciudad = $request->intencion_ciudad;
-        $variableConsulta->respuesta_intencion = $request->respuesta_intencion;
-        $variableConsulta->fecha_llegada = $request->fecha_llegada;
+        // $variableConsulta->ciudad_origen = $request->ciudad_origen;
+        // $variableConsulta->pais_origen = $request->pais_origen;
+        // $variableConsulta->fecha_llegada = $request->fecha_llegada;
+        // $variableConsulta->intencion_ciudad = $request->intencion_ciudad;
+        // $variableConsulta->respuesta_intencion = $request->respuesta_intencion;
+        // $variableConsulta->fecha_llegada = $request->fecha_llegada;
         $variableConsulta->discapacidad = $request->discapacidad;
         $variableConsulta->salud = $request->salud;
         $variableConsulta->estudia_actualmente = $request->estudia_actualmente;

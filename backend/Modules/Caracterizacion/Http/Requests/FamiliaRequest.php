@@ -23,7 +23,7 @@ class FamiliaRequest extends FormRequest {
             'telefono' => 'numeric|nullable',
             'celular' => 'numeric|nullable',
             'correo_electronico' => 'email|nullable',
-            'actividad' => 'required|string',
+            'actividad' => 'nullable|string',
             'ciudad_origen' => 'string|nullable',
             'pais_origen' => 'string|nullable',
             'fecha_llegada' => 'date|date_format:Y-m-d|nullable',

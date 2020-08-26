@@ -37,9 +37,14 @@ class CiudadanoRequest extends FormRequest {
             'discapacidad' => 'string|nullable',
             'salud' => 'string|nullable',
             'estudia_actualmente' => 'string|nullable',
+            'tipo_profesion' => 'string|nullable',
             'nivel_escolaridad' => 'string|nullable',
+            'comunidad_lgtbi' => 'string|nullable',
+            'comunidad_etnica' => 'string|nullable',
             'trabajo' => 'string|nullable',
+            'tipo_empleo' => 'string|nullable',
             'observaciones' => 'string|nullable',
+
         ];
     }
 
