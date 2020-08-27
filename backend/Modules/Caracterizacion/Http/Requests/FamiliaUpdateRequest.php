@@ -26,7 +26,6 @@ class FamiliaUpdateRequest extends FormRequest {
             'actividad' => 'required|string',
             'ciudad_origen' => 'string|nullable',
             'pais_origen' => 'string|nullable',
-            'fecha_llegada' => 'date|date_format:Y-m-d',
             'intencion_ciudad' => 'string|nullable',
             'respuesta_intencion' => 'string|nullable',
             'discapacidad' => 'string|nullable',

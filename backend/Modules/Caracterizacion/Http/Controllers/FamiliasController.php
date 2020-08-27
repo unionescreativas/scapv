@@ -35,6 +35,7 @@ class FamiliasController extends Controller {
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
+
     public function nucleofamiliar(Request $request, $id) {
         $length = $request->input('length');
         $sortBy = $request->input('column');
@@ -48,6 +49,7 @@ class FamiliasController extends Controller {
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
+
     public function show($id) {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
 
@@ -63,6 +65,7 @@ class FamiliasController extends Controller {
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
+
     public function store(FamiliaRequest $request) {
 
         $variableConsulta = $this->configModelo;
@@ -111,6 +114,7 @@ class FamiliasController extends Controller {
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
     }
+
     public function update(FamiliaUpdateRequest $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
@@ -161,6 +165,7 @@ class FamiliasController extends Controller {
         ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
     }
+
     public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
@@ -186,6 +191,7 @@ class FamiliasController extends Controller {
         $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '206'];
     }
+    
     public function restore($id) {
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;
