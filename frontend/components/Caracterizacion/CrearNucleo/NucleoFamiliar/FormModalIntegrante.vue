@@ -1,7 +1,8 @@
 <template>
   <b-modal v-model="toggleModal" size="lg" modal-class="container-fluid">
     <template v-slot:modal-header="{ close }">
-      <h3 class="text-center w-100">Agregar Integrante de Familia</h3>
+      <h3 class="text-center w-100" v-if="!Object.values(integrante).length">Agregar Integrante de Familia</h3>
+      <h3 class="text-center w-100" v-else>Actualizar Integrante de Familia</h3>
       <b-button-close title="Cerrar" @click="close()">
         <i style="font-size: 50px;" class="text-danger ri-close-line"></i>
       </b-button-close>
@@ -59,7 +60,7 @@
               <b-form-group label="NUMERO DE DOCUMENTO: *">
                 <b-form-input type="text" placeholder="INGRESE NUMERO DE DOCUMENTO" v-model="form.numero_documento" />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
-                  {{ errors[0].replace("numero_documento", "") }}
+                  {{ errors[0].replace("numero documento", "") }}
                 </div>
               </b-form-group>
             </ValidationProvider>
@@ -124,7 +125,7 @@
                   v-model="form.fecha_vencimiento"
                 />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
-                  {{ errors[0].replace("fecha_vencimiento", "") }}
+                  {{ errors[0].replace("fecha vencimiento", "") }}
                 </div>
               </b-form-group>
             </ValidationProvider>
@@ -232,7 +233,7 @@
               <b-form-group label="CORREO ELECTRÓNICO:">
                 <b-form-input type="text" placeholder="INGRESE CORREO ELECTRÓNICO" v-model="form.correo_electronico" />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
-                  {{ errors[0].replace("correo_electronico", "") }}
+                  {{ errors[0].replace("correo electronico", "") }}
                 </div>
               </b-form-group>
             </ValidationProvider>
@@ -336,21 +337,83 @@
           </b-col>
         </b-row>
 
-        <ValidationProvider name="trabajo" v-slot="{ errors }">
-          <b-form-group label="ACTUALMENTE SE ENCUENTRA LABORANDO:">
+        <b-row>
+          <b-col sm="6" lg="6">
+            <ValidationProvider name="tipo_profesion" v-slot="{ errors }">
+              <b-form-group label="PROFESIONAL EN ?:">
+                <b-form-input type="text" placeholder="INGRESE PROFESIONAL EN ?" v-model="form.tipo_profesion" />
+                <div style="color: var(--iq-danger-light);" v-if="errors[0]">
+                  {{ errors[0].replace("tipo_profesion", "") }}
+                </div>
+              </b-form-group>
+            </ValidationProvider>
+          </b-col>
+
+          <b-col sm="6" lg="6">
+            <ValidationProvider name="comunidad_lgtbi" v-slot="{ errors }">
+              <b-form-group label="POBLACIÓN LGTBI:">
+                <b-form-input type="text" placeholder="INGRESE POBLACIÓN LGTBI" v-model="form.comunidad_lgtbi" />
+                <div style="color: var(--iq-danger-light);" v-if="errors[0]">
+                  {{ errors[0].replace("comunidad_lgtbi", "") }}
+                </div>
+              </b-form-group>
+            </ValidationProvider>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col sm="6" lg="6">
+            <ValidationProvider name="comunidad_etnica" v-slot="{ errors }">
+              <b-form-group label="PERTENECE ALGUNA COMUNA ETNICA ?:">
+                <b-form-input
+                  type="text"
+                  placeholder="INGRESE PERTENECE ALGUNA COMUNA ETNICA ?"
+                  v-model="form.comunidad_etnica"
+                />
+                <div style="color: var(--iq-danger-light);" v-if="errors[0]">
+                  {{ errors[0].replace("comunidad_etnica", "") }}
+                </div>
+              </b-form-group>
+            </ValidationProvider>
+          </b-col>
+
+          <b-col sm="6" lg="6">
+            <ValidationProvider name="trabajo" v-slot="{ errors }">
+              <b-form-group label="ACTUALMENTE SE ENCUENTRA LABORANDO:">
+                <v-select
+                  placeholder="Seleccione ..."
+                  :options="options.respuestas"
+                  label="valor_campo_1"
+                  :reduce="(option) => option.codigo_campo"
+                  v-model="form.trabajo"
+                >
+                  <template slot="no-options">
+                    <span>Escriba para buscar ...</span>
+                  </template>
+                </v-select>
+                <div style="color: var(--iq-danger-light);" v-if="errors[0]">
+                  {{ errors[0].replace("trabajo", "") }}
+                </div>
+              </b-form-group>
+            </ValidationProvider>
+          </b-col>
+        </b-row>
+
+        <ValidationProvider name="tipo_empleo" v-slot="{ errors }">
+          <b-form-group label="TIPO DE EMPLEO:">
             <v-select
               placeholder="Seleccione ..."
-              :options="options.respuestas"
+              :options="options.tipos_empleos"
               label="valor_campo_1"
               :reduce="(option) => option.codigo_campo"
-              v-model="form.trabajo"
+              v-model="form.tipo_empleo"
             >
               <template slot="no-options">
                 <span>Escriba para buscar ...</span>
               </template>
             </v-select>
             <div style="color: var(--iq-danger-light);" v-if="errors[0]">
-              {{ errors[0].replace("trabajo", "") }}
+              {{ errors[0].replace("tipo_empleo", "") }}
             </div>
           </b-form-group>
         </ValidationProvider>
@@ -396,10 +459,21 @@ export default {
       required: true,
       type: Object,
     },
+    integrante: {
+      type: Object,
+    },
   },
   data: () => ({
     form: {},
   }),
+  watch: {
+    modalShow() {
+      this.form = {
+        ciudadano_id: this.ciudadano.id,
+        ...this.integrante,
+      };
+    },
+  },
   computed: {
     toggleModal: {
       set(value) {
@@ -417,11 +491,6 @@ export default {
       this.$refs.inputEdad._data.localValue = edad;
       this.form.edad = edad;
     },
-  },
-  created() {
-    this.form = {
-      ciudadano_id: this.ciudadano.id,
-    };
   },
 };
 </script>

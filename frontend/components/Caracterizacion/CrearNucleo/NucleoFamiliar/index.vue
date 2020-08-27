@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <form-modal-integrante :modalShow.sync="modalShow" :options="options" :ciudadano="ciudadano" />
+    <form-modal-integrante :modalShow.sync="modalShow" :options="options" :ciudadano="ciudadano" :integrante="tableRowData" />
 
     <b-row class="mt-5">
       <b-col sm="12">
@@ -13,7 +13,7 @@
           <div slot="filters" slot-scope="{ tableData }">
             <div class="row justify-content-between mb-2">
               <div class="col-md-3">
-                <b-button variant="secondary" @click="modalShow = !modalShow">
+                <b-button variant="secondary" @click="agregarIntegrante()">
                   <i class="fa fa-user-plus"></i>
                   <span>Agregar Integrante</span>
                 </b-button>
@@ -127,6 +127,7 @@ export default {
   data() {
     return {
       modalShow: false,
+      tableRowData: {},
       table: {
         url: `${process.env.API_URL}/api/nucleofamiliar/`,
         tableProps: { dir: "desc" },
@@ -173,8 +174,13 @@ export default {
     };
   },
   methods: {
+    agregarIntegrante(){
+      this.tableRowData = {};
+      this.modalShow = true;
+    },
     getRowData(data) {
-      this.$emit("handleButtonModal", data);
+      this.modalShow = true;
+      this.tableRowData = data;
     },
   },
   mounted() {
