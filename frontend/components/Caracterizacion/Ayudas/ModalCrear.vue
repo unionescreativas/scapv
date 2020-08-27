@@ -71,7 +71,9 @@
         </b-col>
       </b-row>
       <h4 v-text="unidades"></h4>
-      <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
+      <div v-show="consulta">
+        <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
+      </div>
       <div v-if="consulta">
         <TablaCrearAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />
         <TablaNucleoAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />
@@ -155,6 +157,13 @@ export default {
             this.consulta = true;
             Swal.fire({
               html: `<h4>El Ciudadano es Integrante de Familia del Nucleo Familiar de: ${this.nombre}!</h4>`,
+              icon: "warning",
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            });
+          } else {
+            Swal.fire({
+              html: `<h4>No se Encontraron Registros!</h4>`,
               icon: "warning",
               allowOutsideClick: false,
               allowEscapeKey: false,
