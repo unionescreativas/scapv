@@ -10,7 +10,7 @@ class FamiliaRequest extends FormRequest {
             //
             'parentesco' => 'required',
             'tipo_documento' => 'required',
-            'numero_documento' => 'required|unique:ciudadanos|unique:familias',
+            'numero_documento' => 'exclude_if:has_estado,bool|required|unique:ciudadanos|unique:familias',
             'pep' => 'numeric|nullable',
             'nombres' => 'required|string',
             'apellidos' => 'required|string',
