@@ -26,6 +26,7 @@
           </ul>
           <div class="iq-search-bar">
             <vue-bootstrap-typeahead
+              ref="VueBootstrapTypeahead"
               backgroundVariant="white"
               textVariant="dark"
               v-model="numero_documento"
@@ -106,12 +107,19 @@ export default {
     miniSidebar() {
       this.$emit("toggle");
     },
+    limpiarBuscador() {
+      this.numero_documento = "";
+      // SE ACCEDE AL COMPONENTE: VueBootstrapTypeahead
+      // Y SE REINICIA EL VALOR DEL INPUT SEARCH
+      this.$refs.VueBootstrapTypeahead.inputValue = "";
+      this.$emit("obtener_numero_documento", null);
+    },
     consultarCiudadano(numero_documento) {
       this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
         if (this.ciudadano != "no existe") {
+          // SI EL CIUDADANO EXISTE, SE LIMPIA EL BUSCADOR Y SE REDIRECCIONA A SU PERFIL
+          this.limpiarBuscador();
           this.$router.push("/perfil");
-          this.numero_documento = "";
-          this.$children[6].inputValue = "";
         } else {
           Swal.fire({
             html: "<h5>Esta persona no se encuentra registrada</h5>",

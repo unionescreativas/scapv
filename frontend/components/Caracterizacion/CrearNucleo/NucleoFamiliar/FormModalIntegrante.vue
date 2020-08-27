@@ -461,6 +461,10 @@ export default {
     },
     integrante: {
       type: Object,
+      default: () => {},
+    },
+    reloadDataTable: {
+      type: Function,
     },
   },
   data: () => ({

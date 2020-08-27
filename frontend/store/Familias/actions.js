@@ -107,14 +107,28 @@ export default {
       }).then((result) => {
         if (result.value) {
           commit("GUARDAR_INTEGRANTE_FAMILIA", res.data.data);
+          payload.reloadDataTable();
         }
       });
     } catch (err) {
-      if (Object.keys(err.response.data.errors).length) {
-        payload.$refs.observer.setErrors(err.response.data.errors);
+      let status = err.response.status;
+      let errors = err.response.data.errors;
+      // ERROR DEL CLIENTE
+      if (status <= 499) {
+        if (errors) {
+          payload.$refs.observer.setErrors(err.response.data.errors);
+          Swal.fire({
+            html: "<h4>Por favor revise los campos en rojo!</h4>",
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          });
+        }
+        // ERROR DEL SERVIDOR
+      } else {
         Swal.fire({
-          html: "<h4>Por favor revise los campos en rojo!</h4>",
-          icon: "warning",
+          html: "<h4>No se pudieron guardar los datos, consulte con el administrador!</h4>",
+          icon: "error",
           allowOutsideClick: false,
           allowEscapeKey: false,
         });

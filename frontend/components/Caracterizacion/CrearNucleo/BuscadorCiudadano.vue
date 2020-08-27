@@ -12,6 +12,7 @@
             <b-row>
               <b-col sm="8" lg="8">
                 <vue-bootstrap-typeahead
+                  ref="VueBootstrapTypeahead"
                   backgroundVariant="white"
                   textVariant="dark"
                   v-model="numero_documento"
@@ -56,13 +57,6 @@ export default {
     ...mapState("Familias", ["ciudadano"]),
   },
   methods: {
-    limpiarDatos() {
-      this.numero_documento = "";
-      // SE ACCEDE AL COMPONENTE: VueBootstrapTypeahead
-      // Y SE REINICIA EL VALOR DEL INPUT SEARCH
-      this.$children[0].inputValue = "";
-      this.$emit("obtener_numero_documento", null);
-    },
     consultarCiudadano(numero_documento) {
       this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
         if (this.ciudadano != "no existe") {

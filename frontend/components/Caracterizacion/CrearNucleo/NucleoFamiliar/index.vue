@@ -1,10 +1,17 @@
 <template>
   <b-container fluid>
-    <form-modal-integrante :modalShow.sync="modalShow" :options="options" :ciudadano="ciudadano" :integrante="tableRowData" />
+    <form-modal-integrante
+      :modalShow.sync="modalShow"
+      :options="options"
+      :ciudadano="ciudadano"
+      :integrante="tableRowData"
+      :reloadDataTable="reloadDataTable"
+    />
 
     <b-row class="mt-5">
       <b-col sm="12">
         <data-table
+          ref="dataTable"
           :classes="table.classes"
           :translate="table.translate"
           :columns="table.columns"
@@ -174,13 +181,16 @@ export default {
     };
   },
   methods: {
-    agregarIntegrante(){
+    agregarIntegrante() {
       this.tableRowData = {};
       this.modalShow = true;
     },
     getRowData(data) {
       this.modalShow = true;
       this.tableRowData = data;
+    },
+    reloadDataTable() {
+      this.$refs.dataTable.getData();
     },
   },
   mounted() {
