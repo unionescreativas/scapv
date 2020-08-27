@@ -4,7 +4,15 @@ export default {
   async consultarCiudadano({ commit }, payload) {
     try {
       let res = await this.$axios.get(`/api/ciudadanos/${payload}`);
-      commit("CONSULTAR_CIUDADANO", res.data.data);
+      if (res.data.data != "no existe") {
+        commit("CONSULTAR_CIUDADANO", res.data.data);
+      } else {
+        res = await this.$axios.get(`/api/familias/${payload}`);
+        if (res.data.data != "no existe") {
+          res = await this.$axios.get(`/api/ciudadanos/${res.data.data[0].ciudadano_id}`);
+        }
+        commit("CONSULTAR_CIUDADANO", res.data.data);
+      }
     } catch (error) {
       console.error(error);
     }
