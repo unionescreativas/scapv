@@ -4,13 +4,13 @@ namespace Modules\Caracterizacion\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FamiliaRequest extends FormRequest {
+class FamiliaUpdateRequest extends FormRequest {
     public function rules() {
         return [
             //
             'parentesco' => 'required',
             'tipo_documento' => 'required',
-            'numero_documento' => 'required|unique:ciudadanos|unique:familias',
+            'numero_documento' => 'required|unique:ciudadanos',
             'pep' => 'numeric|nullable',
             'nombres' => 'required|string',
             'apellidos' => 'required|string',

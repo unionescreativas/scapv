@@ -8,6 +8,7 @@ use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use Modules\Caracterizacion\Entities\Familia;
 use Modules\Caracterizacion\Http\Requests\FamiliaRequest;
+use Modules\Caracterizacion\Http\Requests\FamiliaUpdateRequest;
 
 class FamiliasController extends Controller {
 
@@ -110,7 +111,7 @@ class FamiliasController extends Controller {
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
     }
-    public function update(FamiliaRequest $request, $id) {
+    public function update(FamiliaUpdateRequest $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);
