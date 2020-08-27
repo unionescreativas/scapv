@@ -50,15 +50,15 @@ class FamiliasController extends Controller {
     public function show($id) {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
 
-        // if ($variableConsulta->isEmpty()) {
-        //     $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
-        // } else {
-        //     ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
-        // }
-        // if ($variableConsulta->isEmpty()) {
-        //     return ['data' => 'no existe', 'status' => '201'];
-        // }
+        if ($variableConsulta->isEmpty()) {
+            $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
+        } else {
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
+        }
+        if ($variableConsulta->isEmpty()) {
+            return ['data' => 'no existe', 'status' => '201'];
+        }
 
         return ['data' => $variableConsulta, 'status' => '201'];
     }
