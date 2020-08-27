@@ -93,7 +93,10 @@ class AyudasController extends Controller {
 
         //
 
-        if ($cantidadDisponibles <= $cantidadEntregadas || $cantidadDisponibles <= $request->cantidad_entregada) {
+        if ($cantidadDisponibles <= $cantidadEntregadas) {
+            return ['data' => 'Disponibles 0', 'validacion' => false, 'status' => '202'];
+
+        } elseif ($cantidadDisponibles < $request->cantidad_entregada) {
             return ['data' => 'Disponibles 0', 'validacion' => false, 'status' => '202'];
         } else {
             $variableConsulta = $this->configModelo;
@@ -129,8 +132,11 @@ class AyudasController extends Controller {
 
         //
 
-        if ($cantidadDisponibles <= $cantidadEntregadas || $cantidadDisponibles <= $cantidad) {
-            return ['data' => $datos, 'unidades' => 'Disponibles 0', 'validacion' => false, 'status' => '202'];
+        if ($cantidadDisponibles <= $cantidadEntregadas) {
+            return ['data' => $datos, 'unidades' => 'Disponibles 0', 'validacion' => false, 'status' => '203'];
+        }
+        if ($cantidadDisponibles < $cantidad) {
+            return ['data' => $datos, 'unidades' => 'Disponibles 0', 'validacion' => false, 'status' => '203'];
         }
         $totalDisponible = $cantidadDisponibles - $cantidadEntregadas;
         return ['data' => $datos, 'unidades' => 'Disponibles :' . $totalDisponible, 'validacion' => true, 'status' => '202'];
