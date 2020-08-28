@@ -93,7 +93,7 @@ class AyudasExport implements FromQuery, WithHeadings {
             'NIVEL DE ESCOLARIDAD',
             'PROFESIONAL EN ?',
             'POBLACIÓN LGTBI',
-            'PERTENECE ALGUNA COMUNA ETNICA ?',
+            'PERTENECE ALGUNA COMUNIDAD ETNICA ?',
             'ACTUALMENTE SE ENCUENTRA LABORANDO',
             'TIPO DE EMPLEO',
             'OBSERVACIONES',

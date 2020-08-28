@@ -19,7 +19,6 @@ class ListasController extends Controller {
         $this->configModelo = new Lista;
         $this->modulo = "Listas";
         // Variables Globales---------------------------->
-
     }
 
     public function index(Request $request) {
@@ -27,7 +26,7 @@ class ListasController extends Controller {
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
-        ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
+        ActivityLogger::activity("Consulto datos del modulo {$this->modulo}, Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
         $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)->where('estado', '1');
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
@@ -38,7 +37,7 @@ class ListasController extends Controller {
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
-        ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
+        ActivityLogger::activity("Consulto datos del modulo {$this->modulo}, Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
         $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)
             ->where('estado', '1')->where('nombre_lista', $id);
         $data = $variableConsulta->paginate(100);
@@ -59,7 +58,6 @@ class ListasController extends Controller {
     }
 
     public function store(ListasRequest $request) {
-
         $data = [];
         $variableConsulta = $this->configModelo;
 
@@ -76,7 +74,7 @@ class ListasController extends Controller {
             //Campos a guardar aquí--------------->
         }
 
-        ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
+        ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros: {$variableConsulta}, -> Metodo Store.");
         return ['data' => $data, 'status' => '202'];
     }
 
@@ -85,16 +83,16 @@ class ListasController extends Controller {
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);
         //Campos Actualizar aquí--------------->
-        $variableConsulta->nombre_lista = $request->nombre_lista;
-        $variableConsulta->codigo_campo = $request->codigo_campo;
-        $variableConsulta->valor_campo_1 = $request->valor_campo_1;
-        $variableConsulta->valor_campo_2 = $request->valor_campo_2;
-        $variableConsulta->valor_campo_3 = $request->valor_campo_3;
-        $variableConsulta->valor_campo_4 = $request->valor_campo_4;
+        $variableConsulta->nombre_lista = $request[0]["nombre_lista"];
+        $variableConsulta->codigo_campo = $request[0]["codigo_campo"];
+        $variableConsulta->valor_campo_1 = $request[0]["valor_campo_1"];
+        $variableConsulta->valor_campo_2 = $request[0]["valor_campo_2"];
+        $variableConsulta->valor_campo_3 = $request[0]["valor_campo_3"];
+        $variableConsulta->valor_campo_4 = $request[0]["valor_campo_4"];
         //Campos Actualizar aquí--------------->
         $variableConsulta->save();
 
-        ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
+        ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores: {$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
     }
 
@@ -103,14 +101,14 @@ class ListasController extends Controller {
         $datosElimnados = $variableConsulta;
         $variableConsulta = $this->configModelo::destroy($id);
 
-        ActivityLogger::activity("Eliminado Registo Modulo {$this->modulo},Datos eliminados:{$datosElimnados},  para el registro {$id} -> Metodo destroy");
+        ActivityLogger::activity("Eliminado Registo Modulo {$this->modulo}, Datos eliminados: {$datosElimnados},  para el registro {$id} -> Metodo destroy");
         return ['data' => $variableConsulta, 'status' => '204'];
     }
 
     public function activar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
-        ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
+        ActivityLogger::activity("Activando Registo Modulo {$this->modulo}, Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
         $variableConsulta->estado = 1;
         $variableConsulta->save();
 
@@ -120,7 +118,7 @@ class ListasController extends Controller {
     public function inactivar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
-        ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo},Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
+        ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo}, Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
         $variableConsulta->estado = 0;
         $variableConsulta->save();
 
@@ -130,7 +128,7 @@ class ListasController extends Controller {
     public function restore($id) {
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;
-        ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo},Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");
+        ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo}, Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");
         $variableConsulta->restore();
 
         return ['data' => $variableConsulta, 'status' => '207'];
