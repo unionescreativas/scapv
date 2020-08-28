@@ -177,11 +177,11 @@
     "icon": "fa fa-wrench",
     "children": [
       {
-        "title": "Crear Listas",
+        "title": "Listas",
         "name": "sidebar.menu-5-submenu-1",
         "is_active": false,
         "link": {
-          "path": "/utilidades/crear-listas"
+          "path": "/utilidades/listas"
         },
         "class_name": "",
         "is_icon_class": true,

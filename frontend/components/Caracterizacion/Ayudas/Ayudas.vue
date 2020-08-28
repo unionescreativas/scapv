@@ -124,6 +124,7 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ciudadanos",
@@ -153,10 +154,7 @@ export default {
     };
   },
   computed: {
-    ciudadano() {
-      let ciudadano = this.$store.state.Familias.ciudadano;
-      return ciudadano && ciudadano != "no existe" ? ciudadano[0] : {};
-    },
+    ...mapGetters("Familias", ["ciudadano"]),
   },
   mounted() {
     vito.index();

@@ -135,6 +135,9 @@ export default {
           th: {
             "align-middle": true,
           },
+          td: {
+            "align-middle": true,
+          },
         },
         columns: [
           { label: "CIUDADANO DOCUMENTO", name: "ciudadano.numero_documento", orderable: true },

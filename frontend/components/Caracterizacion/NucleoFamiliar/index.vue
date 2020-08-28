@@ -16,19 +16,19 @@
             >
               <tab-content title="Datos Personales" icon="fa fa-search">
                 <template v-if="stepIndex == 0">
-                  <datos-personales :form="form" :options="options" />
+                  <tab-datos-personales :form="form" :options="options" />
                 </template>
               </tab-content>
 
               <tab-content title="Información Adicional" icon="fa fa-info">
                 <template v-if="stepIndex == 1">
-                  <informacion-adicional :form="form" :options="options" />
+                  <tab-informacion-adicional :form="form" :options="options" />
                 </template>
               </tab-content>
 
               <tab-content title="Núcleo Familiar" icon="fas fa-user-friends">
                 <template v-if="stepIndex == 2">
-                  <nucleo-familiar :form="form" :options="options" :ciudadano="ciudadano" />
+                  <tab-nucleo-familiar :form="form" :options="options" :ciudadano="ciudadano" />
                 </template>
               </tab-content>
 
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { FormWizard, TabContent } from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 import Swal from "sweetalert2";
@@ -102,10 +102,7 @@ export default {
     },
   }),
   computed: {
-    ciudadano() {
-      let ciudadano = this.$store.state.Familias.ciudadano;
-      return ciudadano && ciudadano != "no existe" ? ciudadano[0] : {};
-    },
+    ...mapGetters("Familias", ["ciudadano"]),
   },
   watch: {
     form: {
@@ -119,7 +116,7 @@ export default {
   },
   methods: {
     ...mapActions("Familias", ["guardarCiudadano"]),
-    async validate(func) {
+    async validate(cb) {
       try {
         let res = await this.$axios.post("/api/ciudadanosvalidar", this.form);
         let errors = _.pick(res.data.data.errors, _.keys(this.$refs.observer.fields));
@@ -135,12 +132,12 @@ export default {
         } else {
           if (this.formChanged) {
             this.formChanged = false;
-            return func();
+            return cb();
           } else {
             if (!this.$refs.formWizard.isLastStep) {
               this.$refs.formWizard.nextTab();
             } else {
-              return func();
+              return cb();
             }
           }
         }

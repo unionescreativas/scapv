@@ -79,16 +79,22 @@ export default {
           allowEscapeKey: false,
         }).then((result) => {
           if (result.value) {
+            // SI LA ACCIÓN ES REGISTRAR SE REINICIA EL FORMULARIO
             if (method == "post") {
               commit("GUARDAR_CIUDADANO", res.data.data);
-              $nuxt.resetFormVeeValidate(payload);
               payload.$refs.formWizard.reset();
+              payload.resetFormVeeValidate(payload);
             }
           }
         });
       }
     } catch (err) {
-      console.error(err);
+      Swal.fire({
+        html: "<h4>No se pudieron guardar los datos, consulte con el administrador!</h4>",
+        icon: "error",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
     }
   },
 
@@ -115,7 +121,11 @@ export default {
       }).then((result) => {
         if (result.value) {
           commit("GUARDAR_INTEGRANTE_FAMILIA", res.data.data);
-          payload.reloadDataTable();
+          payload.$parent.$refs.tablaIntegrantes.reloadDataTable();
+          // SI LA ACCIÓN ES REGISTRAR SE REINICIA EL FORMULARIO
+          if (method == "post") {
+            payload.resetFormVeeValidate(payload);
+          }
         }
       });
     } catch (err) {

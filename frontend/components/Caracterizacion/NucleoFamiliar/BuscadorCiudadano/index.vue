@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 import Swal from "sweetalert2";
 
@@ -51,43 +51,45 @@ export default {
   },
   data: () => ({
     numero_documento: "",
-    ciudadanos: [],
   }),
   computed: {
-    ...mapState("Familias", ["ciudadano"]),
+    ...mapGetters({
+      ciudadano: "Familias/ciudadano",
+      ciudadanos: "Familias/documentosCiudadanos",
+    }),
   },
   methods: {
+    ...mapActions("Familias", ["consultarCiudadanos"]),
     consultarCiudadano(numero_documento) {
-      this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
-        if (this.ciudadano != "no existe") {
-          Swal.fire({
-            title: "Registrado!",
-            text: "Ya te encuentras registrado, deseas editar tus datos personales?",
-            icon: "info",
-            confirmButtonColor: "#3085d6",
-            confirmButtonText: "Si",
-            cancelButtonColor: "#d33",
-            cancelButtonText: "No",
-            showCancelButton: true,
-            allowOutsideClick: false,
-            allowEscapeKey: false
-          }).then(async (result) => {
-            if (result.value) {
-              this.$emit("obtener_numero_documento", numero_documento);
-            }
-          });
-        } else {
-          this.$emit("obtener_numero_documento", numero_documento);
-        }
-      });
-      this.$emit("obtener_numero_documento", null);
+      this.$emit("numero_documento", null);
+      if (numero_documento) {
+        this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
+          if (Object.values(this.ciudadano).length) {
+            Swal.fire({
+              title: "Registrado!",
+              text: "Ya te encuentras registrado, deseas editar tus datos personales?",
+              icon: "info",
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Si",
+              cancelButtonColor: "#d33",
+              cancelButtonText: "No",
+              showCancelButton: true,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            }).then((result) => {
+              if (result.value) {
+                this.$emit("numero_documento", numero_documento);
+              }
+            });
+          } else {
+            this.$emit("numero_documento", numero_documento);
+          }
+        });
+      }
     },
   },
-  async mounted() {
-    let res = await this.$axios.get("/api/ciudadanos/");
-    let data = res.data.data;
-    let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
-    this.ciudadanos = ciudadanos;
+  created() {
+    this.consultarCiudadanos();
   },
 };
 </script>
