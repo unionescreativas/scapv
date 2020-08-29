@@ -88,7 +88,7 @@ export default {
       nombre: "",
     };
   },
-  beforeMount() {
+  mounted() {
     this.consultarRegistroEditar();
     this.consultarListaAyudas();
     // console.log("idEditar" + this.idEditar.id);
