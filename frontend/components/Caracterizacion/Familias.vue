@@ -124,6 +124,7 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ciudadanos",
@@ -138,6 +139,9 @@ export default {
           table: { table: true, "table-hover": true, "table-bordered": true, "text-center": true },
           "t-head": { "table-header-iq-primary": true },
           th: {
+            "align-middle": true,
+          },
+          td: {
             "align-middle": true,
           },
         },
@@ -177,7 +181,7 @@ export default {
           { label: "NIVEL DE ESCOLARIDAD", name: "nivel_escolaridad", orderable: true },
           { label: "PROFESIONAL EN ?", name: "tipo_profesion", orderable: true },
           { label: "POBLACIÓN LGTBI", name: "comunidad_lgtbi", orderable: true },
-          { label: "PERTENECE ALGUNA COMUNA ETNICA ?", name: "comunidad_etnica", orderable: true },
+          { label: "PERTENECE ALGUNA COMUNIDAD ETNICA ?", name: "comunidad_etnica", orderable: true },
           { label: "ACTUALMENTE SE ENCUENTRA LABORANDO", name: "trabajo", orderable: true },
           { label: "TIPO DE EMPLEO", name: "tipo_empleo", orderable: true },
           { label: "OBSERVACIONES", name: "observaciones", orderable: true },
@@ -186,10 +190,7 @@ export default {
     };
   },
   computed: {
-    ciudadano() {
-      let ciudadano = this.$store.state.Familias.ciudadano;
-      return ciudadano && ciudadano != "no existe" ? ciudadano[0] : {};
-    },
+    ...mapGetters("Familias", ["ciudadano"]),
   },
   mounted() {
     vito.index();

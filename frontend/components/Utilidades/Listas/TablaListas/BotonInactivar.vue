@@ -1,5 +1,5 @@
 <template>
-  <i class="fa fa-edit fa-2x text-warning" role="button" style="cursor: pointer;" @click="click(data)" title="Editar Integrante"></i>
+  <i class="ri-delete-bin-2-line text-danger" role="button" style="cursor: pointer; font-size: 2em;" @click="click(data)"></i>
 </template>
 
 <script>

@@ -167,8 +167,12 @@
     </ValidationProvider>
 
     <ValidationProvider name="comunidad_etnica" v-slot="{ errors }">
-      <b-form-group label="PERTENECE ALGUNA COMUNA ETNICA ?:">
-        <b-form-input type="text" placeholder="INGRESE PERTENECE ALGUNA COMUNA ETNICA ?" v-model="form.comunidad_etnica" />
+      <b-form-group label="PERTENECE ALGUNA COMUNIDAD ETNICA ?:">
+        <b-form-input
+          type="text"
+          placeholder="INGRESE PERTENECE ALGUNA COMUNIDAD ETNICA ?"
+          v-model="form.comunidad_etnica"
+        />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("comunidad_etnica", "") }}
         </div>

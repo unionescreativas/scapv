@@ -1,14 +1,6 @@
 <template>
   <b-container fluid>
-    <form-modal-integrante
-      :modalShow.sync="modalShow"
-      :options="options"
-      :ciudadano="ciudadano"
-      :integrante="tableRowData"
-      :reloadDataTable="reloadDataTable"
-    />
-
-    <b-row class="mt-5">
+    <b-row>
       <b-col sm="12">
         <data-table
           ref="dataTable"
@@ -130,11 +122,11 @@
 import { vito } from "~/plugins/config/pluginInit";
 
 export default {
-  props: ["form", "options", "ciudadano"],
+  props: ["ciudadano"],
   data() {
     return {
       modalShow: false,
-      tableRowData: {},
+      tableRowData: null,
       table: {
         url: `${process.env.API_URL}/api/nucleofamiliar/`,
         tableProps: { dir: "desc" },
@@ -143,6 +135,9 @@ export default {
           table: { table: true, "table-hover": true, "table-bordered": true, "text-center": true },
           "t-head": { "table-header-iq-primary": true },
           th: {
+            "align-middle": true,
+          },
+          td: {
             "align-middle": true,
           },
         },
@@ -182,12 +177,12 @@ export default {
   },
   methods: {
     agregarIntegrante() {
-      this.tableRowData = {};
-      this.modalShow = true;
+      this.$emit("getRowData", null);
+      this.$emit("modalShow", true);
     },
     getRowData(data) {
-      this.modalShow = true;
-      this.tableRowData = data;
+      this.$emit("getRowData", data);
+      this.$emit("modalShow", true);
     },
     reloadDataTable() {
       this.$refs.dataTable.getData();

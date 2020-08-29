@@ -8,7 +8,7 @@ Vue.mixin({
   },
   methods: {
     resetFormVeeValidate(_vm) {
-      _vm.form = {};
+      _vm.form = _vm.form.length ? [{}] : {};
       _vm.$nextTick(() => {
         if (_vm.$refs.observer) {
           _vm.$refs.observer.reset();

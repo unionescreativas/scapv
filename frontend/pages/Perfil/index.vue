@@ -310,7 +310,7 @@
                   </b-row>
                   <b-row>
                     <b-col>
-                      <b-form-group label="PERTENECE ALGUNA COMUNA ETNICA ?" label-for="exampleInputText35">
+                      <b-form-group label="PERTENECE ALGUNA COMUNIDAD ETNICA ?" label-for="exampleInputText35">
                         <b-form-input type="text" :value="ciudadano.comunidad_etnica" disabled></b-form-input>
                       </b-form-group>
                     </b-col>

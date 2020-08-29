@@ -1,4 +1,5 @@
 export default () => ({
   ciudadano: null,
-  integrante_familia: null,
+  ciudadanos: [],
+  integrante: null,
 });

@@ -1,7 +1,7 @@
 <template>
   <b-modal v-model="toggleModal" size="lg" modal-class="container-fluid">
     <template v-slot:modal-header="{ close }">
-      <h3 class="text-center w-100" v-if="!Object.values(integrante).length">Agregar Integrante de Familia</h3>
+      <h3 class="text-center w-100" v-if="!integrante">Agregar Integrante de Familia</h3>
       <h3 class="text-center w-100" v-else>Actualizar Integrante de Familia</h3>
       <b-button-close title="Cerrar" @click="close()">
         <i style="font-size: 50px;" class="text-danger ri-close-line"></i>
@@ -364,10 +364,10 @@
         <b-row>
           <b-col sm="6" lg="6">
             <ValidationProvider name="comunidad_etnica" v-slot="{ errors }">
-              <b-form-group label="PERTENECE ALGUNA COMUNA ETNICA ?:">
+              <b-form-group label="PERTENECE ALGUNA COMUNIDAD ETNICA ?:">
                 <b-form-input
                   type="text"
-                  placeholder="INGRESE PERTENECE ALGUNA COMUNA ETNICA ?"
+                  placeholder="INGRESE PERTENECE ALGUNA COMUNIDAD ETNICA ?"
                   v-model="form.comunidad_etnica"
                 />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
@@ -462,9 +462,6 @@ export default {
     integrante: {
       type: Object,
       default: () => {},
-    },
-    reloadDataTable: {
-      type: Function,
     },
   },
   data: () => ({

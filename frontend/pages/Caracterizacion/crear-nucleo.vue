@@ -1,7 +1,7 @@
 <template>
   <div>
-    <buscador-ciudadano @obtener_numero_documento="obtener_numero_documento" />
-    <form-nucleo v-if="numero_documento" :numero_documento="numero_documento" />
+    <buscador-ciudadano @numero_documento="numero_documento = $event" />
+    <nucleo-familiar v-if="numero_documento" :numero_documento="numero_documento" />
   </div>
 </template>
 
@@ -19,11 +19,6 @@ export default {
   }),
   mounted() {
     vito.index();
-  },
-  methods: {
-    obtener_numero_documento(value) {
-      this.numero_documento = value;
-    },
   },
 };
 </script>

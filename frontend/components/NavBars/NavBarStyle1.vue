@@ -69,7 +69,7 @@
   <!-- TOP Nav Bar END -->
 </template>
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 import Swal from "sweetalert2";
 import verticalMenu from "~/plugins/FackApi/json/VerticalMenu";
@@ -95,15 +95,16 @@ export default {
   data: () => ({
     sidebar: verticalMenu,
     numero_documento: "",
-    ciudadanos: [],
   }),
   computed: {
-    ...mapState("Familias", ["ciudadano"]),
     ...mapGetters({
+      ciudadano: "Familias/ciudadano",
+      ciudadanos: "Familias/documentosCiudadanos",
       bookmark: "Setting/bookmarkState",
     }),
   },
   methods: {
+    ...mapActions("Familias", ["consultarCiudadanos"]),
     miniSidebar() {
       this.$emit("toggle");
     },
@@ -112,11 +113,10 @@ export default {
       // SE ACCEDE AL COMPONENTE: VueBootstrapTypeahead
       // Y SE REINICIA EL VALOR DEL INPUT SEARCH
       this.$refs.VueBootstrapTypeahead.inputValue = "";
-      this.$emit("obtener_numero_documento", null);
     },
     consultarCiudadano(numero_documento) {
       this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
-        if (this.ciudadano != "no existe") {
+        if (Object.values(this.ciudadano).length) {
           // SI EL CIUDADANO EXISTE, SE LIMPIA EL BUSCADOR Y SE REDIRECCIONA A SU PERFIL
           this.limpiarBuscador();
           this.$router.push("/perfil");
@@ -131,11 +131,8 @@ export default {
       });
     },
   },
-  async mounted() {
-    let res = await this.$axios.get("/api/ciudadanos/");
-    let data = res.data.data;
-    let ciudadanos = data.map((ciudadano) => ciudadano.numero_documento);
-    this.ciudadanos = ciudadanos;
+  created() {
+    this.consultarCiudadanos();
   },
 };
 </script>

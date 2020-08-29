@@ -191,7 +191,7 @@ class FamiliasController extends Controller {
         $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '206'];
     }
-    
+
     public function restore($id) {
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;

@@ -162,6 +162,9 @@ export default {
           th: {
             "align-middle": true,
           },
+          td: {
+            "align-middle": true,
+          },
         },
         columns: [
           {

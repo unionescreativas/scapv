@@ -1,10 +1,5 @@
 <template>
-  <i
-    class="fa fa-eye fa-2x text-primary"
-    role="button"
-    style="cursor: pointer;"
-    @click="click({ typeForm: 'ver', ...data })"
-  ></i>
+  <i class="ri-edit-box-line text-warning" role="button" style="cursor: pointer; font-size: 2em;" @click="click(data)"></i>
 </template>
 
 <script>

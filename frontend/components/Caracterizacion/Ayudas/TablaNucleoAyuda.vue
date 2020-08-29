@@ -130,6 +130,9 @@ export default {
           th: {
             "align-middle": true,
           },
+          td: {
+            "align-middle": true,
+          },
         },
         columns: [
           {
@@ -174,7 +177,7 @@ export default {
           { label: "NIVEL DE ESCOLARIDAD", name: "nivel_escolaridad" },
           { label: "PROFESIONAL EN ?", name: "tipo_profesion" },
           { label: "POBLACIÓN LGTBI", name: "comunidad_lgtbi" },
-          { label: "PERTENECE ALGUNA COMUNA ETNICA ?", name: "comunidad_etnica" },
+          { label: "PERTENECE ALGUNA COMUNIDAD ETNICA ?", name: "comunidad_etnica" },
           { label: "ACTUALMENTE SE ENCUENTRA LABORANDO", name: "trabajo" },
           { label: "TIPO DE EMPLEO", name: "tipo_empleo" },
           { label: "OBSERVACIONES", name: "observaciones" },
