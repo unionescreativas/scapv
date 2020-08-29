@@ -10,6 +10,12 @@ export default {
         res = await this.$axios.get(`/api/familias/${payload}`);
         if (res.data.data != "no existe") {
           res = await this.$axios.get(`/api/ciudadanos/${res.data.data[0].ciudadano_id}`);
+          Swal.fire({
+            html: `<h4>El Ciudadano es Integrante de Familia del Nucleo Familiar de: ${res.data.data[0].nombres} ${res.data.data[0].apellidos}!</h4>`,
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          });
         }
         commit("CONSULTAR_CIUDADANO", res.data.data);
       }
