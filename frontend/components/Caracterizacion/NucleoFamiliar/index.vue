@@ -99,6 +99,7 @@ export default {
       barrios: [],
       ciudades_origen: [],
       paises_origen: [],
+      intenciones_ciudad: [],
       respuestas: [],
       niveles_escolares: [],
       tipos_empleos: [],
