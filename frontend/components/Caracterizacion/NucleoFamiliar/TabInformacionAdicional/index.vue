@@ -58,7 +58,17 @@
 
     <ValidationProvider name="intencion_ciudad" v-slot="{ errors }">
       <b-form-group label="INTENCIÓN DE ESTAR EN LA CIUDAD:">
-        <b-form-input type="text" placeholder="INGRESE INTENCIÓN DE ESTAR EN LA CIUDAD" v-model="form.intencion_ciudad" />
+        <v-select
+          placeholder="Seleccione ..."
+          :options="options.intenciones_ciudad"
+          label="valor_campo_1"
+          :reduce="(option) => option.codigo_campo"
+          v-model="form.intencion_ciudad"
+        >
+          <template slot="no-options">
+            <span>Escriba para buscar ...</span>
+          </template>
+        </v-select>
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("intencion_ciudad", "") }}
         </div>
@@ -67,7 +77,7 @@
 
     <ValidationProvider name="respuesta_intencion" v-slot="{ errors }">
       <b-form-group label="RESPUESTA INTENCIÓN:">
-        <b-form-input type="date" placeholder="INGRESE RESPUESTA INTENCIÓN" v-model="form.respuesta_intencion" />
+        <b-form-input type="text" placeholder="INGRESE RESPUESTA INTENCIÓN" v-model="form.respuesta_intencion" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("respuesta_intencion", "") }}
         </div>
@@ -159,7 +169,17 @@
 
     <ValidationProvider name="comunidad_lgtbi" v-slot="{ errors }">
       <b-form-group label="POBLACIÓN LGTBI:">
-        <b-form-input type="text" placeholder="INGRESE POBLACIÓN LGTBI" v-model="form.comunidad_lgtbi" />
+        <v-select
+          placeholder="Seleccione ..."
+          :options="options.respuestas"
+          label="valor_campo_1"
+          :reduce="(option) => option.codigo_campo"
+          v-model="form.comunidad_lgtbi"
+        >
+          <template slot="no-options">
+            <span>Escriba para buscar ...</span>
+          </template>
+        </v-select>
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("comunidad_lgtbi", "") }}
         </div>
@@ -168,11 +188,17 @@
 
     <ValidationProvider name="comunidad_etnica" v-slot="{ errors }">
       <b-form-group label="PERTENECE ALGUNA COMUNIDAD ETNICA ?:">
-        <b-form-input
-          type="text"
-          placeholder="INGRESE PERTENECE ALGUNA COMUNIDAD ETNICA ?"
+        <v-select
+          placeholder="Seleccione ..."
+          :options="options.respuestas"
+          label="valor_campo_1"
+          :reduce="(option) => option.codigo_campo"
           v-model="form.comunidad_etnica"
-        />
+        >
+          <template slot="no-options">
+            <span>Escriba para buscar ...</span>
+          </template>
+        </v-select>
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("comunidad_etnica", "") }}
         </div>

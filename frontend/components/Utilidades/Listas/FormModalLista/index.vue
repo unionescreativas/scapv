@@ -159,10 +159,13 @@ export default {
     form: [{}],
   }),
   watch: {
-    modalShow() {
+    modalShow(value) {
       this.form[0] = {
         ...this.lista,
       };
+      if (!value) {
+        this.form = [{}];
+      }
     },
   },
   computed: {

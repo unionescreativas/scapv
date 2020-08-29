@@ -163,7 +163,17 @@
 
     <ValidationProvider name="departamento" v-slot="{ errors }">
       <b-form-group label="DEPARTAMENTO DE RESIDENCIA: *">
-        <b-form-input type="text" placeholder="INGRESE DEPARTAMENTO DE RESIDENCIA" v-model="form.departamento" />
+        <v-select
+          placeholder="Seleccione ..."
+          :options="options.departamentos"
+          label="valor_campo_1"
+          :reduce="(option) => option.codigo_campo"
+          v-model="form.departamento"
+        >
+          <template slot="no-options">
+            <span>Escriba para buscar ...</span>
+          </template>
+        </v-select>
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("departamento", "") }}
         </div>
@@ -174,7 +184,7 @@
       <b-form-group label="CIUDAD DE RESIDENCIA:">
         <v-select
           placeholder="Seleccione ..."
-          :options="options.ciudades_origen"
+          :options="options.ciudades_residencia"
           label="valor_campo_1"
           :reduce="(option) => option.codigo_campo"
           v-model="form.ciudad"

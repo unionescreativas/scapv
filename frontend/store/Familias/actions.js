@@ -10,13 +10,13 @@ export default {
         res = await this.$axios.get(`/api/familias/${payload}`);
         if (res.data.data != "no existe") {
           res = await this.$axios.get(`/api/ciudadanos/${res.data.data[0].ciudadano_id}`);
-          Swal.fire({
-            html: `<h4>El Ciudadano es Integrante de Familia del Nucleo Familiar de: ${res.data.data[0].nombres} ${res.data.data[0].apellidos}!</h4>`,
-            icon: "warning",
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-          });
         }
+        Swal.fire({
+          html: `<h4>El Ciudadano es Integrante de Familia del Nucleo Familiar de: ${res.data.data[0].nombres} ${res.data.data[0].apellidos}!</h4>`,
+          icon: "warning",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        });
         commit("CONSULTAR_CIUDADANO", res.data.data);
       }
     } catch (error) {
@@ -60,16 +60,13 @@ export default {
         }).then(async (result) => {
           if (result.value) {
             let res = await this.$axios({ method, url, data });
+            commit("GUARDAR_CIUDADANO", [res.data.data]);
 
             Swal.fire({
               html: `<h4>${mensajeGuardar}</h4>`,
               icon: "success",
               allowOutsideClick: false,
               allowEscapeKey: false,
-            }).then((result) => {
-              if (result.value) {
-                commit("GUARDAR_CIUDADANO", res.data.data);
-              }
             });
           } else {
             payload.$refs.formWizard.nextTab();
@@ -77,6 +74,7 @@ export default {
         });
       } else {
         let res = await this.$axios({ method, url, data });
+        commit("GUARDAR_CIUDADANO", [res.data.data]);
 
         Swal.fire({
           html: `<h4>${mensajeGuardar}</h4>`,
@@ -87,7 +85,6 @@ export default {
           if (result.value) {
             // SI LA ACCIÓN ES REGISTRAR SE REINICIA EL FORMULARIO
             if (method == "post") {
-              commit("GUARDAR_CIUDADANO", res.data.data);
               payload.$refs.formWizard.reset();
               payload.resetFormVeeValidate(payload);
             }
