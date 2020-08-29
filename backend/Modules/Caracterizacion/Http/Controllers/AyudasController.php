@@ -41,6 +41,20 @@ class AyudasController extends Controller {
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
+    public function editarRegistro($id) {
+        $variableConsulta = $this->configModelo::where('id', $id)->get();
+        if ($variableConsulta->isEmpty()) {
+            $variableConsulta = $this->configModelo::where('id', $id)->get();
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
+        } else {
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
+        }
+        if ($variableConsulta->isEmpty()) {
+            return ['data' => 'no existe', 'status' => '201'];
+        }
+        return ['data' => $variableConsulta, 'status' => '201'];
+    }
+
     public function show($id, Request $request) {
         $sortBy = "id";
         $orderBy = "asc";
@@ -79,25 +93,31 @@ class AyudasController extends Controller {
     }
     public function store(AyudaRequest $request) {
         $cantidadDisponibles = 0;
-        $cantidadEntregadas = 0;
+        $cantidadEntregadasAnteriormente = 0;
+        $cantidadEntregada = 0;
+        $disponible = 0;
+        // ----------------------------------->Validadon Ayudas Disponibles;
+        $disponibilidad = DB::table('listas')->where('id', $request->lista_id)
+            ->first();
+        $cantidadDisponibles = (int) $disponibilidad->valor_campo_2;
+        // ----------------------------------->Validadon Ayudas Disponibles;
+
+        // ----------------------------------->Validadon Ayudas Entregadas Anteriormente;
         $ayudasEntregadas = DB::table('ayudas')
             ->where('lista_id', $request->lista_id)
             ->where('ciudadano_id', $request->ciudadano_id)->sum('cantidad_entregada');
         if (!is_null($ayudasEntregadas)) {
-            $cantidadEntregadas = (int) $ayudasEntregadas;
+            $cantidadEntregadasAnteriormente = (int) $ayudasEntregadas;
         }
-        $disponibilidad = DB::table('listas')->where('id', $request->lista_id)
-            ->first();
-        $cantidadDisponibles = (int) $disponibilidad->valor_campo_2;
-        //
+        // ----------------------------------->Validadon Ayudas Entregadas Anteriormente;
+        $cantidadEntregada = $request->cantidad_entregada;
+        // ---------->Calculando Unidades Entregadas
+        $disponible = $cantidadDisponibles - ($cantidadEntregadasAnteriormente + $cantidadEntregada);
+        // ---------->Calculando Unidades Entregadas
 
-        //
-
-        if ($cantidadDisponibles <= $cantidadEntregadas) {
+        if ($disponible < 0) {
             return ['data' => 'Disponibles 0', 'validacion' => false, 'status' => '202'];
 
-        } elseif ($cantidadDisponibles < $request->cantidad_entregada) {
-            return ['data' => 'Disponibles 0', 'validacion' => false, 'status' => '202'];
         } else {
             $variableConsulta = $this->configModelo;
             //Campos a guardar aquí--------------->
@@ -113,53 +133,79 @@ class AyudasController extends Controller {
         }
     }
 
-    public function consultandoUnidades($ciudadano_id, $lista_id, $cantidad) {
+    public function consultandoUnidades(Request $request) {
         $cantidadDisponibles = 0;
-        $cantidadEntregadas = 0;
-        $datos = DB::table('ayudas')
-            ->where('lista_id', $lista_id)
-            ->where('ciudadano_id', $ciudadano_id)->get();
-        $ayudasEntregadas = DB::table('ayudas')
-            ->where('lista_id', $lista_id)
-            ->where('ciudadano_id', $ciudadano_id)->sum('cantidad_entregada');
-        if (!is_null($ayudasEntregadas)) {
-            $cantidadEntregadas = (int) $ayudasEntregadas;
-        }
-        $disponibilidad = DB::table('listas')->where('id', $lista_id)
+        $cantidadEntregadasAnteriormente = 0;
+        $cantidadEntregada = 0;
+        $disponible = 0;
+        // ----------------------------------->Validadon Ayudas Disponibles;
+        $disponibilidad = DB::table('listas')->where('id', $request->lista_id)
             ->first();
         $cantidadDisponibles = (int) $disponibilidad->valor_campo_2;
-        //
+        // ----------------------------------->Validadon Ayudas Disponibles;
 
-        //
+        // ----------------------------------->Validadon Ayudas Entregadas Anteriormente;
+        $ayudasEntregadas = DB::table('ayudas')
+            ->where('lista_id', $request->lista_id)
+            ->where('ciudadano_id', $request->ciudadano_id)->sum('cantidad_entregada');
+        if (!is_null($ayudasEntregadas)) {
+            $cantidadEntregadasAnteriormente = (int) $ayudasEntregadas;
+        }
+        // ----------------------------------->Validadon Ayudas Entregadas Anteriormente;
 
-        if ($cantidadDisponibles <= $cantidadEntregadas) {
-            return ['data' => $datos, 'unidades' => 'Disponibles 0', 'validacion' => false, 'status' => '203'];
+        // ---------->Calculando Unidades Entregadas
+        $cantidadEntregada = (int) $request->cantidad_entregada;
+        $disponible = $cantidadDisponibles - ($cantidadEntregadasAnteriormente + $cantidadEntregada);
+        // ---------->Calculando Unidades Entregadas
+
+        $datos = DB::table('ayudas')
+            ->where('lista_id', $request->lista_id)
+            ->where('ciudadano_id', $request->ciudadano_id)->first();
+
+        if ($disponible < 0) {
+            return ['data' => $datos, 'unidades' => 'Disponibles :' . $disponible, 'validacion' => false, 'status' => '203'];
         }
-        if ($cantidadDisponibles < $cantidad) {
-            return ['data' => $datos, 'unidades' => 'Disponibles 0', 'validacion' => false, 'status' => '203'];
-        }
-        $totalDisponible = $cantidadDisponibles - $cantidadEntregadas;
-        return ['data' => $datos, 'unidades' => 'Disponibles :' . $totalDisponible, 'validacion' => true, 'status' => '202'];
+        $disponible = $cantidadDisponibles - ($cantidadEntregadasAnteriormente);
+        return ['data' => $datos, 'unidades' => 'Disponibles :' . $disponible, 'validacion' => true, 'status' => '202'];
     }
     public function update(AyudaRequest $request, $id) {
         //
 
         $cantidadDisponibles = 0;
-        $cantidadEntregadas = 0;
+        $cantidadEntregadasAnteriormente = 0;
+        $cantidadEntregada = 0;
+        $cantidadesModificando = 0;
+        $disponible = 0;
+
+        // ----------------------------------->Unidades a Modificar;
+        $cantidadesModificando = DB::table('ayudas')
+            ->where('id', $id)
+            ->sum('cantidad_entregada');
+        if (!is_null($cantidadesModificando)) {
+            $cantidadesModificando = (int) $cantidadesModificando;
+        }
+        // ----------------------------------->Unidades a Modificar;
+
+        // ----------------------------------->Validadon Ayudas Disponibles;
+        $disponibilidad = DB::table('listas')->where('id', $request->lista_id)
+            ->first();
+        $cantidadDisponibles = (int) $disponibilidad->valor_campo_2;
+        // ----------------------------------->Validadon Ayudas Disponibles;
+
+        // ----------------------------------->Validadon Ayudas Entregadas Anteriormente;
         $ayudasEntregadas = DB::table('ayudas')
             ->where('lista_id', $request->lista_id)
             ->where('ciudadano_id', $request->ciudadano_id)->sum('cantidad_entregada');
         if (!is_null($ayudasEntregadas)) {
-            $cantidadEntregadas = (int) $ayudasEntregadas;
+            $cantidadEntregadasAnteriormente = (int) $ayudasEntregadas;
         }
-        $disponibilidad = DB::table('listas')->where('id', $request->lista_id)
-            ->first();
-        $cantidadDisponibles = (int) $disponibilidad->valor_campo_2;
-        //
+        $cantidadEntregadasAnteriormente = $cantidadEntregadasAnteriormente - $cantidadesModificando;
+        // ----------------------------------->Validadon Ayudas Entregadas Anteriormente;
+        $cantidadEntregada = $request->cantidad_entregada;
+        // ---------->Calculando Unidades Entregadas
+        $disponible = $cantidadDisponibles - ($cantidadEntregadasAnteriormente + $cantidadEntregada);
 
-        //
-
-        if ($cantidadDisponibles <= $cantidadEntregadas) {
+        if ($disponible < 0) {
             return ['data' => 'sin stock', 'status' => '202'];
         } else {
             $datosAnteriores = $this->configModelo::find($id);

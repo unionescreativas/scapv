@@ -5,7 +5,25 @@
         <iq-card>
           <template v-slot:headerTitle>
             <h4 class="card-title">Ayudas</h4>
-            <ModalCrear />
+            <ModalCrear @refrescar="refrescar" />
+            <b-modal
+              ref="modalEditar"
+              v-model="show"
+              size="xl"
+              title="Modulo Editar Ayuda"
+              ok-title="Save Changes"
+              cancel-title="Cerrar"
+            >
+              <ModalEditar :idEditar="idEditar" @refrescar="refrescar" />
+              <template v-slot:modal-footer>
+                <div class="w-100">
+                  <p class="float-left">Editar Ayudas</p>
+                  <b-button variant="primary" size="sm" class="float-right" @click="LimpiarDatos">
+                    Cerrar
+                  </b-button>
+                </div>
+              </template>
+            </b-modal>
           </template>
           <template v-slot:headerAction>
             <a class="text-primary float-right" v-b-toggle.collapse-1 role="button">
@@ -13,7 +31,13 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table :classes="table.classes" :translate="table.translate" :columns="table.columns" :url="table.url">
+            <data-table
+              ref="ayudas"
+              :classes="table.classes"
+              :translate="table.translate"
+              :columns="table.columns"
+              :url="table.url"
+            >
               <div slot="filters" slot-scope="{ tableData }">
                 <div class="row justify-content-end mb-2">
                   <div class="col-md-3">
@@ -125,6 +149,9 @@ export default {
   layout: "LightLayout",
   data() {
     return {
+      show: false,
+      editar: false,
+      idEditar: "",
       table: {
         url: `${process.env.API_URL}/api/ayudas/`,
         tableProps: { dir: "desc" },
@@ -150,7 +177,6 @@ export default {
             handler: this.displayRow,
             component: () => import("~/components/Caracterizacion/Tablas.vue"),
           },
-          { label: "TIPO AYUDA", name: "lista.codigo_lista", orderable: true },
           { label: "AYUDA", name: "lista.valor_campo_1", orderable: true },
           { label: "DOCUMENTO CIUDADANO", name: "ciudadano.numero_documento", orderable: true },
           { label: "NOMBRE CIUDADANO", name: "ciudadano.nombres", orderable: true },
@@ -162,9 +188,19 @@ export default {
     };
   },
   methods: {
+    refrescar(value) {
+      this.$refs["modalEditar"].hide();
+      this.$refs.ayudas.getData();
+    },
+    LimpiarDatos() {
+      this.$refs["modalEditar"].hide();
+    },
     displayRow(data) {
-      let ruta = `/perfil/${data.id}`;
-      this.$router.push(ruta);
+      this.$refs["modalEditar"].show();
+      console.log(data);
+      this.idEditar = data;
+      // let ruta = `/perfil/${data.id}`;
+      // this.$router.push(ruta);
     },
   },
   mounted() {

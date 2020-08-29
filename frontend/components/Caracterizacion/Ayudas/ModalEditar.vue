@@ -1,98 +1,73 @@
 <template>
   <div>
-    <b-button @click="showModal" variant="primary"> <i class="fas fa-plus-circle"></i> Cargar Ayuda</b-button>
-    <b-modal
-      ref="modalCrear"
-      v-model="show"
-      size="xl"
-      title="Modulo Crear Ayuda"
-      ok-title="Save Changes"
-      cancel-title="Cerrar"
-    >
-      <p>Por favor Ingresar Numero de Documento</p>
-      <b-form>
-        <b-row>
-          <b-col>
-            <b-form-group label="Ayuda" label-for="exampleInputNumber1">
-              <b-form-select plain v-model="ayuda" :options="consultaListas" size="lg">
-                <template v-slot:first>
-                  <b-form-select-option :value="null">SELECCIONAR REGISTRO</b-form-select-option>
-                </template>
-              </b-form-select>
-            </b-form-group>
-          </b-col>
-          <b-col>
-            <b-form-group label="Documento de Identificación" label-for="exampleInputNumber1">
-              <b-form-input v-model="numeroDocumento" type="text" value="1"></b-form-input>
-            </b-form-group>
-          </b-col>
-        </b-row>
-        <b-row v-if="consulta">
-          <b-col>
-            <b-form-group label="Cabeza de Familia" label-for="exampleInputNumber1">
-              <b-form-input v-model="nombre" type="text"></b-form-input>
-            </b-form-group>
-          </b-col>
-          <b-col>
-            <b-form-group label="Fecha Expedición" label-for="exampleInputNumber1">
-              <b-form-input v-model="fecha_expedicion" type="text"> </b-form-input>
-            </b-form-group>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <b-form-group label="Cantidad" label-for="exampleInputNumber1">
-              <b-form-input v-model="cantidad" type="number" value="1"></b-form-input>
-            </b-form-group>
-          </b-col>
-          <b-col>
-            <b-form-group label="Consultar" label-for="exampleInputNumber1">
-              <b-button @click="consultarCiudadano" variant="success" class="mb-3 mr-1"
-                ><i class="ri-search-fill"></i
-              ></b-button>
-            </b-form-group>
-          </b-col>
-        </b-row>
-      </b-form>
-      <b-row v-if="validarCargarAyuda">
+    <p>Por favor Ingresar Numero de Documento</p>
+    <b-form>
+      <b-row>
         <b-col>
-          <b-form>
-            <b-form-group label="Fecha Entrega" label-for="exampleInputNumber1">
-              <b-form-input v-model="fecha_entrega" type="date"></b-form-input>
-            </b-form-group>
-          </b-form>
+          <b-form-group label="Ayuda" label-for="exampleInputNumber1">
+            <b-form-select plain v-model="ayuda" :options="consultaListas" size="lg">
+              <template v-slot:first>
+                <b-form-select-option :value="null">SELECCIONAR REGISTRO</b-form-select-option>
+              </template>
+            </b-form-select>
+          </b-form-group>
         </b-col>
         <b-col>
-          <b-form-group label="Guardar" label-for="exampleInputNumber1">
-            <b-button @click="GuardarDatos" variant="info" class="mb-3 mr-1"
-              ><i class="ri-save-fill"></i>Guardar Datos</b-button
-            >
+          <b-form-group label="Documento de Identificación" label-for="exampleInputNumber1">
+            <b-form-input v-model="numeroDocumento" type="text" value="1"></b-form-input>
           </b-form-group>
         </b-col>
       </b-row>
-      <h4 v-text="unidades"></h4>
-      <div v-show="consulta">
-        <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
-      </div>
-      <div v-if="consulta">
-        <TablaCrearAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />
-        <TablaNucleoAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />
-      </div>
-      <template v-slot:modal-footer>
-        <div class="w-100">
-          <p class="float-left">Crear Ayudas</p>
-          <b-button variant="primary" size="sm" class="float-right" @click="LimpiarDatos">
-            Cerrar
-          </b-button>
-        </div>
-      </template>
-    </b-modal>
+      <b-row v-if="consulta">
+        <b-col>
+          <b-form-group label="Cabeza de Familia" label-for="exampleInputNumber1">
+            <b-form-input v-model="nombre" type="text"></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col>
+          <b-form-group label="Fecha Expedición" label-for="exampleInputNumber1">
+            <b-form-input v-model="fecha_expedicion" type="text"> </b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-form-group label="Cantidad" label-for="exampleInputNumber1">
+            <b-form-input v-model="cantidad" type="number" value="1"></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col> </b-col>
+      </b-row>
+    </b-form>
+    <b-row v-if="validarCargarAyuda">
+      <b-col>
+        <b-form>
+          <b-form-group label="Fecha Entrega" label-for="exampleInputNumber1">
+            <b-form-input v-model="fecha_entrega" type="date"></b-form-input>
+          </b-form-group>
+        </b-form>
+      </b-col>
+      <b-col>
+        <b-form-group label="Actualizar" label-for="exampleInputNumber1">
+          <b-button @click="ActualizarDatos" variant="info" class="mb-3 mr-1"
+            ><i class="ri-save-fill"></i>Actualizar Datos</b-button
+          >
+        </b-form-group>
+      </b-col>
+    </b-row>
+    <h4 v-text="unidades"></h4>
+    <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
+    <div v-if="consulta">
+      <TablaCrearAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />
+      <TablaNucleoAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />
+    </div>
   </div>
 </template>
 
 <script>
 import Swal from "sweetalert2";
 export default {
+  props: ["idEditar"],
   data() {
     return {
       show: false,
@@ -104,7 +79,7 @@ export default {
       consulta: false,
       ciudadano: "",
       numeroDocumento: "",
-      cantidad: 1,
+      cantidad: 0,
       fecha_entrega: "",
       ayuda: "",
       consultaListas: [],
@@ -113,10 +88,32 @@ export default {
       nombre: "",
     };
   },
-  mounted() {
+  beforeMount() {
+    this.consultarRegistroEditar();
     this.consultarListaAyudas();
+    // console.log("idEditar" + this.idEditar.id);
   },
   methods: {
+    async consultarRegistroEditar() {
+      try {
+        let consulta;
+        let consultaCiudadano;
+        this.modulo_id = this.idEditar.ciudadano_id;
+        this.ciudadano = this.idEditar.ciudadano_id;
+        this.ayuda = this.idEditar.lista_id;
+        this.cantidad = this.idEditar.cantidad_entregada;
+        this.fecha_entrega = this.idEditar.fecha_entrega;
+        let ciudadano = await this.$axios.get(`/api/ciudadanos/${this.idEditar.ciudadano_id}`);
+        consultaCiudadano = ciudadano.data.data[0];
+        this.fecha_expedicion = consultaCiudadano.fecha_expedicion;
+        this.nombre = consultaCiudadano.nombres + " " + consultaCiudadano.apellidos;
+        this.numeroDocumento = consultaCiudadano.numero_documento;
+        this.validarCargarAyuda = true;
+        this.consulta = true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async consultarListaAyudas() {
       let listas = {};
       let consulta;
@@ -177,9 +174,7 @@ export default {
         this.ConsultarDisponibles();
       }
     },
-    async GuardarDatos() {
-      this.validarCargarAyuda = false;
-      await this.ConsultarDisponibles();
+    async ActualizarDatos() {
       try {
         if (this.validarCargarAyuda) {
           if (this.fecha_entrega == "") {
@@ -191,7 +186,7 @@ export default {
             });
           } else {
             let res = await this.$axios
-              .post(`/api/ayudas`, {
+              .put(`/api/ayudas/${this.idEditar.id}`, {
                 lista_id: this.ayuda,
                 ciudadano_id: this.modulo_id,
                 cantidad_entregada: this.cantidad,

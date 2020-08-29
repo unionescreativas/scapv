@@ -20,6 +20,7 @@ class Ayuda extends Model {
 
     protected $dataTableColumns = [
         // 'lista_ayuda_id' => ['searchable' => true,'order_term' => 'orderable'],
+        'id' => ['searchable' => true, 'order_term' => 'orderable'],
         'cantidad_entregada' => ['searchable' => true, 'order_term' => 'orderable'],
         'fecha_entrega' => ['searchable' => true, 'order_term' => 'orderable'],
     ];

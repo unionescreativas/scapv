@@ -117,6 +117,15 @@
         <template slot="responsiveRight">
           <ul class="navbar-nav ml-auto navbar-list">
             <li class="nav-item">
+              <div class="iq-card shadow-none m-0">
+                <div class="iq-card-body p-0">
+                  <div class="p-3">
+                    <ModalCrear />
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
               <div class="iq-sub-dropdown">
                 <div class="iq-card shadow-none m-0">
                   <div class="iq-card-body p-0">
@@ -224,7 +233,7 @@
                   <div class="iq-card-body p-0">
                     <div class="bg-primary p-3">
                       <h5 class="mb-0 text-white line-height">
-                        Hello Nik jone
+                        Hello Nik jone s
                       </h5>
                       <span class="text-white font-size-12">{{ $t("nav.user.available") }}</span>
                     </div>
