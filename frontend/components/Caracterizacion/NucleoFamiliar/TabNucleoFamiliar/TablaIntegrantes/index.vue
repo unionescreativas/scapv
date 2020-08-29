@@ -147,7 +147,7 @@ export default {
             orderable: false,
             event: "click",
             handler: this.getRowData,
-            component: () => import("./BotonEditar.vue"),
+            component: () => import("./BtnEditarIntegrante.vue"),
           },
           { label: "PARENTESCO", name: "parentesco", orderable: true },
           { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },

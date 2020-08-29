@@ -93,6 +93,8 @@ export default {
       tipos_documentos: [],
       generos: [],
       estados_civiles: [],
+      departamentos: [],
+      ciudades_residencia: [],
       barrios: [],
       ciudades_origen: [],
       paises_origen: [],
