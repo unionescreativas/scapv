@@ -136,6 +136,7 @@ Route::put('ayudas/{id}/activar', 'AyudasController@activar')->name('ayudas.acti
 Route::put('ayudas/{id}/restore', 'AyudasController@restore')->name('ayudas.restore');
 Route::get('editarregistoayuda/{id}', 'AyudasController@editarRegistro')->name('ayudas.editarRegistro');
 Route::post('consultandounidades', 'AyudasController@consultandounidades')->name('ayudas.consultandounidades');
+Route::get('consultarayudasentregadas/{id}', 'AyudasController@consultarAyudasEntregadas')->name('ayudas.consultarayudasentregadas');
 Route::group(['middleware' => ['activity']], function () {
     Route::apiResources(
         [

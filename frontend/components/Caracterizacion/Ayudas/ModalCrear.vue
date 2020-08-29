@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button @click="showModal" variant="primary"> <i class="fas fa-plus-circle"></i> Cargar Ayuda</b-button>
+    <b-button @click="showModal" variant="primary">Cargar Ayuda</b-button>
     <b-modal
       ref="modalCrear"
       v-model="show"
@@ -199,21 +199,12 @@ export default {
               })
               .then(function (response) {
                 console.log(response);
-                if (response.data.data == "sin stock") {
-                  Swal.fire({
-                    html: `<h4>Sin Stock Disponible!</h4>`,
-                    icon: "warning",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                  });
-                } else {
-                  Swal.fire({
-                    html: `<h4>El registro ha sido Creado con éxito!</h4>`,
-                    icon: "success",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                  });
-                }
+                Swal.fire({
+                  html: `<h4>El registro ha sido Creado con éxito!</h4>`,
+                  icon: "success",
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                });
               })
               .catch(function (error) {
                 console.log(error);
@@ -222,7 +213,6 @@ export default {
             this.LimpiarDatos();
           }
         }
-        this.$emit("refrescar", true);
       } catch (error) {
         console.error(error);
       }

@@ -27,18 +27,34 @@ class CiudadanosController extends Controller {
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
-        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)->where('ciudadanos.estado', '1');
+        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue,
+            [
+                "ayudas",
+            ])->where('ciudadanos.estado', '1');
         $data = $variableConsulta->paginate($length);
         return new DataTableCollectionResource($data);
     }
 
-    public function show($id) {
-        $variableConsulta = $this->configModelo::where('id', $id)->where('ciudadanos.estado', '1')->get();
-        if ($variableConsulta->isEmpty()) {
+    public function show($id, Request $request) {
+        $sortBy = "id";
+        $orderBy = "asc";
+        $searchValue = $request->input('search');
+        $variableConsulta = $this->configModelo::eloquentQuery(
+            $sortBy,
+            $orderBy,
+            $searchValue,
+            [
+                "ayudas",
+            ]
+        )->where('ciudadanos.id', $id)->where('ciudadanos.estado', '1');
+        $length = 20;
+        if ($variableConsulta->first()) {
+            $data = $variableConsulta->paginate($length);
+            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$data} -> Metodo show");
+            return new DataTableCollectionResource($data);
+        } else {
             $variableConsulta = $this->configModelo::where('numero_documento', $id)->get();
             ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
-        } else {
-            ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro con id: {$id},  Valores consultados: {$variableConsulta} -> Metodo show");
         }
         if ($variableConsulta->isEmpty()) {
             return ['data' => 'no existe', 'status' => '201'];

@@ -55,7 +55,20 @@ class Ciudadano extends Model {
         'observaciones' => ['searchable' => true, 'order_term' => 'orderable'],
 
     ];
+    protected $dataTableRelationships = [
+        "hasMany" => [
+            "ayudas" => [
+                "model" => \Modules\Caracterizacion\Entities\Ayuda::class,
+                "foreign_key" => "ciudadano_id",
+                "columns" => [
+                    'ayudas.id' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'cantidad_entregada' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'fecha_entrega' => ['searchable' => true, 'order_term' => 'orderable'],
+                ],
+            ],
 
+        ],
+    ];
     public function transferencia() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
     }

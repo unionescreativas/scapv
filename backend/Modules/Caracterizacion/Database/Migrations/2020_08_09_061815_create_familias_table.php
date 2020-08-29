@@ -22,9 +22,9 @@ class CreateFamiliasTable extends Migration {
             $table->string('pep')->nullable();
             $table->string('nombres');
             $table->string('apellidos');
-            $table->date('fecha_expedicion');
+            $table->date('fecha_expedicion')->nullable();
             $table->date('fecha_vencimiento')->nullable();
-            $table->date('fecha_nacimiento');
+            $table->date('fecha_nacimiento')->nullable();
             $table->integer('edad')->nullable();
             $table->string('genero')->nullable();
             $table->string('estado_civil')->nullable();

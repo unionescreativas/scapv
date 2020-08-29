@@ -54,7 +54,18 @@ class AyudasController extends Controller {
         }
         return ['data' => $variableConsulta, 'status' => '201'];
     }
+    public function consultarAyudasEntregadas($id) {
+        $ayudasEntregadas = DB::table('ayudas')
+            ->where('ciudadano_id', $id)->sum('cantidad_entregada');
+        if (!is_null($ayudasEntregadas)) {
+            $cantidadEntregadasAnteriormente = (int) $ayudasEntregadas;
+            return ['data' => $ayudasEntregadas, 'status' => '203'];
+        } else {
+            return ['data' => $ayudasEntregadas, 'status' => '201'];
 
+        }
+
+    }
     public function show($id, Request $request) {
         $sortBy = "id";
         $orderBy = "asc";

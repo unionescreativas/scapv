@@ -5,6 +5,7 @@
         <iq-card>
           <template v-slot:headerTitle>
             <h4 class="card-title">Transferencias</h4>
+            <ModalCrearTransferencia @refrescar="refrescar" />
           </template>
           <template v-slot:headerAction>
             <a class="text-primary float-right" v-b-toggle.collapse-1 role="button">
@@ -12,7 +13,13 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table :classes="table.classes" :translate="table.translate" :columns="table.columns" :url="table.url">
+            <data-table
+              ref="transferencia"
+              :classes="table.classes"
+              :translate="table.translate"
+              :columns="table.columns"
+              :url="table.url"
+            >
               <div slot="filters" slot-scope="{ tableData }">
                 <div class="row justify-content-end mb-2">
                   <div class="col-md-3">
@@ -121,7 +128,7 @@
 import { vito } from "~/plugins/config/pluginInit";
 
 export default {
-  name: "ayudas",
+  name: "transferencias",
   layout: "LightLayout",
   data() {
     return {
@@ -152,9 +159,9 @@ export default {
     };
   },
   methods: {
-    displayRow(data) {
-      let ruta = `/perfil/${data.id}`;
-      this.$router.push(ruta);
+    refrescar(value) {
+      // this.$refs["modalEditar"].hide();
+      this.$refs.transferencia.getData();
     },
   },
   mounted() {
