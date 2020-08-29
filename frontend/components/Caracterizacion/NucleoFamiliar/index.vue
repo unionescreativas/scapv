@@ -33,7 +33,7 @@
               </tab-content>
 
               <tab-content title="Finalizar" icon="fa fa-check">
-                <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
+                <documentos :modulo="modulo" :moduloid="ciudadano.id"></documentos>
               </tab-content>
 
               <template slot="footer" slot-scope="props">
@@ -86,7 +86,6 @@ export default {
   components: { FormWizard, TabContent },
   data: () => ({
     modulo: "documentos",
-    modulo_id: "",
     form: {},
     formChanged: false,
     stepIndex: 0,

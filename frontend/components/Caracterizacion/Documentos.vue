@@ -105,9 +105,12 @@ export default {
     moduloid(value) {
       this.fileRecords = [];
       this.moduloid = value;
-      console.log(value);
+      console.log("modulo i" + value);
       this.getFileRecordsInitial();
     },
+  },
+  mounted() {
+    this.getFileRecordsInitial();
   },
   methods: {
     fileeditable() {
