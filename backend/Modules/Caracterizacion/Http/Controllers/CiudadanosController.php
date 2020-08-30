@@ -27,7 +27,7 @@ class CiudadanosController extends Controller {
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
-        $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue,
+        $variableConsulta = Ciudadano::eloquentQuery($sortBy, $orderBy, $searchValue,
             [
                 "ayudas",
             ])->where('ciudadanos.estado', '1');
