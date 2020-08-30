@@ -61,7 +61,7 @@ class Ciudadano extends Model {
                 "model" => \Modules\Caracterizacion\Entities\Ayuda::class,
                 "foreign_key" => "ciudadano_id",
                 "columns" => [
-                    'ayudas.id' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'id' => ['searchable' => true, 'order_term' => 'orderable'],
                     'cantidad_entregada' => ['searchable' => true, 'order_term' => 'orderable'],
                     'fecha_entrega' => ['searchable' => true, 'order_term' => 'orderable'],
                 ],
