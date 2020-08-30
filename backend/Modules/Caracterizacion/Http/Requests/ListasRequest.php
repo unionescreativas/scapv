@@ -4,19 +4,17 @@ namespace Modules\Caracterizacion\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ListasRequest extends FormRequest
-{
+class ListasRequest extends FormRequest {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             '*.nombre_lista' => 'required',
-            '*.codigo_campo' => 'required',
-            '*.valor_campo_1' => 'required'
+            '*.codigo_campo' => 'required|unique:listas',
+            '*.valor_campo_1' => 'required',
         ];
     }
 
@@ -25,8 +23,7 @@ class ListasRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 }

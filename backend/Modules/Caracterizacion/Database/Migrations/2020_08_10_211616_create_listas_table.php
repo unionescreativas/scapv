@@ -1,18 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateListasTable extends Migration
-{
+class CreateListasTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('listas', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
@@ -30,6 +28,7 @@ class CreateListasTable extends Migration
             $table->uuid('usuario_actualizacion')->nullable();
             $table->softDeletesTz();
             $table->timestamps();
+            $table->unique('codigo_campo');
         });
     }
 
@@ -38,8 +37,7 @@ class CreateListasTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('listas');
     }
 }
