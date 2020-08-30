@@ -39,7 +39,7 @@ class CreateFamiliasTable extends Migration {
             $table->string('actividad')->nullable();
             $table->string('ciudad_origen')->nullable();
             $table->string('pais_origen')->nullable();
-            $table->string('fecha_llegada')->nullable();
+            $table->date('fecha_llegada')->nullable();
             $table->string('intencion_ciudad')->nullable();
             $table->string('respuesta_intencion')->nullable();
             $table->string('discapacidad')->nullable();

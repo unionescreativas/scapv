@@ -2,46 +2,43 @@
 
 namespace Modules\Reportes\Http\Controllers;
 
-
-use Webpatser\Uuid\Uuid;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Reportes\Exports\AyudasExport;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\Reportes\Exports\FamiliasExport;
-use Modules\Reportes\Exports\CiudadanosExport;
-use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 use Modules\Reportes\Exports\AyudasPendientesExport;
+use Modules\Reportes\Exports\CiudadanosExport;
+use Modules\Reportes\Exports\FamiliasExport;
+use Modules\Reportes\Exports\NucleoExport;
+use Webpatser\Uuid\Uuid;
 
-class GenerarReportesController extends Controller
-{
+class GenerarReportesController extends Controller {
 
-    public function exportarCiudadanos()
-    {
+    public function exportarCiudadanos() {
         $nombre_archivo = (string) Uuid::generate(4);
         ActivityLogger::activity("Generando Reportes: Exportar Ciudadanos");
         return Excel::download(new CiudadanosExport, "ciudadanos-{$nombre_archivo}.xlsx");
     }
 
-    public function exportarFamilias()
-    {
+    public function exportarFamilias() {
         $nombre_archivo = (string) Uuid::generate(4);
         ActivityLogger::activity("Generando Reportes: Exportar Ciudadanos");
         return Excel::download(new FamiliasExport, "familias-{$nombre_archivo}.xlsx");
     }
-    public function exportarAyudas()
-    {
+    public function exportarAyudas() {
         $nombre_archivo = (string) Uuid::generate(4);
         ActivityLogger::activity("Generando Reportes: Exportar Ciudadanos");
         return Excel::download(new AyudasExport, "ayudas-{$nombre_archivo}.xlsx");
     }
 
-    public function exportarAyudasPendientes()
-    {
+    public function exportarAyudasPendientes() {
         $nombre_archivo = (string) Uuid::generate(4);
         ActivityLogger::activity("Generando Reportes: Exportar Ciudadanos");
         return Excel::download(new AyudasPendientesExport, "ayudaspendientes-{$nombre_archivo}.xlsx");
+    }
+    public function exportarNucleo() {
+        $nombre_archivo = (string) Uuid::generate(4);
+        ActivityLogger::activity("Generando Reportes: Exportar Ciudadanos");
+        return Excel::download(new NucleoExport, "nucleo-{$nombre_archivo}.xlsx");
     }
 }

@@ -194,9 +194,27 @@ export default {
     };
   },
   methods: {
+    consultarCiudadano(numero_documento) {
+      this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
+        if (Object.values(this.ciudadano).length) {
+          // SI EL CIUDADANO EXISTE, SE LIMPIA EL BUSCADOR Y SE REDIRECCIONA A SU PERFIL
+          this.limpiarBuscador();
+          this.$router.push("/perfil");
+        } else {
+          Swal.fire({
+            html: "<h5>Esta persona no se encuentra registrada</h5>",
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          });
+        }
+      });
+    },
     displayRow(data) {
-      let ruta = `/perfil/${data.id}`;
-      this.$router.push(ruta);
+      // console.log(data);
+      this.$store.dispatch("Familias/consultarCiudadano", data.numero_documento).then(() => {
+        this.$router.push("/perfil");
+      });
     },
   },
   mounted() {

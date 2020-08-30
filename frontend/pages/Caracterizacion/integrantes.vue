@@ -193,8 +193,9 @@ export default {
   },
   methods: {
     displayRow(data) {
-      let ruta = `/perfil/${data.id}`;
-      this.$router.push(ruta);
+      this.$store.dispatch("Familias/consultarCiudadano", data.numero_documento).then(() => {
+        this.$router.push("/perfil");
+      });
     },
   },
   mounted() {

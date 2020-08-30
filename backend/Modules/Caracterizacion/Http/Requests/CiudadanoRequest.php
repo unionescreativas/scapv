@@ -28,7 +28,7 @@ class CiudadanoRequest extends FormRequest {
             'barrio' => 'required',
             'comuna' => 'required',
             'direccion' => 'required',
-            'actividad' => 'required|string',
+            'actividad' => 'string|nullable',
             'ciudad_origen' => 'string|nullable',
             'pais_origen' => 'string|nullable',
             'fecha_llegada' => 'date|date_format:Y-m-d|nullable',
