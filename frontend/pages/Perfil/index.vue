@@ -396,7 +396,25 @@
           </tab-content-item>
         </tab-content>
       </b-col>
-      <familias />
+      <!-- <familias /> -->
+
+      <form-modal-integrante
+        :modalShow.sync="modalShow"
+        :options="options"
+        :ciudadano="ciudadanoPerfil"
+        :integrante="tableRowData"
+      />
+      <b-col sm="12">
+        <iq-card class="p-2">
+          <tabla-integrantes
+            ref="tablaIntegrantes"
+            :ciudadano="ciudadanoPerfil"
+            @getRowData="tableRowData = $event"
+            @modalShow="modalShow = $event"
+          />
+        </iq-card>
+      </b-col>
+
       <ayudas />
     </b-row>
   </b-container>
@@ -404,11 +422,25 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
+import { mapGetters } from "vuex";
 
 export default {
   layout: "LightLayout",
   name: "Perfil",
   data: () => ({
+    // ----------------Intregrantes>
+    modalShow: false,
+    tableRowData: {},
+    options: {
+      parentescos: [],
+      tipos_documentos: [],
+      generos: [],
+      estados_civiles: [],
+      respuestas: [],
+      niveles_escolares: [],
+      tipos_empleos: [],
+    },
+    // ----------------   --Intregrantes>
     // Modulo Documentos-------------------->
     modulo_id: "",
     modulo: "documentos",
@@ -462,6 +494,9 @@ export default {
     ],
   }),
   computed: {
+    ...mapGetters({
+      ciudadanoPerfil: "Familias/ciudadano",
+    }),
     ciudadano() {
       let ciudadano = this.$store.state.Familias.ciudadano;
       let ciudadanoDatos = {};
@@ -497,6 +532,11 @@ export default {
         this.currentMidx = idx;
       }
     },
+  },
+  created() {
+    Object.keys(this.options).forEach((option) => {
+      this.$axios.get(`/api/listas/${option}`).then((res) => (this.options[option] = res.data.data));
+    });
   },
 };
 </script>

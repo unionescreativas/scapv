@@ -5,7 +5,9 @@
         <iq-card>
           <template v-slot:headerTitle>
             <h4 class="card-title">Ayudas Entregadas</h4>
+            <ModalCrear />
           </template>
+
           <template v-slot:headerAction>
             <a class="text-primary float-right" v-b-toggle.collapse-1 role="button">
               <i class="ri-code-s-slash-line" />

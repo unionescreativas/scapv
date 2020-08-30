@@ -95,6 +95,7 @@ export default {
       estados_civiles: [],
       departamentos: [],
       ciudades_residencia: [],
+      intenciones_ciudad:[],
       barrios: [],
       ciudades_origen: [],
       paises_origen: [],

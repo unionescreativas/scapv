@@ -14,17 +14,18 @@
           <template v-slot:body>
             <b-row>
               <b-col lg="4">
-                <div class="card iq-mb-3 bg-primary text-white">
+                <div class="card iq-mb-3 text-white" style="background-color: var(--iq-primary);">
                   <!----><!---->
                   <div class="card-body">
                     <!----><!---->
-                    <h4 class="card-title text-white">Primary card title</h4>
+                    <h4 class="card-title text-white">Nucleo Familiar</h4>
                     <blockquote class="blockquote mb-0">
-                      <p class="font-size-14">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                      </p>
                       <footer class="blockquote-footer text-white font-size-12">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                        <p class="font-size-14">
+                          <a href="http://localhost:8000/api/reportes/nucleo/" class="btn btn-primary" target="_blank"
+                            ><i class="fas fa-cloud-download-alt"></i> Descargar</a
+                          >
+                        </p>
                       </footer>
                     </blockquote>
                   </div>
@@ -36,13 +37,14 @@
                   <!----><!---->
                   <div class="card-body">
                     <!----><!---->
-                    <h4 class="card-title text-white">Secondary card title</h4>
+                    <h4 class="card-title text-white">Cabezas de Familia</h4>
                     <blockquote class="blockquote mb-0">
-                      <p class="font-size-14">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                      </p>
                       <footer class="blockquote-footer text-white font-size-12">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                        <p class="font-size-14">
+                          <a href="http://localhost:8000/api/reportes/ciudadanos/" class="btn btn-primary" target="_blank"
+                            ><i class="fas fa-cloud-download-alt"></i> Descargar</a
+                          >
+                        </p>
                       </footer>
                     </blockquote>
                   </div>
@@ -54,13 +56,14 @@
                   <!----><!---->
                   <div class="card-body">
                     <!----><!---->
-                    <h4 class="card-title text-white">Success card title</h4>
+                    <h4 class="card-title text-white">Integrantes de Familia</h4>
                     <blockquote class="blockquote mb-0">
-                      <p class="font-size-14">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                      </p>
                       <footer class="blockquote-footer text-white font-size-12">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                        <p class="font-size-14">
+                          <a href="http://localhost:8000/api/reportes/familias/" class="btn btn-primary" target="_blank"
+                            ><i class="fas fa-cloud-download-alt"></i> Descargar</a
+                          >
+                        </p>
                       </footer>
                     </blockquote>
                   </div>
@@ -75,13 +78,17 @@
                   <!----><!---->
                   <div class="card-body">
                     <!----><!---->
-                    <h4 class="card-title text-white">Danger card title</h4>
+                    <h4 class="card-title text-white">Ayudas Entregadas</h4>
                     <blockquote class="blockquote mb-0">
-                      <p class="font-size-14">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                      </p>
                       <footer class="blockquote-footer text-white font-size-12">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                        <p class="font-size-14">
+                          <a
+                            href="http://localhost:8000/api/reportes/ayudasentregadas/"
+                            class="btn btn-primary"
+                            target="_blank"
+                            ><i class="fas fa-cloud-download-alt"></i> Descargar</a
+                          >
+                        </p>
                       </footer>
                     </blockquote>
                   </div>
@@ -93,37 +100,40 @@
                   <!----><!---->
                   <div class="card-body">
                     <!----><!---->
-                    <h4 class="card-title text-white">Warning card title</h4>
+                    <h4 class="card-title text-white">Pendientes por Ayuda</h4>
                     <blockquote class="blockquote mb-0">
-                      <p class="font-size-14">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                      </p>
                       <footer class="blockquote-footer text-white font-size-12">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                        <p class="font-size-14">
+                          <a
+                            href="http://localhost:8000/api/reportes/ayudaspendientes/"
+                            class="btn btn-primary"
+                            target="_blank"
+                            ><i class="fas fa-cloud-download-alt"></i> Descargar</a
+                          >
+                        </p>
                       </footer>
                     </blockquote>
                   </div>
                   <!----><!---->
                 </div>
               </b-col>
-              <b-col lg="4">
+              <!-- <b-col lg="4">
                 <div class="card iq-mb-3 bg-info text-white">
-                  <!----><!---->
                   <div class="card-body">
-                    <!----><!---->
+
                     <h4 class="card-title text-white">Info card title</h4>
                     <blockquote class="blockquote mb-0">
-                      <p class="font-size-14">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                      </p>
                       <footer class="blockquote-footer text-white font-size-12">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                        <p class="font-size-14">
+                          <a href="http://localhost:8000/api/reportes/nucleo/" class="btn btn-primary" target="_blank"
+                            ><i class="fas fa-cloud-download-alt"></i> Descargar</a
+                          >
+                        </p>
                       </footer>
                     </blockquote>
                   </div>
-                  <!----><!---->
                 </div>
-              </b-col>
+              </b-col> -->
             </b-row>
           </template>
         </iq-card>
