@@ -46,51 +46,24 @@ export default {
         mensajeGuardar = "El registro se ha actualizado con éxito!";
       }
 
-      if (!payload.$refs.formWizard.isLastStep) {
-        Swal.fire({
-          html: "<h4>Desea guardar los cambios hasta aquí?</h4>",
-          icon: "info",
-          confirmButtonColor: "#3085d6",
-          confirmButtonText: "Si",
-          cancelButtonColor: "#d33",
-          cancelButtonText: "No",
-          showCancelButton: true,
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-        }).then(async (result) => {
-          if (result.value) {
-            let res = await this.$axios({ method, url, data });
-            commit("GUARDAR_CIUDADANO", [res.data.data]);
+      let res = await this.$axios({ method, url, data });
 
-            Swal.fire({
-              html: `<h4>${mensajeGuardar}</h4>`,
-              icon: "success",
-              allowOutsideClick: false,
-              allowEscapeKey: false,
-            });
-          } else {
-            payload.$refs.formWizard.nextTab();
+      Swal.fire({
+        html: `<h4>${mensajeGuardar}</h4>`,
+        icon: "success",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.value) {
+          commit("GUARDAR_CIUDADANO", [res.data.data]);
+          // SI LA ACCIÓN ES REGISTRAR Y SI ES EL ÚLTIMO PASO
+          if (method == "post" && payload.$refs.formWizard.isLastStep) {
+            // SE REINICIA EL FORMULARIO Y SE DEVUELVE A LA PRIMER PESTAÑA
+            payload.resetFormVeeValidate(payload);
+            payload.$refs.formWizard.reset();
           }
-        });
-      } else {
-        let res = await this.$axios({ method, url, data });
-        commit("GUARDAR_CIUDADANO", [res.data.data]);
-
-        Swal.fire({
-          html: `<h4>${mensajeGuardar}</h4>`,
-          icon: "success",
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-        }).then((result) => {
-          if (result.value) {
-            // SI LA ACCIÓN ES REGISTRAR SE REINICIA EL FORMULARIO
-            if (method == "post") {
-              payload.$refs.formWizard.reset();
-              payload.resetFormVeeValidate(payload);
-            }
-          }
-        });
-      }
+        }
+      });
     } catch (err) {
       Swal.fire({
         html: "<h4>No se pudieron guardar los datos, consulte con el administrador!</h4>",

@@ -181,7 +181,7 @@
     </ValidationProvider>
 
     <ValidationProvider name="ciudad" v-slot="{ errors }">
-      <b-form-group label="CIUDAD DE RESIDENCIA:">
+      <b-form-group label="CIUDAD DE RESIDENCIA: *">
         <v-select
           placeholder="Seleccione ..."
           :options="options.ciudades_residencia"

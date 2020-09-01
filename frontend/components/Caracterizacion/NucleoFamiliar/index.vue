@@ -95,7 +95,7 @@ export default {
       estados_civiles: [],
       departamentos: [],
       ciudades_residencia: [],
-      intenciones_ciudad:[],
+      intenciones_ciudad: [],
       barrios: [],
       ciudades_origen: [],
       paises_origen: [],
@@ -110,13 +110,11 @@ export default {
     ...mapGetters("Familias", ["ciudadano"]),
   },
   watch: {
-    form: {
-      handler(val, oldVal) {
-        if (Object.values(oldVal).length) {
-          this.formChanged = true;
-        }
-      },
-      deep: true,
+    ciudadano(value) {
+      this.form = { ...value };
+      this.$nextTick(() => {
+        this.formChanged = false;
+      });
     },
   },
   methods: {
@@ -126,7 +124,34 @@ export default {
         let res = await this.$axios.post("/api/ciudadanosvalidar", this.form);
         let errors = _.pick(res.data.data.errors, _.keys(this.$refs.observer.fields));
 
-        if (Object.keys(errors).length) {
+        if (!Object.keys(errors).length) {
+          if (!this.$refs.formWizard.isLastStep) {
+            if (this.formChanged) {
+              this.formChanged = false;
+              Swal.fire({
+                html: "<h4>Desea guardar los cambios hasta aquí?</h4>",
+                icon: "info",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Si",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "No",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+              }).then((result) => {
+                if (result.value) {
+                  return cb();
+                } else {
+                  this.$refs.formWizard.nextTab();
+                }
+              });
+            } else {
+              this.$refs.formWizard.nextTab();
+            }
+          } else {
+            return cb();
+          }
+        } else {
           this.$refs.observer.setErrors(errors);
           Swal.fire({
             html: "<h4>Por favor revise los campos en rojo!</h4>",
@@ -134,17 +159,6 @@ export default {
             allowOutsideClick: false,
             allowEscapeKey: false,
           });
-        } else {
-          if (this.formChanged) {
-            this.formChanged = false;
-            return cb();
-          } else {
-            if (!this.$refs.formWizard.isLastStep) {
-              this.$refs.formWizard.nextTab();
-            } else {
-              return cb();
-            }
-          }
         }
       } catch (err) {
         console.error(err);
@@ -156,10 +170,8 @@ export default {
     },
   },
   created() {
-    this.form = {
-      numero_documento: this.numero_documento,
-      ...this.ciudadano,
-    };
+    this.form = { numero_documento: this.numero_documento, ...this.ciudadano };
+    this.$watch("form", (value) => this.formChanged = true, { deep: true });
 
     Object.keys(this.options).forEach((option) => {
       this.$axios.get(`/api/listas/${option}`).then((res) => (this.options[option] = res.data.data));

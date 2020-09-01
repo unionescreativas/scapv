@@ -130,7 +130,6 @@ export default {
         this.consultaListas.push(listas);
         // formData.append("file[" + index + "]", item.file);
       });
-      console.log(res);
     },
     async consultarCiudadano() {
       try {

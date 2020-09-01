@@ -105,7 +105,6 @@ export default {
     moduloid(value) {
       this.fileRecords = [];
       this.moduloid = value;
-      console.log("modulo i" + value);
       this.getFileRecordsInitial();
     },
   },

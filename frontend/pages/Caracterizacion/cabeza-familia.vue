@@ -119,6 +119,7 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
+import { mapActions } from "vuex";
 
 export default {
   layout: "LightLayout",
@@ -194,28 +195,10 @@ export default {
     };
   },
   methods: {
-    consultarCiudadano(numero_documento) {
-      this.$store.dispatch("Familias/consultarCiudadano", numero_documento).then(() => {
-        if (Object.values(this.ciudadano).length) {
-          // SI EL CIUDADANO EXISTE, SE LIMPIA EL BUSCADOR Y SE REDIRECCIONA A SU PERFIL
-          this.limpiarBuscador();
-          this.$router.push("/perfil");
-        } else {
-          Swal.fire({
-            html: "<h5>Esta persona no se encuentra registrada</h5>",
-            icon: "warning",
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-          });
-        }
-      });
-    },
     displayRow(data) {
-      // console.log(data);
-      this.$store.dispatch("Familias/consultarCiudadano", data.numero_documento).then(() => {
-        this.$router.push("/perfil");
-      });
+      this.consultarCiudadano(data.numero_documento).then(() => this.$router.push("/perfil"));
     },
+    ...mapActions("Familias", ["consultarCiudadano"]),
   },
   mounted() {
     vito.index();

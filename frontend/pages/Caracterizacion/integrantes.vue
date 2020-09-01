@@ -119,6 +119,7 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
+import { mapActions } from "vuex";
 
 export default {
   layout: "LightLayout",
@@ -193,10 +194,9 @@ export default {
   },
   methods: {
     displayRow(data) {
-      this.$store.dispatch("Familias/consultarCiudadano", data.numero_documento).then(() => {
-        this.$router.push("/perfil");
-      });
+      this.consultarCiudadano(data.numero_documento).then(() => this.$router.push("/perfil"));
     },
+    ...mapActions("Familias", ["consultarCiudadano"]),
   },
   mounted() {
     vito.index();
