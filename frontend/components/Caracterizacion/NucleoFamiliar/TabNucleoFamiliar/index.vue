@@ -17,7 +17,19 @@
 
 <script>
 export default {
-  props: ["forms", "options", "ciudadano"],
+  props: {
+    form: {
+      required: true,
+      type: Object,
+    },
+    options: {
+      required: true,
+    },
+    ciudadano: {
+      required: true,
+      type: Object,
+    },
+  },
   data: () => ({
     modalShow: false,
     tableRowData: {},

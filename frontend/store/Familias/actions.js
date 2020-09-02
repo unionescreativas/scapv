@@ -47,6 +47,7 @@ export default {
       }
 
       let res = await this.$axios({ method, url, data });
+      commit("GUARDAR_CIUDADANO", [res.data.data]);
 
       Swal.fire({
         html: `<h4>${mensajeGuardar}</h4>`,
@@ -55,12 +56,21 @@ export default {
         allowEscapeKey: false,
       }).then((result) => {
         if (result.value) {
-          commit("GUARDAR_CIUDADANO", [res.data.data]);
-          // SI LA ACCIÓN ES REGISTRAR Y SI ES EL ÚLTIMO PASO
-          if (method == "post" && payload.$refs.formWizard.isLastStep) {
-            // SE REINICIA EL FORMULARIO Y SE DEVUELVE A LA PRIMER PESTAÑA
-            payload.resetFormVeeValidate(payload);
-            payload.$refs.formWizard.reset();
+          // SI LA ACCIÓN ES REGISTRAR
+          if (method == "post") {
+            // SI ES EL ÚLTIMO PASO (PESTAÑA)
+            if (payload.$refs.formWizard.isLastStep) {
+              // SE REINICIA EL FORMULARIO Y SE DEVUELVE A LA PRIMER PESTAÑA
+              payload.resetFormVeeValidate(payload);
+              payload.$refs.formWizard.reset();
+            } else {
+              // SI NO ES EL ÚLTIMO PASO (PESTAÑA), SE CARGA EL CIUDADANO AL FORMULARIO
+              payload.form = { ...res.data.data };
+              // SE REINICIAN LOS CAMBIOS DEL FORMULARIO
+              payload.$nextTick(() => {
+                payload.formChanged = false;
+              });
+            }
           }
         }
       });

@@ -122,7 +122,12 @@
 import { vito } from "~/plugins/config/pluginInit";
 
 export default {
-  props: ["ciudadano"],
+  props: {
+    ciudadano: {
+      required: true,
+      type: Object,
+    },
+  },
   data() {
     return {
       modalShow: false,

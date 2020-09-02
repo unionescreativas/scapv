@@ -47,7 +47,7 @@
                     <b-col sm="4" lg="4">
                       <ValidationProvider :name="`${index}.nombre_lista`" v-slot="{ errors }">
                         <b-form-group>
-                          <b-form-input placeholder="INGRESE NOMBRE LISTA" v-model="form.nombre_lista" />
+                          <input type="text" class="form-control" placeholder="INGRESE NOMBRE LISTA" v-model="form.nombre_lista" />
                           <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                             {{ errors[0].replace(`${index}.nombre_lista`, "") }}
                           </div>
@@ -58,7 +58,7 @@
                     <b-col sm="4" lg="4">
                       <ValidationProvider :name="`${index}.codigo_campo`" v-slot="{ errors }">
                         <b-form-group>
-                          <b-form-input placeholder="INGRESE CÓDIGO CAMPO" v-model="form.codigo_campo" />
+                          <input type="text" class="form-control" placeholder="INGRESE CÓDIGO CAMPO" v-model="form.codigo_campo" />
                           <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                             {{ errors[0].replace(`${index}.codigo_campo`, "") }}
                           </div>
@@ -69,7 +69,7 @@
                     <b-col sm="4" lg="4">
                       <ValidationProvider :name="`${index}.valor_campo_1`" v-slot="{ errors }">
                         <b-form-group>
-                          <b-form-input placeholder="INGRESE VALOR CAMPO 1" v-model="form.valor_campo_1" />
+                          <input type="text" class="form-control" placeholder="INGRESE VALOR CAMPO 1" v-model="form.valor_campo_1" />
                           <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                             {{ errors[0].replace(`${index}.valor_campo_1`, "") }}
                           </div>
@@ -95,19 +95,19 @@
                   <b-row class="mt-3">
                     <b-col sm="4" lg="4">
                       <b-form-group>
-                        <b-form-input placeholder="INGRESE VALOR CAMPO 2" v-model="form.valor_campo_2" />
+                        <input type="text" class="form-control" placeholder="INGRESE VALOR CAMPO 2" v-model="form.valor_campo_2" />
                       </b-form-group>
                     </b-col>
 
                     <b-col sm="4" lg="4">
                       <b-form-group>
-                        <b-form-input placeholder="INGRESE VALOR CAMPO 3" v-model="form.valor_campo_3" />
+                        <input type="text" class="form-control" placeholder="INGRESE VALOR CAMPO 3" v-model="form.valor_campo_3" />
                       </b-form-group>
                     </b-col>
 
                     <b-col sm="4" lg="4">
                       <b-form-group>
-                        <b-form-input placeholder="INGRESE VALOR CAMPO 4" v-model="form.valor_campo_4" />
+                        <input type="text" class="form-control" placeholder="INGRESE VALOR CAMPO 4" v-model="form.valor_campo_4" />
                       </b-form-group>
                     </b-col>
                   </b-row>
@@ -165,18 +165,15 @@ export default {
       this.form[0] = {
         ...this.lista,
       };
-      if (!value) {
-        this.form = [{}];
-      }
     },
   },
   computed: {
     toggleModal: {
-      set(value) {
-        this.$emit("update:modalShow", value);
-      },
       get() {
         return this.modalShow;
+      },
+      set(value) {
+        this.$emit("update:modalShow", value);
       },
     },
   },

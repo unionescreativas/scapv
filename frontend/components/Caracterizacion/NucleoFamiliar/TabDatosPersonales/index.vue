@@ -21,7 +21,13 @@
 
     <ValidationProvider name="numero_documento" v-slot="{ errors }">
       <b-form-group label="NUMERO DE DOCUMENTO: *">
-        <b-form-input type="text" placeholder="INGRESE NUMERO DE DOCUMENTO" v-model="form.numero_documento" :readonly="!!form.id" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="INGRESE NUMERO DE DOCUMENTO"
+          v-model="form.numero_documento"
+          :readonly="!!form.id"
+        />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("numero_documento", "") }}
         </div>
@@ -30,14 +36,14 @@
 
     <ValidationProvider name="pep" v-slot="{ errors }">
       <b-form-group label="# PERMISO ESPECIAL DE PERMANENCIA:">
-        <b-form-input type="text" placeholder="INGRESE # PERMISO ESPECIAL DE PERMANENCIA" v-model="form.pep" />
+        <input type="text" class="form-control" placeholder="INGRESE # PERMISO ESPECIAL DE PERMANENCIA" v-model="form.pep" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">{{ errors[0].replace("pep", "") }}</div>
       </b-form-group>
     </ValidationProvider>
 
     <ValidationProvider name="nombres" v-slot="{ errors }">
       <b-form-group label="NOMBRES: *">
-        <b-form-input type="text" placeholder="INGRESE NOMBRES" v-model="form.nombres" />
+        <input type="text" class="form-control" placeholder="INGRESE NOMBRES" v-model="form.nombres" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("nombres", "") }}
         </div>
@@ -46,7 +52,7 @@
 
     <ValidationProvider name="apellidos" v-slot="{ errors }">
       <b-form-group label="APELLIDOS: *">
-        <b-form-input type="text" placeholder="INGRESE APELLIDOS" v-model="form.apellidos" />
+        <input type="text" class="form-control" placeholder="INGRESE APELLIDOS" v-model="form.apellidos" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("apellidos", "") }}
         </div>
@@ -55,7 +61,12 @@
 
     <ValidationProvider name="fecha_expedicion" v-slot="{ errors }">
       <b-form-group label="FECHA DE EXPEDICION DEL DOCUMENTO: *">
-        <b-form-input type="date" placeholder="INGRESE FECHA DE EXPEDICION DEL DOCUMENTO" v-model="form.fecha_expedicion" />
+        <input
+          type="date"
+          class="form-control"
+          placeholder="INGRESE FECHA DE EXPEDICION DEL DOCUMENTO"
+          v-model="form.fecha_expedicion"
+        />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("fecha expedicion", "") }}
         </div>
@@ -64,8 +75,9 @@
 
     <ValidationProvider name="fecha_vencimiento" v-slot="{ errors }">
       <b-form-group label="FECHA DE VENCIMIENTO DEL DOCUMENTO: *">
-        <b-form-input
+        <input
           type="date"
+          class="form-control"
           placeholder="INGRESE FECHA DE VENCIMIENTO DEL DOCUMENTO"
           v-model="form.fecha_vencimiento"
         />
@@ -77,11 +89,12 @@
 
     <ValidationProvider name="fecha_nacimiento" v-slot="{ errors }">
       <b-form-group label="FECHA DE NACIMIENTO: *">
-        <b-form-input
+        <input
           type="date"
+          class="form-control"
           placeholder="INGRESE FECHA DE NACIMIENTO"
           v-model="form.fecha_nacimiento"
-          @change="calcularEdad"
+          @change="calcularEdad($event.target.value)"
         />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("fecha nacimiento", "") }}
@@ -91,7 +104,7 @@
 
     <ValidationProvider name="edad" v-slot="{ errors }">
       <b-form-group label="EDAD: *">
-        <b-form-input type="text" ref="inputEdad" v-model="form.edad" readonly />
+        <input type="text" class="form-control" ref="inputEdad" v-model="form.edad" readonly />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">{{ errors[0].replace("edad", "") }}</div>
       </b-form-group>
     </ValidationProvider>
@@ -136,7 +149,7 @@
 
     <ValidationProvider name="telefono" v-slot="{ errors }">
       <b-form-group label="TELÉFONO:">
-        <b-form-input type="text" placeholder="INGRESE TELÉFONO" v-model="form.telefono" />
+        <input type="text" class="form-control" placeholder="INGRESE TELÉFONO" v-model="form.telefono" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("telefono", "") }}
         </div>
@@ -145,7 +158,7 @@
 
     <ValidationProvider name="celular" v-slot="{ errors }">
       <b-form-group label="CELULAR:">
-        <b-form-input type="text" placeholder="INGRESE CELULAR" v-model="form.celular" />
+        <input type="text" class="form-control" placeholder="INGRESE CELULAR" v-model="form.celular" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("celular", "") }}
         </div>
@@ -154,7 +167,7 @@
 
     <ValidationProvider name="correo_electronico" v-slot="{ errors }">
       <b-form-group label="CORREO ELECTRÓNICO:">
-        <b-form-input type="text" placeholder="INGRESE CORREO ELECTRÓNICO" v-model="form.correo_electronico" />
+        <input type="text" class="form-control" placeholder="INGRESE CORREO ELECTRÓNICO" v-model="form.correo_electronico" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("correo_electronico", "") }}
         </div>
@@ -222,9 +235,10 @@
 
     <ValidationProvider name="comuna" v-slot="{ errors }">
       <b-form-group label="COMUNA DE RESIDENCIA: *">
-        <b-form-input
+        <input
           ref="inputComuna"
           type="text"
+          class="form-control"
           id="comuna"
           placeholder="INGRESE COMUNA DE RESIDENCIA"
           v-model="form.comuna"
@@ -238,7 +252,7 @@
 
     <ValidationProvider name="direccion" v-slot="{ errors }">
       <b-form-group label="DIRECCIÓN DE RESIDENCIA: *">
-        <b-form-input type="text" placeholder="INGRESE DIRECCIÓN DE RESIDENCIA" v-model="form.direccion" />
+        <input type="text" class="form-control" placeholder="INGRESE DIRECCIÓN DE RESIDENCIA" v-model="form.direccion" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("direccion", "") }}
         </div>
@@ -251,17 +265,25 @@
 import { calcularEdad } from "~/plugins/general/scripts";
 
 export default {
-  props: ["form", "options"],
+  props: {
+    form: {
+      required: true,
+      type: Object,
+    },
+    options: {
+      required: true,
+    },
+  },
   methods: {
     autocompletarComuna(value) {
       let barrio = this.options.barrios.find((option) => option.codigo_campo == value);
       let comuna = barrio.valor_campo_2;
-      this.$refs.inputComuna._data.localValue = comuna;
+      this.$refs.inputComuna.value = comuna;
       this.form.comuna = comuna;
     },
     calcularEdad(fecha) {
       let edad = calcularEdad(fecha);
-      this.$refs.inputEdad._data.localValue = edad;
+      this.$refs.inputEdad.value = edad;
       this.form.edad = edad;
     },
   },

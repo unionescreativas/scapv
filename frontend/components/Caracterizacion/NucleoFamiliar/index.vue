@@ -26,14 +26,14 @@
                 </template>
               </tab-content>
 
-              <tab-content title="Núcleo Familiar" icon="fas fa-user-friends">
+              <tab-content title="Núcleo Familiar" icon="fas fa-user-friends" v-if="Object.values(ciudadano).length">
                 <template v-if="stepIndex == 2">
                   <tab-nucleo-familiar :form="form" :options="options" :ciudadano="ciudadano" />
                 </template>
               </tab-content>
 
-              <tab-content title="Finalizar" icon="fa fa-check">
-                <documentos :modulo="modulo" :moduloid="ciudadano.id"></documentos>
+              <tab-content title="Finalizar" icon="fa fa-check" v-if="Object.values(ciudadano).length">
+                <documentos :modulo="modulo" :moduloid="ciudadano.id" />
               </tab-content>
 
               <template slot="footer" slot-scope="props">
@@ -108,14 +108,6 @@ export default {
   }),
   computed: {
     ...mapGetters("Familias", ["ciudadano"]),
-  },
-  watch: {
-    ciudadano(value) {
-      this.form = { ...value };
-      this.$nextTick(() => {
-        this.formChanged = false;
-      });
-    },
   },
   methods: {
     ...mapActions("Familias", ["guardarCiudadano"]),

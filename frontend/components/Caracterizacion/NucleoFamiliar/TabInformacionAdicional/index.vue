@@ -2,7 +2,7 @@
   <div>
     <ValidationProvider name="actividad" v-slot="{ errors }">
       <b-form-group label="ACTIVIDAD QUE REALIZA ACTUALMENTE:">
-        <b-form-input type="text" placeholder="INGRESE ACTIVIDAD" v-model="form.actividad" />
+        <input type="text" class="form-control" placeholder="INGRESE ACTIVIDAD" v-model="form.actividad" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("actividad", "") }}
         </div>
@@ -49,7 +49,7 @@
 
     <ValidationProvider name="fecha_llegada" v-slot="{ errors }">
       <b-form-group label="FECHA DE LLEGADA AL PAIS:">
-        <b-form-input type="date" placeholder="INGRESE FECHA DE LLEGADA AL PAIS" v-model="form.fecha_llegada" />
+        <input type="date" class="form-control" placeholder="INGRESE FECHA DE LLEGADA AL PAIS" v-model="form.fecha_llegada" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("fecha_llegada", "") }}
         </div>
@@ -77,7 +77,12 @@
 
     <ValidationProvider name="respuesta_intencion" v-slot="{ errors }">
       <b-form-group label="RESPUESTA INTENCIÓN:">
-        <b-form-input type="text" placeholder="INGRESE RESPUESTA INTENCIÓN" v-model="form.respuesta_intencion" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="INGRESE RESPUESTA INTENCIÓN"
+          v-model="form.respuesta_intencion"
+        />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("respuesta_intencion", "") }}
         </div>
@@ -160,7 +165,7 @@
 
     <ValidationProvider name="tipo_profesion" v-slot="{ errors }">
       <b-form-group label="PROFESIONAL EN ?:">
-        <b-form-input type="text" placeholder="INGRESE PROFESIONAL EN ?" v-model="form.tipo_profesion" />
+        <input type="text" class="form-control" placeholder="INGRESE PROFESIONAL EN ?" v-model="form.tipo_profesion" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("tipo_profesion", "") }}
         </div>
@@ -256,6 +261,14 @@
 
 <script>
 export default {
-  props: ["form", "options"],
+  props: {
+    form: {
+      required: true,
+      type: Object,
+    },
+    options: {
+      required: true
+    },
+  },
 };
 </script>

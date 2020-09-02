@@ -58,7 +58,12 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="numero_documento" v-slot="{ errors }">
               <b-form-group label="NUMERO DE DOCUMENTO: *">
-                <b-form-input type="text" placeholder="INGRESE NUMERO DE DOCUMENTO" v-model="form.numero_documento" />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="INGRESE NUMERO DE DOCUMENTO"
+                  v-model="form.numero_documento"
+                />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("numero documento", "") }}
                 </div>
@@ -69,7 +74,12 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="pep" v-slot="{ errors }">
               <b-form-group label="# PERMISO ESPECIAL DE PERMANENCIA:">
-                <b-form-input type="text" placeholder="INGRESE # PERMISO ESPECIAL DE PERMANENCIA" v-model="form.pep" />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="INGRESE # PERMISO ESPECIAL DE PERMANENCIA"
+                  v-model="form.pep"
+                />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">{{ errors[0].replace("pep", "") }}</div>
               </b-form-group>
             </ValidationProvider>
@@ -80,7 +90,7 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="nombres" v-slot="{ errors }">
               <b-form-group label="NOMBRES: *">
-                <b-form-input type="text" placeholder="INGRESE NOMBRES" v-model="form.nombres" />
+                <input type="text" class="form-control" placeholder="INGRESE NOMBRES" v-model="form.nombres" />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("nombres", "") }}
                 </div>
@@ -91,7 +101,7 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="apellidos" v-slot="{ errors }">
               <b-form-group label="APELLIDOS: *">
-                <b-form-input type="text" placeholder="INGRESE APELLIDOS" v-model="form.apellidos" />
+                <input type="text" class="form-control" placeholder="INGRESE APELLIDOS" v-model="form.apellidos" />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("apellidos", "") }}
                 </div>
@@ -104,8 +114,9 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="fecha_expedicion" v-slot="{ errors }">
               <b-form-group label="FECHA DE EXPEDICION DEL DOCUMENTO: *">
-                <b-form-input
+                <input
                   type="date"
+                  class="form-control"
                   placeholder="INGRESE FECHA DE EXPEDICION DEL DOCUMENTO"
                   v-model="form.fecha_expedicion"
                 />
@@ -119,8 +130,9 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="fecha_vencimiento" v-slot="{ errors }">
               <b-form-group label="FECHA DE VENCIMIENTO DEL DOCUMENTO: *">
-                <b-form-input
+                <input
                   type="date"
+                  class="form-control"
                   placeholder="INGRESE FECHA DE VENCIMIENTO DEL DOCUMENTO"
                   v-model="form.fecha_vencimiento"
                 />
@@ -136,11 +148,12 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="fecha_nacimiento" v-slot="{ errors }">
               <b-form-group label="FECHA DE NACIMIENTO: *">
-                <b-form-input
+                <input
                   type="date"
+                  class="form-control"
                   placeholder="INGRESE FECHA DE NACIMIENTO"
                   v-model="form.fecha_nacimiento"
-                  @change="calcularEdad"
+                  @change="calcularEdad($event.target.value)"
                 />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("fecha nacimiento", "") }}
@@ -152,7 +165,7 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="edad" v-slot="{ errors }">
               <b-form-group label="EDAD: *">
-                <b-form-input type="text" ref="inputEdad" v-model="form.edad" readonly />
+                <input type="text" class="form-control" ref="inputEdad" v-model="form.edad" readonly />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">{{ errors[0].replace("edad", "") }}</div>
               </b-form-group>
             </ValidationProvider>
@@ -207,7 +220,7 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="telefono" v-slot="{ errors }">
               <b-form-group label="TELÉFONO:">
-                <b-form-input type="text" placeholder="INGRESE TELÉFONO" v-model="form.telefono" />
+                <input type="text" class="form-control" placeholder="INGRESE TELÉFONO" v-model="form.telefono" />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("telefono", "") }}
                 </div>
@@ -218,7 +231,7 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="celular" v-slot="{ errors }">
               <b-form-group label="CELULAR:">
-                <b-form-input type="text" placeholder="INGRESE CELULAR" v-model="form.celular" />
+                <input type="text" class="form-control" placeholder="INGRESE CELULAR" v-model="form.celular" />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("celular", "") }}
                 </div>
@@ -231,7 +244,12 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="correo_electronico" v-slot="{ errors }">
               <b-form-group label="CORREO ELECTRÓNICO:">
-                <b-form-input type="text" placeholder="INGRESE CORREO ELECTRÓNICO" v-model="form.correo_electronico" />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="INGRESE CORREO ELECTRÓNICO"
+                  v-model="form.correo_electronico"
+                />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("correo electronico", "") }}
                 </div>
@@ -242,7 +260,7 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="actividad" v-slot="{ errors }">
               <b-form-group label="ACTIVIDAD QUE REALIZA ACTUALMENTE:">
-                <b-form-input type="text" placeholder="INGRESE ACTIVIDAD" v-model="form.actividad" />
+                <input type="text" class="form-control" placeholder="INGRESE ACTIVIDAD" v-model="form.actividad" />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("actividad", "") }}
                 </div>
@@ -341,7 +359,12 @@
           <b-col sm="6" lg="6">
             <ValidationProvider name="tipo_profesion" v-slot="{ errors }">
               <b-form-group label="PROFESIONAL EN ?:">
-                <b-form-input type="text" placeholder="INGRESE PROFESIONAL EN ?" v-model="form.tipo_profesion" />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="INGRESE PROFESIONAL EN ?"
+                  v-model="form.tipo_profesion"
+                />
                 <div style="color: var(--iq-danger-light);" v-if="errors[0]">
                   {{ errors[0].replace("tipo_profesion", "") }}
                 </div>
@@ -493,11 +516,11 @@ export default {
   },
   computed: {
     toggleModal: {
-      set(value) {
-        this.$emit("update:modalShow", value);
-      },
       get() {
         return this.modalShow;
+      },
+      set(value) {
+        this.$emit("update:modalShow", value);
       },
     },
   },
@@ -505,7 +528,7 @@ export default {
     ...mapActions("Familias", ["guardarIntegranteFamilia"]),
     calcularEdad(fecha) {
       let edad = calcularEdad(fecha);
-      this.$refs.inputEdad._data.localValue = edad;
+      this.$refs.inputEdad.value = edad;
       this.form.edad = edad;
     },
   },
