@@ -33,12 +33,59 @@ export default {
     }
   },
 
-  async guardarCiudadano({ commit, dispatch }, payload) {
+  async validarPestana({ dispatch }, payload) {
+    try {
+      let res = await this.$axios.post("/api/ciudadanosvalidar", payload.form);
+      let errors = _.pick(res.data.data.errors, _.keys(payload.$refs.observer.fields));
+
+      if (!Object.keys(errors).length) {
+        if (!payload.$refs.formWizard.isLastStep) {
+          if (payload.formChanged) {
+            payload.formChanged = false;
+            Swal.fire({
+              html: "<h4>Desea guardar los cambios hasta aquí?</h4>",
+              icon: "info",
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Si",
+              cancelButtonColor: "#d33",
+              cancelButtonText: "No",
+              showCancelButton: true,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+            }).then((result) => {
+              if (result.value) {
+                dispatch("guardarCiudadano", payload);
+              } else {
+                payload.$refs.formWizard.nextTab();
+              }
+            });
+          } else {
+            payload.$refs.formWizard.nextTab();
+          }
+        } else {
+          dispatch("guardarCiudadano", payload);
+        }
+      } else {
+        payload.$refs.observer.setErrors(errors);
+        Swal.fire({
+          html: "<h4>Por favor revise los campos en rojo!</h4>",
+          icon: "warning",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  async guardarCiudadano({ commit }, payload) {
     try {
       let url = "/api/ciudadanos";
       let method = "post";
       let data = payload.form;
       let mensajeGuardar = "El registro se ha realizado con éxito!";
+      let ultimaPestana = payload.$refs.formWizard.isLastStep;
 
       if (data.id) {
         url = `/api/ciudadanos/${data.id}`;
@@ -59,14 +106,14 @@ export default {
           // SI LA ACCIÓN ES REGISTRAR
           if (method == "post") {
             // SI ES EL ÚLTIMO PASO (PESTAÑA)
-            if (payload.$refs.formWizard.isLastStep) {
+            if (ultimaPestana) {
               // SE REINICIA EL FORMULARIO Y SE DEVUELVE A LA PRIMER PESTAÑA
               payload.resetFormVeeValidate(payload);
               payload.$refs.formWizard.reset();
             } else {
               // SI NO ES EL ÚLTIMO PASO (PESTAÑA), SE CARGA EL CIUDADANO AL FORMULARIO
               payload.form = { ...res.data.data };
-              // SE REINICIAN LOS CAMBIOS DEL FORMULARIO
+              // LOS CAMBIOS DEL FORMULARIO PASAN A SER FALSE
               payload.$nextTick(() => {
                 payload.formChanged = false;
               });

@@ -172,7 +172,7 @@ export default {
     inactivarLista(data) {
       Swal.fire({
         html: "<h4>Está seguro(a) que desea inactivar el registro?</h4>",
-        icon: "info",
+        icon: "warning",
         confirmButtonColor: "#3085d6",
         confirmButtonText: "Si",
         cancelButtonColor: "#d33",
