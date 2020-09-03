@@ -33,7 +33,7 @@
               </tab-content>
 
               <tab-content title="Finalizar" icon="fa fa-check" v-if="Object.values(ciudadano).length">
-                <documentos :modulo="modulo" :moduloid="ciudadano.id" />
+                <documentos :modulo="modulo" :moduloid="ciudadano.id" class="mb-4" />
               </tab-content>
 
               <template slot="footer" slot-scope="props">
@@ -111,55 +111,6 @@ export default {
   },
   methods: {
     ...mapActions("Familias", ["guardarCiudadano"]),
-    async validate(cb) {
-      try {
-        let res = await this.$axios.post("/api/ciudadanosvalidar", this.form);
-        let errors = _.pick(res.data.data.errors, _.keys(this.$refs.observer.fields));
-
-        if (!Object.keys(errors).length) {
-          if (!this.$refs.formWizard.isLastStep) {
-            if (this.formChanged) {
-              this.formChanged = false;
-              Swal.fire({
-                html: "<h4>Desea guardar los cambios hasta aquí?</h4>",
-                icon: "info",
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "Si",
-                cancelButtonColor: "#d33",
-                cancelButtonText: "No",
-                showCancelButton: true,
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-              }).then((result) => {
-                if (result.value) {
-                  return cb();
-                } else {
-                  this.$refs.formWizard.nextTab();
-                }
-              });
-            } else {
-              this.$refs.formWizard.nextTab();
-            }
-          } else {
-            return cb();
-          }
-        } else {
-          this.$refs.observer.setErrors(errors);
-          Swal.fire({
-            html: "<h4>Por favor revise los campos en rojo!</h4>",
-            icon: "warning",
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-          });
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    prevTab() {
-      this.formChanged = false;
-      this.$refs.formWizard.prevTab();
-    },
   },
   created() {
     this.form = { numero_documento: this.numero_documento, ...this.ciudadano };
