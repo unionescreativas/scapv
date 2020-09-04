@@ -110,7 +110,7 @@ export default {
     ...mapGetters("Familias", ["ciudadano"]),
   },
   methods: {
-    ...mapActions("Familias", ["guardarCiudadano"]),
+    ...mapActions("Familias", ["validarPestana", "guardarCiudadano"]),
   },
   created() {
     this.form = { numero_documento: this.numero_documento, ...this.ciudadano };
