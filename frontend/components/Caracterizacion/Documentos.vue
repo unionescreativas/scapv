@@ -8,7 +8,7 @@
       :multiple="multiple"
       :deletable="deletable"
       :editable="editable"
-      :meta="true"
+      :meta="meta"
       :linkable="linkable"
       :sortable="sortable"
       :readonly="readonly"
@@ -24,11 +24,9 @@
         type: 'Elija imágenes, videos, documentos o archivos zip.',
         size: 'El archivo supera el tamaño permitido.',
       }"
-      @editable="fileeditable($event)"
-      @select="filesSelected($event)"
-      @delete="fileDeleted($event)"
-      @beforedelete="onBeforeDelete($event)"
-      @sort="onSort($event)"
+      @editable="fileEditable($event)"
+      @select="archivosSeleccionados({ payload: _self, fileRecords: $event })"
+      @beforedelete="antesDeEliminar({ payload: _self, fileRecord: $event })"
       @upload="uploadEvent('upload', $event)"
       @upload:error="uploadEvent('upload:error', $event)"
       @upload:delete="uploadEvent('upload:delete', $event)"
@@ -38,53 +36,61 @@
       v-model="fileRecords"
     ></VueFileAgent>
 
-    <b-button :disabled="!fileRecordsForUpload.length" variant="primary" class="mb-3 mr-1" @click="uploadFiles()">
-      <i class="fa fa-cloud-upload"></i>
-      Cargar {{ fileRecordsForUpload.length }} Documentos
-    </b-button>
+    <transition name="fade">
+      <b-button
+        v-if="fileRecordsForUpload.length"
+        class="mt-2"
+        style="background-color: var(--iq-primary);"
+        @click="subirDocumentos(_self)"
+      >
+        <i class="fa fa-cloud-upload"></i>
+        <b>Cargar {{ fileRecordsForUpload.length + `${fileRecordsForUpload.length > 1 ? " Documentos" : " Documento"}` }}</b>
+      </b-button>
+    </transition>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import Swal from "sweetalert2";
+
 export default {
   props: ["modulo", "moduloid"],
-  data: function () {
-    return {
-      icons: {
-        pdf: "red",
-        doc: "blue",
-        ods: "green",
-        zip: "orange",
-        db: "brown",
-      },
-      fileRecords: [],
-      fileRecordsForUpload: [],
-      auto: false,
-      averageColor: false,
-      meta: true,
-      multiple: true,
-      deletable: true,
-      editable: false,
-      linkable: true,
-      sortable: false,
-      readonly: false,
-      resumable: true,
-      disabled: false,
-      compact: false,
-      theme: "default",
-      sortDirection: {
-        lastModified: "ASC",
-        name: "ASC",
-      },
-      selectedIdx: 1,
-      valAccept: "image/*,audio/*,video/*,.pdf,.doc,.xls,.xlsx,.docx,.ods,.zip,.rar,",
-      valCapture: "",
-      valMaxSize: "4024MB",
-      valMaxFiles: 50,
-    };
-  },
+  data: () => ({
+    icons: {
+      pdf: "red",
+      doc: "blue",
+      ods: "green",
+      zip: "orange",
+      db: "brown",
+    },
+    fileRecords: [],
+    fileRecordsForUpload: [],
+    auto: false,
+    averageColor: false,
+    meta: true,
+    multiple: true,
+    deletable: true,
+    editable: true,
+    linkable: true,
+    sortable: false,
+    readonly: false,
+    resumable: true,
+    disabled: false,
+    compact: false,
+    theme: "default",
+    sortDirection: {
+      lastModified: "ASC",
+      name: "ASC",
+    },
+    selectedIdx: 1,
+    valAccept: "image/*,audio/*,video/*,.pdf,.doc,.xls,.xlsx,.docx,.ods,.zip,.rar,",
+    valCapture: "",
+    valMaxSize: "4024MB",
+    valMaxFiles: 50,
+  }),
   computed: {
+    ...mapState("Documentos", ["documentos"]),
     fileRecordsInvalid: function () {
       var fileRecordsInvalid = [];
       for (var i = 0; i < this.fileRecords.length; i++) {
@@ -102,51 +108,32 @@ export default {
     },
   },
   watch: {
+    documentos(value) {
+      this.fileRecords = _.cloneDeep(value);
+      console.log(this.$refs.vueFileAgent)
+    },
     moduloid(value) {
       this.fileRecords = [];
       this.moduloid = value;
-      this.getFileRecordsInitial();
+      this.consultarDocumentos(this);
     },
   },
-  mounted() {
-    this.getFileRecordsInitial();
+  created() {
+    this.consultarDocumentos(this);
   },
   methods: {
-    fileeditable() {
+    ...mapActions("Documentos", [
+      "archivosSeleccionados",
+      "subirDocumentos",
+      "consultarDocumentos",
+      "antesDeEliminar",
+      "eliminarDocumento",
+    ]),
+    fileEditable(file) {
       console.log("sirve caray");
     },
     uploadEvent(eventName, data) {
       console.log("UPLOAD EVENT ", eventName, data);
-    },
-    getFileRecordsInitial: function () {
-      // return window.getFileRecordsInitial();
-      let url = `/api/documentos?modulo_id=${this.moduloid}&modulo=${this.modulo}`;
-      let documentosCargado = {};
-      let consulta;
-      this.$axios
-        .get(url)
-        .then((res) => {
-          consulta = res.data.data;
-          consulta.forEach((item, index) => {
-            documentosCargado = {
-              id: consulta[index].id,
-              name: consulta[index].nombre_carga,
-              lastModified: consulta[index].updated_at,
-              sizeText: consulta[index].nombre_carga,
-              size: consulta[index].tamano,
-              type: consulta[index].aplicacion,
-              ext: consulta[index].extension,
-              url: `${process.env.API_URL}/storage${consulta[index].url_descarga}`,
-            };
-            // console.log("array creado " + documentosCargado.id);
-            this.fileRecords.push(documentosCargado);
-            // formData.append("file[" + index + "]", item.file);
-          });
-          // console.log("consultando" + this.fileRecords);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
     getSelectedFileRecord: function () {
       var i = this.selectedIdx;
@@ -266,98 +253,17 @@ export default {
       });
       // console.log('sortBy after', prop, this.fileRecords);
     },
-    uploadFiles: function () {
-      let formData = new FormData();
-      formData.append("modulo_id", this.moduloid);
-      formData.append("modulo", this.modulo);
-      this.fileRecordsForUpload.forEach((item, index) => {
-        formData.append("file[" + index + "]", item.file);
-      });
-      let url = "/api/documentos";
-      this.$axios
-        .post(url, formData, {
-          header: {
-            "Content-type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          // console.log("respuesta de carga" + res);
-          Swal.fire("Excelente!", "Datos Cargados Correctamente!", "success");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      this.fileRecordsForUpload = [];
-    },
-    deleteUploadedFile: function (fileRecord) {
-      // Using the default uploader. You may use another uploader instead.
-      this.$refs.vueFileAgent.deleteUpload(this.uploadEndpoint, this.uploadHeaders, fileRecord);
-    },
-    filesSelected: function (fileRecords) {
-      console.log("filesSelected", fileRecords);
-      var validFileRecords = [];
-      for (var i = 0; i < fileRecords.length; i++) {
-        if (!fileRecords[i].error) {
-          validFileRecords.push(fileRecords[i]);
-        }
-      }
-      console.log("filesSelected", fileRecords, validFileRecords);
-      this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
-    },
-    eliminarArchivo(fileRecord) {
-      console.log(fileRecord);
-      let url = `/api/documentos/${fileRecord.id}`;
-      this.$axios
-        .delete(url)
-        .then((res) => {
-          this.fileRecords = [];
-          this.getFileRecordsInitial();
-          console.log("registro eliminado Correctamente" + res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    onBeforeDelete: function (fileRecord) {
-      var i = this.fileRecordsForUpload.indexOf(fileRecord);
-      if (i !== -1) {
-        this.fileRecordsForUpload.splice(i, 1);
-      } else {
-        Swal.fire({
-          title: "¿Estás seguro?",
-          text: "¡No podrás revertir esto!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#d33",
-          cancelButtonColor: "#3085d6",
-          confirmButtonText: "Si, Borrar!",
-          cancelButtonText: "No, Borrar!",
-        }).then((result) => {
-          if (result.value) {
-            this.eliminarArchivo(fileRecord);
-            Swal.fire("Eliminado!", "Documento Eliminado Correctamente.", "success");
-          }
-        });
-      }
-    },
-    fileDeleted: function (fileRecord) {
-      var i = this.fileRecordsForUpload.indexOf(fileRecord);
-      if (i !== -1) {
-        this.fileRecordsForUpload.splice(i, 1);
-      } else {
-        this.deleteUploadedFile(fileRecord);
-      }
-    },
-    onSort(event) {
-      console.log(
-        "sorted",
-        event.oldIndex,
-        event.newIndex,
-        this.fileRecords.map(function (fd) {
-          return typeof fd.name == "function" ? fd.name() : fd.name;
-        })
-      );
-    },
   },
 };
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
