@@ -48,14 +48,14 @@
                 <div class="wizard-footer-right">
                   <b-button
                     v-if="!props.isLastStep"
-                    @click="validate(() => guardarCiudadano(_self))"
+                    @click="validarPestana(_self)"
                     class="wizard-footer-right"
                     :style="props.fillButtonStyle"
                     >Siguiente</b-button
                   >
                   <b-button
                     v-if="props.isLastStep"
-                    @click="validate(() => guardarCiudadano(_self))"
+                    @click="validarPestana(_self)"
                     class="wicozard-footer-right finish-button"
                     :style="props.fillButtonStyle"
                     >Finalizar</b-button
