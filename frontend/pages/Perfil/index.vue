@@ -83,8 +83,8 @@
                     <div class="user-detail pl-5">
                       <div class="d-flex flex-wrap align-items-center">
                         <div class="profile-detail d-flex align-items-center">
-                          <h3 v-text="ciudadano.nombre_completo"></h3>
-                          <p v-text="ciudadano.pais_origen" class="m-0 pl-3"></p>
+                          <h3 v-text="perfil.nombre_completo"></h3>
+                          <p v-text="perfil.pais_origen" class="m-0 pl-3"></p>
                         </div>
                       </div>
                     </div>
@@ -111,115 +111,115 @@
                     <b-row>
                       <b-col>
                         <b-form-group label="TIPO DE DOCUMENTO" label-for="exampleInputText2">
-                          <b-form-input type="text" :value="ciudadano.tipo_documento" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.tipo_documento" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="NUMERO DE DOCUMENTO" label-for="exampleInputText3">
-                          <b-form-input type="text" :value="ciudadano.numero_documento" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.numero_documento" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="# PERMISO ESPECIAL DE PERMANENCIA" label-for="exampleInputText4">
-                          <b-form-input type="text" :value="ciudadano.pep" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.pep" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="NOMBRES" label-for="exampleInputText5">
-                          <b-form-input type="text" :value="ciudadano.nombres" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.nombres" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="APELLIDOS" label-for="exampleInputText6">
-                          <b-form-input type="text" :value="ciudadano.apellidos" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.apellidos" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="FECHA DE EXPEDICION DEL DOCUMENTO" label-for="exampleInputText7">
-                          <b-form-input type="text" :value="ciudadano.fecha_expedicion" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.fecha_expedicion" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="FECHA DE VENCIMIENTO DEL DOCUMENTO" label-for="exampleInputText8">
-                          <b-form-input type="text" :value="ciudadano.fecha_vencimiento" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.fecha_vencimiento" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="FECHA DE NACIMIENTO" label-for="exampleInputText9">
-                          <b-form-input type="text" :value="ciudadano.fecha_nacimiento" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.fecha_nacimiento" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="EDAD" label-for="exampleInputText10">
-                          <b-form-input type="text" :value="ciudadano.edad" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.edad" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="GENERO" label-for="exampleInputText11">
-                          <b-form-input type="text" :value="ciudadano.genero" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.genero" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="ESTADO CIVIL" label-for="exampleInputText12">
-                          <b-form-input type="text" :value="ciudadano.estado_civil" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.estado_civil" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="TELEFONO" label-for="exampleInputText13">
-                          <b-form-input type="text" :value="ciudadano.telefono" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.telefono" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="CELULAR" label-for="exampleInputText14">
-                          <b-form-input type="text" :value="ciudadano.celular" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.celular" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="CORREO ELECTRONICO" label-for="exampleInputText15">
-                          <b-form-input type="text" :value="ciudadano.correo_electronico" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.correo_electronico" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="DEPARTAMENTO DE RESIDENCIA" label-for="exampleInputText16">
-                          <b-form-input type="text" :value="ciudadano.departamento" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.departamento" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="CIUDAD DE RESIDENCIA" label-for="exampleInputText17">
-                          <b-form-input type="text" :value="ciudadano.ciudad" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.ciudad" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="BARRIO DE RESIDENCIA" label-for="exampleInputText18">
-                          <b-form-input type="text" :value="ciudadano.barrrio" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.barrrio" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                       <b-col>
                         <b-form-group label="COMUNA DE RESIDENCIA" label-for="exampleInputText19">
-                          <b-form-input type="text" :value="ciudadano.comuna" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.comuna" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
                         <b-form-group label="DIRRECION DE RESIDENCIA" label-for="exampleInputText20">
-                          <b-form-input type="text" :value="ciudadano.direccion" disabled></b-form-input>
+                          <b-form-input type="text" :value="perfil.direccion" disabled></b-form-input>
                         </b-form-group>
                       </b-col>
                     </b-row>
@@ -239,96 +239,96 @@
                   <b-row>
                     <b-col>
                       <b-form-group label="ACTIVIDAD" label-for="exampleInputText23">
-                        <b-form-input type="text" :value="ciudadano.actividad" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.actividad" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="CIUDAD DE ORIGEN" label-for="exampleInputText24">
-                        <b-form-input type="text" :value="ciudadano.ciudad_origen" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.ciudad_origen" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col>
                       <b-form-group label="PAIS DE ORIGEN" label-for="exampleInputText25">
-                        <b-form-input type="text" :value="ciudadano.pais_origen" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.pais_origen" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="FECHA DE LLEGADA AL PAIS" label-for="exampleInputText26">
-                        <b-form-input type="text" :value="ciudadano.fecha_llegada" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.fecha_llegada" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col>
                       <b-form-group label="FECHA DE LLEGADA AL PAIS" label-for="exampleInputText27">
-                        <b-form-input type="text" :value="ciudadano.intencion_ciudad" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.intencion_ciudad" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="FECHA DE LLEGADA AL PAIS" label-for="exampleInputText28">
-                        <b-form-input type="text" :value="ciudadano.respuesta_intencion" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.respuesta_intencion" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col>
                       <b-form-group label="TIENE ALGUNA DISCAPACIDAD" label-for="exampleInputText29">
-                        <b-form-input type="text" :value="ciudadano.discapacidad" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.discapacidad" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="TIENE SISTEMA DE SALUD" label-for="exampleInputText30">
-                        <b-form-input type="text" :value="ciudadano.salud" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.salud" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col>
                       <b-form-group label="SE ENCUENTRA ESTUDIANDO ACTUALMENTE" label-for="exampleInputText31">
-                        <b-form-input type="text" :value="ciudadano.estudia_actualmente" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.estudia_actualmente" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="NIVEL DE ESCOLARIDAD" label-for="exampleInputText32">
-                        <b-form-input type="text" :value="ciudadano.nivel_escolaridad" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.nivel_escolaridad" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col>
                       <b-form-group label="PROFESIONAL EN ?" label-for="exampleInputText33">
-                        <b-form-input type="text" :value="ciudadano.tipo_profesion" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.tipo_profesion" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="POBLACIÓN LGTBI" label-for="exampleInputText34">
-                        <b-form-input type="text" :value="ciudadano.comunidad_lgtbi" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.comunidad_lgtbi" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col>
                       <b-form-group label="PERTENECE ALGUNA COMUNIDAD ETNICA ?" label-for="exampleInputText35">
-                        <b-form-input type="text" :value="ciudadano.comunidad_etnica" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.comunidad_etnica" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="ACTUALMENTE SE ENCUENTRA LABORANDO" label-for="exampleInputText36">
-                        <b-form-input type="text" :value="ciudadano.trabajo" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.trabajo" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col>
                       <b-form-group label="TIPO DE EMPLEO" label-for="exampleInputText37">
-                        <b-form-input type="text" :value="ciudadano.tipo_empleo" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.tipo_empleo" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                     <b-col>
                       <b-form-group label="OBSERVACIONES" label-for="exampleInputText38">
-                        <b-form-input type="text" :value="ciudadano.observaciones" disabled></b-form-input>
+                        <b-form-input type="text" :value="perfil.observaciones" disabled></b-form-input>
                       </b-form-group>
                     </b-col>
                   </b-row>
@@ -336,6 +336,7 @@
               </template>
             </iq-card>
           </tab-content-item>
+
           <tab-content-item :active="false" id="nivel-riesgo" aria-labelled-by="otra-informacion">
             <iq-card>
               <template v-slot:headerTitle>
@@ -363,6 +364,7 @@
               </template>
             </iq-card>
           </tab-content-item>
+
           <tab-content-item :active="false" id="maps" aria-labelled-by="otra-informacion">
             <iq-card>
               <template v-slot:headerTitle>
@@ -389,29 +391,24 @@
               </template>
             </iq-card>
           </tab-content-item>
+
           <tab-content-item :active="false" id="docs" aria-labelled-by="otra-informacion">
             <iq-card>
-              <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
+              <template v-slot:body>
+                <documentos modulo="documentos" :moduloid="perfil.id" />
+              </template>
             </iq-card>
           </tab-content-item>
         </tab-content>
       </b-col>
-      <!-- <familias /> -->
 
-      <form-modal-integrante
-        :modalShow.sync="modalShow"
-        :options="options"
-        :ciudadano="ciudadanoPerfil"
-        :integrante="tableRowData"
-      />
+      <form-modal-integrante :modalShow.sync="modalShow" :options="options" :ciudadano="ciudadano"
+        :integrante="tableRowData" />
+
       <b-col sm="12">
         <iq-card class="p-2">
-          <tabla-integrantes
-            ref="tablaIntegrantes"
-            :ciudadano="ciudadanoPerfil"
-            @getRowData="tableRowData = $event"
-            @modalShow="modalShow = $event"
-          />
+          <tabla-integrantes ref="tablaIntegrantes" :ciudadano="ciudadano" @getRowData="tableRowData = $event"
+            @modalShow="modalShow = $event" />
         </iq-card>
       </b-col>
 
@@ -441,9 +438,6 @@ export default {
       tipos_empleos: [],
     },
     // ----------------   --Intregrantes>
-    // Modulo Documentos-------------------->
-    modulo_id: "",
-    modulo: "documentos",
     // Modulo Documentos-------------------->
     urlEditar: "",
     user: {
@@ -495,30 +489,26 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      ciudadanoPerfil: "Familias/ciudadano",
+      ciudadano: "Familias/ciudadano",
     }),
-    ciudadano() {
-      let ciudadano = this.$store.state.Familias.ciudadano;
-      let ciudadanoDatos = {};
+    perfil() {
+      let perfil = {};
 
-      if (ciudadano && ciudadano != "no existe") {
-        ciudadanoDatos = {
-          ...ciudadano[0],
-          nombres: _.startCase(_.camelCase(ciudadano[0].nombres)),
-          apellidos: _.startCase(_.camelCase(ciudadano[0].apellidos)),
-          nombre_completo: _.startCase(_.camelCase(`${ciudadano[0].nombres} ${ciudadano[0].apellidos}`)),
-          pais_origen: _.startCase(_.camelCase(ciudadano[0].pais_origen)),
+      if (Object.values(this.ciudadano).length) {
+        perfil = {
+          ...this.ciudadano,
+          nombres: _.startCase(_.camelCase(this.ciudadano.nombres)),
+          apellidos: _.startCase(_.camelCase(this.ciudadano.apellidos)),
+          nombre_completo: _.startCase(_.camelCase(`${this.ciudadano.nombres} ${this.ciudadano.apellidos}`)),
+          pais_origen: _.startCase(_.camelCase(this.ciudadano.pais_origen)),
         };
+
+        this.markers[0].position.lat = this.ciudadano.lat;
+        this.markers[0].position.lng = this.ciudadano.let;
+        this.markers[0].infoText = `Dirreción : ${this.ciudadano.direccion} , Comuna : ${this.ciudadano.comuna}`;
       }
 
-      this.modulo_id = ciudadanoDatos.id;
-      this.markers[0].position.lat = Object.values(ciudadanoDatos).length ? ciudadanoDatos.lat : 0;
-      this.markers[0].position.lng = Object.values(ciudadanoDatos).length ? ciudadanoDatos.let : 0;
-      this.markers[0].infoText = Object.values(ciudadanoDatos).length
-        ? `Dirreción : ${ciudadanoDatos.direccion} , Comuna : ${ciudadanoDatos.comuna} `
-        : "";
-
-      return ciudadanoDatos;
+      return perfil;
     },
   },
   methods: {
