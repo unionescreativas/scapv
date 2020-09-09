@@ -2,7 +2,7 @@ export const state = () => ({
   auth: {
     busy: false,
     loggedIn: false,
-    strategy: "local",
+    strategy: "laravelSanctum",
     user: null,
   },
 });
