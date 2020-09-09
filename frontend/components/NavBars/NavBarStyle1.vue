@@ -72,7 +72,7 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 import Swal from "sweetalert2";
-import verticalMenu from "~/plugins/FackApi/json/VerticalMenu";
+import verticalMenu from "~/plugins/fakeAPI/json/VerticalMenu";
 
 export default {
   name: "NavBarStyle1",

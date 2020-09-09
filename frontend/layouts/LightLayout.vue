@@ -338,9 +338,9 @@
 </template>
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-// import { Users } from "~/plugins/FackApiapi/chat";
-import horizontalMenu from "~/plugins/FackApi/json/HorizontalMenu";
-import verticalMenu from "~/plugins/FackApi/json/VerticalMenu";
+// import { Users } from "~/plugins/fakeAPIapi/chat";
+import horizontalMenu from "~/plugins/fakeAPI/json/HorizontalMenu";
+import verticalMenu from "~/plugins/fakeAPI/json/VerticalMenu";
 import userProfile from "~/assets/images/user/user-1.jpeg";
 import loader from "~/assets/images/loader.gif";
 import darkLoader from "~/assets/images/darkMode/dark-logo.gif";

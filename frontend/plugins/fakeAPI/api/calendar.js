@@ -1,5 +1,5 @@
 import Event from "../../Model/Event";
-import moment from "moment";
+import moment from "~/plugins/fakeAPI/api/node_modules/moment";
 
 export const CalenderList = [
     {

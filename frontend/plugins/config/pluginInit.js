@@ -1,4 +1,4 @@
-import SideBarItems from "~/plugins/FackApi/json/VerticalMenu.json";
+import SideBarItems from "~/plugins/fakeAPI/json/VerticalMenu.json";
 import Scrollbar from "smooth-scrollbar";
 import Snackbar from "node-snackbar";
 const $ = require("jquery");
@@ -210,8 +210,11 @@ export const vito = {
       let selector, mainElement;
 
       if (!$(myTargetElement).parents(".iq-sub-dropdown").length) {
-        if ($(myTargetElement).hasClass("search-toggle") || $(myTargetElement).parent().hasClass("search-toggle") || $(
-            myTargetElement).parent().parent().hasClass("search-toggle")) {
+        if (
+          $(myTargetElement).hasClass("search-toggle") ||
+          $(myTargetElement).parent().hasClass("search-toggle") ||
+          $(myTargetElement).parent().parent().hasClass("search-toggle")
+        ) {
           if ($(myTargetElement).hasClass("search-toggle")) {
             selector = $(myTargetElement).parent();
             mainElement = $(myTargetElement);

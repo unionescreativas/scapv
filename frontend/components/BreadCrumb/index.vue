@@ -23,7 +23,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import SideBarItems from "~/plugins/FackApi/json/VerticalMenu.json";
+import SideBarItems from "~/plugins/fakeAPI/json/VerticalMenu.json";
 
 export default {
   name: "BreadCrumb",
@@ -86,7 +86,7 @@ export default {
             });
           }
         }
-      })
+      });
       // this.currentRoute = this.navList.find((item) => item.link.name === this.$route.path);
       // let book = this.bookmark.find((item) => item.link.name === this.$route.path);
       // if (book !== undefined) {
