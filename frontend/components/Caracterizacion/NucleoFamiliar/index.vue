@@ -40,7 +40,7 @@
                 <div class="wizard-footer-left">
                   <b-button
                     v-if="props.activeTabIndex > 0 || props.isLastStep"
-                    @click="prevTab((formChanged = false))"
+                    @click="props.prevTab((formChanged = false))"
                     :style="props.fillButtonStyle"
                     >Atrás</b-button
                   >
