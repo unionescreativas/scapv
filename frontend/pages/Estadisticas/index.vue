@@ -154,15 +154,15 @@ export default {
   head: () => ({
     title: "Estadísticas",
   }),
-  async asyncData({ $axios }) {
-    let res = await $axios.get("/api/datosgenerales/");
-    let estadisticas = res.data.data;
-    return {
-      estadisticas,
-    };
+  computed: {
+    ...mapState("Estadisticas", ["estadisticas"]),
   },
-  methods: {},
-  computed: {},
+  methods: {
+    ...mapActions("Estadisticas", ["consultarEstadisticas"]),
+  },
+  created() {
+    this.consultarEstadisticas();
+  },
   mounted() {
     vito.index();
   },

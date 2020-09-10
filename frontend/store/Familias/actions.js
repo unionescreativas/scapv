@@ -145,6 +145,7 @@ export default {
       }
 
       let res = await this.$axios({ method, url, data });
+      commit("GUARDAR_INTEGRANTE_FAMILIA", res.data.data);
 
       Swal.fire({
         html: `<h4>${mensajeGuardar}</h4>`,
@@ -153,7 +154,6 @@ export default {
         allowEscapeKey: false,
       }).then((result) => {
         if (result.value) {
-          commit("GUARDAR_INTEGRANTE_FAMILIA", res.data.data);
           payload.$parent.$refs.tablaIntegrantes.reloadDataTable();
           // SI LA ACCIÓN ES REGISTRAR SE REINICIA EL FORMULARIO
           if (method == "post") {

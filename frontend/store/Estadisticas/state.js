@@ -1,3 +1,3 @@
 export default () => ({
-  estadisticas: null,
+  estadisticas: {},
 });

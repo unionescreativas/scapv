@@ -1,5 +1,5 @@
 export default () => ({
-  ciudadano: null,
+  ciudadano: {},
   ciudadanos: [],
-  integrante: null,
+  integrante: {},
 });
