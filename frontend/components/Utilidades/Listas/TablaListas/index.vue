@@ -3,7 +3,13 @@
     <b-col sm="12">
       <iq-card>
         <template v-slot:body>
-          <data-table ref="dataTable" :classes="table.classes" :translate="table.translate" :columns="table.columns" :url="table.url">
+          <data-table
+            ref="dataTable"
+            :classes="table.classes"
+            :translate="table.translate"
+            :columns="table.columns"
+            :url="table.url"
+          >
             <div slot="filters" slot-scope="{ tableData }">
               <div class="row justify-content-between mb-4">
                 <div class="col-md-3">
@@ -122,7 +128,7 @@ export default {
   data() {
     return {
       table: {
-        url: `${process.env.API_URL}/api/listas/`,
+        url: `${process.env.API_URL}/api/listas`,
         tableProps: { dir: "desc" },
         classes: {
           "table-container": { "table-responsive": true },
@@ -182,9 +188,9 @@ export default {
         allowEscapeKey: false,
       }).then((result) => {
         if (result.value) {
-          this.$store.dispatch("Listas/inactivarLista", {...this, id_lista: data.id});
+          this.$store.dispatch("Listas/inactivarLista", { ...this, id_lista: data.id });
         }
-      })
+      });
     },
     reloadDataTable() {
       this.$refs.dataTable.getData();

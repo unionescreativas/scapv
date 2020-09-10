@@ -22,7 +22,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/nucleo/" class="btn btn-primary" target="_blank"
+                          <a :href="`${url}/api/reportes/nucleo`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -41,7 +41,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/ciudadanos/" class="btn btn-primary" target="_blank"
+                          <a :href="`${url}/api/reportes/ciudadanos`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -60,7 +60,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/familias/" class="btn btn-primary" target="_blank"
+                          <a :href="`${url}/api/reportes/familias`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -82,10 +82,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a
-                            href="http://localhost:8000/api/reportes/ayudasentregadas/"
-                            class="btn btn-primary"
-                            target="_blank"
+                          <a :href="`${url}/api/reportes/ayudasentregadas`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -104,10 +101,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a
-                            href="http://localhost:8000/api/reportes/ayudaspendientes/"
-                            class="btn btn-primary"
-                            target="_blank"
+                          <a :href="`${url}/api/reportes/ayudaspendientes`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -125,7 +119,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/nucleo/" class="btn btn-primary" target="_blank"
+                          <a :href=url + "/api/reportes/nucleo` class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -150,6 +144,11 @@ export default {
   head: () => ({
     title: "Inicio",
   }),
+  data() {
+    return {
+      url: `${process.env.API_URL}`,
+    };
+  },
   mounted() {
     vito.mainIndex();
   },
