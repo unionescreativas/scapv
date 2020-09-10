@@ -155,7 +155,7 @@ export default {
     title: "Estadísticas",
   }),
   async asyncData({ $axios }) {
-    let res = await $axios.get("/api/datosgenerales/");
+    let res = await $axios.get("/api/datosgenerales");
     let estadisticas = res.data.data;
     return {
       estadisticas,

@@ -18,9 +18,7 @@
               <template v-slot:modal-footer>
                 <div class="w-100">
                   <p class="float-left">Editar Ayudas</p>
-                  <b-button variant="primary" size="sm" class="float-right" @click="LimpiarDatos">
-                    Cerrar
-                  </b-button>
+                  <b-button variant="primary" size="sm" class="float-right" @click="LimpiarDatos"> Cerrar </b-button>
                 </div>
               </template>
             </b-modal>
@@ -153,7 +151,7 @@ export default {
       editar: false,
       idEditar: "",
       table: {
-        url: `${process.env.API_URL}/api/ayudas/`,
+        url: `${process.env.API_URL}/api/ayudas`,
         tableProps: { dir: "desc" },
         classes: {
           "table-container": { "table-responsive": true },

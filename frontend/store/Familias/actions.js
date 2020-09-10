@@ -26,7 +26,7 @@ export default {
 
   async consultarCiudadanos({ commit }) {
     try {
-      let res = await this.$axios.get("/api/ciudadanos/");
+      let res = await this.$axios.get("/api/ciudadanos");
       commit("CONSULTAR_CIUDADANOS", res.data.data);
     } catch (error) {
       console.error(error);

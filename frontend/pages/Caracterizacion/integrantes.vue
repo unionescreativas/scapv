@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       table: {
-        url: `${process.env.API_URL}/api/familias/`,
+        url: `${process.env.API_URL}/api/familias`,
         tableProps: { dir: "desc" },
         classes: {
           "table-container": { "table-responsive": true },

@@ -22,7 +22,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/nucleo/" class="btn btn-primary" target="_blank"
+                          <a :href="`${process.env.API_URL}/api/reportes/nucleo`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -41,7 +41,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/ciudadanos/" class="btn btn-primary" target="_blank"
+                          <a :href="`${process.env.API_URL}/api/reportes/ciudadanos`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -60,7 +60,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/familias/" class="btn btn-primary" target="_blank"
+                          <a :href="`${process.env.API_URL}/api/reportes/familias`" class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
@@ -83,7 +83,7 @@
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
                           <a
-                            href="http://localhost:8000/api/reportes/ayudasentregadas/"
+                            :href="`${process.env.API_URL}/api/reportes/ayudasentregadas`"
                             class="btn btn-primary"
                             target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
@@ -105,7 +105,7 @@
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
                           <a
-                            href="http://localhost:8000/api/reportes/ayudaspendientes/"
+                            :href="`${process.env.API_URL}/api/reportes/ayudaspendientes`"
                             class="btn btn-primary"
                             target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
@@ -125,7 +125,7 @@
                     <blockquote class="blockquote mb-0">
                       <footer class="blockquote-footer text-white font-size-12">
                         <p class="font-size-14">
-                          <a href="http://localhost:8000/api/reportes/nucleo/" class="btn btn-primary" target="_blank"
+                          <a :href=`${process.env.API_URL}/api/reportes/nucleo/` class="btn btn-primary" target="_blank"
                             ><i class="fas fa-cloud-download-alt"></i> Descargar</a
                           >
                         </p>
