@@ -42,7 +42,7 @@
       <div class="sign-info">
         <span class="dark-color d-inline-block line-height-2">
           Aún no tienes una cuenta?
-          <nuxt-link to="/auth/sign-up1" class="iq-waves-effect pr-4">
+          <nuxt-link to="/auth/iniciar-sesion" class="iq-waves-effect pr-4">
             Regístrate
           </nuxt-link>
         </span>
