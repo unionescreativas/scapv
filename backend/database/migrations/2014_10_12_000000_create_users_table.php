@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration {
             $table->uuid('id');
             $table->primary('id');
 
-            $table->string('nombre');
+            $table->string('name');
             $table->string('apellido')->nullable();
             $table->string('numero_documento');
             $table->string('cargo')->nullable();
