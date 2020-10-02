@@ -2,25 +2,18 @@
 
 namespace Modules\Caracterizacion\Http\Controllers;
 
-
-use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\Caracterizacion\Entities\Documento;
-use Modules\Caracterizacion\Http\Requests\DocumentoRequest;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
-use Illuminate\Support\Facades\Storage;
+use Modules\Caracterizacion\Entities\Documento;
+use Webpatser\Uuid\Uuid;
 
-class DocumentosController extends Controller
-{
+class DocumentosController extends Controller {
 
     protected $configModelo;
     protected $modulo;
 
-    public function __construct()
-    {
+    public function __construct() {
         // Variables Globales---------------------------->
         $this->configModelo = new Documento;
         $this->modulo = "Documentos";
@@ -28,8 +21,7 @@ class DocumentosController extends Controller
 
     }
 
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $modulo_id = $request->input('modulo_id');
         $modulo = $request->input('modulo');
         $variableConsulta = $this->configModelo::where('modulo', $modulo)
@@ -37,13 +29,11 @@ class DocumentosController extends Controller
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: -> Metodo Index");
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function show($id)
-    {
+    public function show($id) {
         $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();
         return ['data' => $variableConsulta, 'status' => '201'];
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         // ------------------------>Datos Ruta
         $modulo = $request->modulo;
@@ -52,6 +42,7 @@ class DocumentosController extends Controller
         // ------------------------>Datos Ruta
         $data = [];
         $variableConsulta = $this->configModelo;
+        $variableConsulta->usuario_creacion = $request->user()->id;
         foreach ($request->file as $key => $value) {
             // // ------------------------>Datos Archivo
             $extensionArchivo = $request->file[$key]->getClientOriginalExtension();
@@ -70,7 +61,7 @@ class DocumentosController extends Controller
                 'modulo_id' => $moduloId,
                 'modulo' => $modulo,
                 'nombre_archivo' => $nombreArchivo,
-                'nombre_carga' =>  $nombre_carga,
+                'nombre_carga' => $nombre_carga,
                 'url' => $ruta,
                 'url_descarga' => $ruta_descarga,
                 'extension' => $extensionArchivo,
@@ -83,50 +74,50 @@ class DocumentosController extends Controller
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $data, 'status' => '202'];
     }
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
         $datosAnteriores = $this->configModelo::find($id);
         $variableConsulta = $this->configModelo::find($id);
 
         //Campos Actualizar aquí--------------->
         $variableConsulta->nombre_carga = $request->nombre_carga;
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         //Campos Actualizar aquí--------------->
 
         $variableConsulta->save();
         ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
     }
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         $variableConsulta = $this->configModelo::destroy($id);
         ActivityLogger::activity("Eliminado Registo Modulo {$this->modulo},Datos eliminados:{$datosElimnados},  para el registro {$id} -> Metodo destroy");
         return ['data' => $variableConsulta, 'status' => '204'];
     }
 
-    public function activar($id)
-    {
+    public function activar($id) {
         $variableConsulta = $this->configModelo::find($id);
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         $datosActivar = $variableConsulta;
+
         ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
         $variableConsulta->estado = 1;
         $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '205'];
     }
 
-    public function inactivar($id)
-    {
+    public function inactivar($id) {
         $variableConsulta = $this->configModelo::find($id);
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         $datosActivar = $variableConsulta;
         ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo},Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
         $variableConsulta->estado = 0;
         $variableConsulta->save();
         return ['data' => $variableConsulta, 'status' => '206'];
     }
-    public function restore($id)
-    {
+    public function restore($id) {
         $variableConsulta = $this->configModelo::withTrashed()->find($id);
         $datosRestaurar = $variableConsulta;
         ActivityLogger::activity("Restaurando Registo Modulo {$this->modulo},Datos a Restaurar: {$datosRestaurar}, para el registro {$id} -> Metodo Restaurar.");
@@ -134,8 +125,7 @@ class DocumentosController extends Controller
         return ['data' => $variableConsulta, 'status' => '207'];
     }
 
-    public function cors()
-    {
+    public function cors() {
         if (!$this->corsEnabled) {
             return;
         }
@@ -148,8 +138,7 @@ class DocumentosController extends Controller
         }
     }
 
-    public function handle()
-    {
+    public function handle() {
         $this->cors();
         $response = $this->handleRequest();
         header('Content-Type: application/json');

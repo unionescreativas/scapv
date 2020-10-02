@@ -22,6 +22,8 @@ class CiudadanosController extends Controller {
 
     // Variables Globales---------------------------->
     public function index(Request $request) {
+
+        // return $usuario;
         $length = $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
@@ -105,6 +107,7 @@ class CiudadanosController extends Controller {
         $variableConsulta->trabajo = $request->trabajo;
         $variableConsulta->tipo_empleo = $request->tipo_empleo;
         $variableConsulta->observaciones = $request->observaciones;
+        $variableConsulta->usuario_creacion = $request->user()->id;
         $variableConsulta->save();
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
@@ -151,6 +154,7 @@ class CiudadanosController extends Controller {
         $variableConsulta->trabajo = $request->trabajo;
         $variableConsulta->tipo_empleo = $request->tipo_empleo;
         $variableConsulta->observaciones = $request->observaciones;
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         $variableConsulta->save();
         ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
@@ -159,6 +163,7 @@ class CiudadanosController extends Controller {
     public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         $variableConsulta = $this->configModelo::destroy($id);
         ActivityLogger::activity("Eliminado Registo Modulo {$this->modulo},Datos eliminados:{$datosElimnados},  para el registro {$id} -> Metodo destroy");
         return ['data' => $variableConsulta, 'status' => '204'];
@@ -167,6 +172,7 @@ class CiudadanosController extends Controller {
     public function activar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
         $variableConsulta->estado = 1;
         $variableConsulta->save();
@@ -176,6 +182,7 @@ class CiudadanosController extends Controller {
     public function inactivar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
+        $variableConsulta->usuario_actualizacion = $request->user()->id;
         ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo},Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
         $variableConsulta->estado = 0;
         $variableConsulta->save();
