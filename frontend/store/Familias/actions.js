@@ -140,6 +140,7 @@ export default {
           // SI LA ACCIÓN ES REGISTRAR SE REINICIA EL FORMULARIO
           if (method == "post") {
             payload.resetFormVeeValidate(payload);
+            payload.llenarDatosIntegrante();
           }
         }
       });

@@ -56,7 +56,7 @@
       </b-col>
     </b-row>
     <h4 v-text="unidades"></h4>
-    <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
+    <documentos :modulo="modulo" :moduloid="modulo_id" subida_automatica></documentos>
     <div v-if="consulta">
       <TablaCrearAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />
       <TablaNucleoAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />

@@ -4,6 +4,7 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use Modules\Caracterizacion\Entities\Ciudadano;
@@ -24,7 +25,9 @@ class CiudadanosController extends Controller {
     public function index(Request $request) {
 
         // return $usuario;
-        $length = $request->input('length');
+
+        $all = DB::table('ciudadanos')->count();
+        $length = $request->input('length') == "all" ? $all : $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
@@ -34,6 +37,7 @@ class CiudadanosController extends Controller {
                 "ayudas",
             ])->where('ciudadanos.estado', '1');
         $data = $variableConsulta->paginate($length);
+        $ciudadanos = DB::table('ciudadanos')->count();
         return new DataTableCollectionResource($data);
     }
 

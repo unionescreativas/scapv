@@ -1,8 +1,11 @@
 import Swal from "sweetalert2";
 
 export default {
-  archivosSeleccionados({}, { payload, fileRecords }) {
+  archivosSeleccionados({ dispatch }, { payload, fileRecords }) {
     payload.fileRecordsForUpload = [...payload.fileRecordsForUpload, ...fileRecords.filter((file) => !file.error)];
+    if (payload.subida_automatica && payload.fileRecordsForUpload.length) {
+      dispatch("subirDocumentos", payload);
+    }
   },
 
   async subirDocumentos({ commit }, payload) {

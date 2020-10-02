@@ -508,10 +508,7 @@ export default {
   }),
   watch: {
     modalShow() {
-      this.form = {
-        ciudadano_id: this.ciudadano.id,
-        ...this.integrante,
-      };
+      this.llenarDatosIntegrante();
     },
   },
   computed: {
@@ -530,6 +527,12 @@ export default {
       let edad = calcularEdad(fecha);
       this.$refs.inputEdad.value = edad;
       this.form.edad = edad;
+    },
+    llenarDatosIntegrante() {
+      this.form = {
+        ciudadano_id: this.ciudadano.id,
+        ...this.integrante,
+      };
     },
   },
 };

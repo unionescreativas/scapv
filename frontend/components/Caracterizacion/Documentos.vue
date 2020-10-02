@@ -64,7 +64,7 @@
       <template v-slot:after-outer>
         <transition name="fade">
           <b-button
-            v-if="fileRecordsForUpload.length"
+            v-if="!subida_automatica && fileRecordsForUpload.length"
             class="mt-2"
             style="background-color: var(--iq-primary);"
             @click="subirDocumentos(_self)"
@@ -86,7 +86,21 @@ import { mapState, mapActions } from "vuex";
 import Swal from "sweetalert2";
 
 export default {
-  props: ["modulo", "moduloid"],
+  props: {
+    modulo: {
+      type: String,
+      required: true,
+    },
+    moduloid: {
+      type: String,
+      required: true,
+    },
+    subida_automatica: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
+  },
   data: () => ({
     fileInEdit: null,
     fileRecords: [],

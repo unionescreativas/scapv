@@ -72,7 +72,7 @@
       </b-row>
       <h4 v-text="unidades"></h4>
       <div v-show="consulta">
-        <documentos :modulo="modulo" :moduloid="modulo_id"></documentos>
+        <documentos :modulo="modulo" :moduloid="modulo_id" subida_automatica></documentos>
       </div>
       <div v-if="consulta">
         <TablaCrearAyuda :ciudadano="ciudadano" :estado="actualizarRegistro" />

@@ -64,7 +64,7 @@ export default {
       try {
         let consulta;
         let listas = {};
-        let res = await this.$axios.get(`/api/ciudadanos`);
+        let res = await this.$axios.get(`/api/ciudadanos?length=all`);
         consulta = res.data.data;
         // console.log(consulta);
         let tipodeicono;
