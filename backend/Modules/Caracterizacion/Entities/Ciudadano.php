@@ -68,6 +68,26 @@ class Ciudadano extends Model {
             ],
 
         ],
+        "belongsTo" => [
+            "usuario_creacion" => [
+                "model" => \App\User::class,
+                "foreign_key" => "usuario_creacion_id",
+                "columns" => [
+                    'name' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'email' => ['searchable' => true, 'order_term' => 'orderable'],
+                ],
+            ],
+            "usuario_actualizacion" => [
+                "model" => "App\User",
+                "alias" => "Actualizacion",
+                "foreign_key" => "usuario_actualizacion_id",
+                "columns" => [
+                    'name' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'email' => ['searchable' => true, 'order_term' => 'orderable'],
+                ],
+            ],
+
+        ],
     ];
     public function transferencia() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
@@ -79,7 +99,12 @@ class Ciudadano extends Model {
     public function ayudas() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Ayuda');
     }
-
+    public function usuario_creacion() {
+        return $this->belongsTo('App\User');
+    }
+    public function usuario_actualizacion() {
+        return $this->belongsTo('App\User');
+    }
     public static function boot() {
         parent::boot();
         self::creating(

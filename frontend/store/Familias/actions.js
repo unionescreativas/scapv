@@ -169,4 +169,80 @@ export default {
       }
     }
   },
+
+  async eliminarCiudadano({ commit }, { data, reloadDataTable }) {
+    try {
+      Swal.fire({
+        html: "<h4>Está seguro(a) que desea eliminar este ciudadano?</h4>",
+        icon: "warning",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Si",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No",
+        showCancelButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.value) {
+          let res = this.$axios.delete(`/api/ciudadanos/${data.id}`);
+          Swal.fire({
+            html: "<h4>El ciudadano se ha eliminado con éxito!</h4>",
+            icon: "success",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then((result) => {
+            if (result.value) {
+              reloadDataTable();
+            }
+          });
+        } else {
+        }
+      });
+    } catch (err) {
+      Swal.fire({
+        html: "<h4>No se pudieron guardar los datos, consulte con el administrador!</h4>",
+        icon: "error",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
+    }
+  },
+
+  async eliminarIntegrante({ commit }, { data, reloadDataTable }) {
+    try {
+      Swal.fire({
+        html: "<h4>Está seguro(a) que desea eliminar este integrante?</h4>",
+        icon: "warning",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Si",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No",
+        showCancelButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.value) {
+          let res = this.$axios.delete(`/api/familias/${data.id}`);
+          Swal.fire({
+            html: "<h4>El Integrante se ha eliminado con éxito!</h4>",
+            icon: "success",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then((result) => {
+            if (result.value) {
+              reloadDataTable();
+            }
+          });
+        } else {
+        }
+      });
+    } catch (err) {
+      Swal.fire({
+        html: "<h4>No se pudieron guardar los datos, consulte con el administrador!</h4>",
+        icon: "error",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
+    }
+  },
 };

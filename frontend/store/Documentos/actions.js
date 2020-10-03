@@ -172,7 +172,7 @@ export default {
           commit("ELIMINAR_DOCUMENTO", payload);
 
           Swal.fire({
-            html: `<h4>el documento se ha eliminado con éxito!</h4>`,
+            html: `<h4>El documento se ha eliminado con éxito!</h4>`,
             icon: "success",
             allowOutsideClick: false,
             allowEscapeKey: false,

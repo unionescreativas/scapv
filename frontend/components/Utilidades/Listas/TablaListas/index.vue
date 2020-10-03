@@ -143,19 +143,20 @@ export default {
         },
         columns: [
           {
-            label: "INACTIVAR",
-            orderable: false,
-            event: "click",
-            handler: this.inactivarLista,
-            component: () => import("./BtnInactivarLista.vue"),
-          },
-          {
             label: "EDITAR",
             orderable: false,
             event: "click",
             handler: this.getRowData,
             component: () => import("./BtnEditarLista.vue"),
           },
+          {
+            label: "INACTIVAR",
+            orderable: false,
+            event: "click",
+            handler: this.inactivarLista,
+            component: () => import("./BtnInactivarLista.vue"),
+          },
+
           { label: "NOMBRE LISTA", name: "nombre_lista", orderable: true },
           { label: "CÓDIGO CAMPO", name: "codigo_campo", orderable: true },
           { label: "VALOR CAMPO 1", name: "valor_campo_1", orderable: true },

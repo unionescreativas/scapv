@@ -12,7 +12,13 @@
             </a>
           </template>
           <template v-slot:body>
-            <data-table :classes="table.classes" :translate="table.translate" :columns="table.columns" :url="table.url">
+            <data-table
+              ref="tablaCiudadanos"
+              :classes="table.classes"
+              :translate="table.translate"
+              :columns="table.columns"
+              :url="table.url"
+            >
               <div slot="filters" slot-scope="{ tableData }">
                 <div class="row justify-content-end mb-2">
                   <div class="col-md-3">
@@ -120,6 +126,7 @@
 <script>
 import { vito } from "~/plugins/config/pluginInit";
 import { mapActions } from "vuex";
+// import Swal from "sweetalert2";
 
 export default {
   layout: "LightLayout",
@@ -152,6 +159,19 @@ export default {
             event: "click",
             handler: this.displayRow,
             component: () => import("~/components/Caracterizacion/Tablas.vue"),
+          },
+          {
+            label: "ELIMINAR",
+            name: "eliminar",
+            orderable: false,
+            classes: {
+              btn: true,
+              "btn-primary": true,
+              "btn-sm": true,
+            },
+            event: "click",
+            handler: this.eliminar,
+            component: () => import("~/components/Caracterizacion/Btneliminar.vue"),
           },
           { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
           { label: "NUMERO DE DOCUMENTO", name: "numero_documento", orderable: true },
@@ -190,6 +210,8 @@ export default {
           { label: "ACTUALMENTE SE ENCUENTRA LABORANDO", name: "trabajo", orderable: true },
           { label: "TIPO DE EMPLEO", name: "tipo_empleo", orderable: true },
           { label: "OBSERVACIONES", name: "observaciones", orderable: true },
+          { label: "USUARIO CREACIÓN", name: "usuario_creacion.name", orderable: true },
+          { label: "USUARIO ACTUALZIACIÓN", name: "usuario_actualizacion.name", orderable: true },
         ],
       },
     };
@@ -198,7 +220,13 @@ export default {
     displayRow(data) {
       this.consultarCiudadano(data.numero_documento).then(() => this.$router.push("/perfil"));
     },
-    ...mapActions("Familias", ["consultarCiudadano"]),
+    eliminar(data) {
+      this.eliminarCiudadano({ data, reloadDataTable: this.reloadDataTable });
+    },
+    reloadDataTable() {
+      this.$refs.tablaCiudadanos.getData();
+    },
+    ...mapActions("Familias", ["consultarCiudadano", "eliminarCiudadano"]),
   },
   mounted() {
     vito.index();

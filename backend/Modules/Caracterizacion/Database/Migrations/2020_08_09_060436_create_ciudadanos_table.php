@@ -55,8 +55,12 @@ class CreateCiudadanosTable extends Migration {
 
             //aqui van los campos------------------>
             $table->boolean('estado')->default(1);
-            $table->uuid('usuario_creacion')->nullable();
             $table->uuid('usuario_actualizacion')->nullable();
+            $table->uuid('usuario_actualizacion_id')->nullable();
+            $table->foreign('usuario_actualizacion')
+                ->references('id')->on('ciudadanos');
+            $table->foreign('usuario_actualizacion')
+                ->references('id')->on('ciudadanos');
             $table->softDeletesTz();
             $table->timestamps();
             $table->unique('numero_documento');

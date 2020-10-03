@@ -39,10 +39,6 @@ class Lista extends Model {
 
     //Relaciones --------------------------------------------------------->
 
-    public function ayuda() {
-        return $this->belongsTo('\Modules\Caracterizacion\Entities\Ayuda');
-    }
-
     //Relaciones --------------------------------------------------------->
 
     //Creacion del campo id Uuid --------------------------------------------------------->

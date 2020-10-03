@@ -11,7 +11,7 @@ class CiudadanoRequest extends FormRequest {
         return [
             'tipo_documento' => 'nullable',
             'numero_documento' => 'required|unique:familias',
-            'pep' => 'numeric|nullable',
+            'pep' => 'nullable',
             'nombres' => 'required|string',
             'apellidos' => 'nullable',
             'fecha_expedicion' => 'date|date_format:Y-m-d|nullable',

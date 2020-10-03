@@ -11,7 +11,7 @@ class FamiliaRequest extends FormRequest {
             'parentesco' => 'required',
             'tipo_documento' => 'nullable',
             'numero_documento' => 'required|unique:ciudadanos|unique:familias',
-            'pep' => 'numeric|nullable',
+            'pep' => 'nullable',
             'nombres' => 'required|string',
             'apellidos' => 'nullable|string',
             'fecha_expedicion' => 'nullable|date|date_format:Y-m-d|date_format:Y-m-d',

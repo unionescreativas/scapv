@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration {
             $table->softDeletesTz();
             $table->timestamps();
             $table->unique('numero_documento');
+
         });
     }
 
