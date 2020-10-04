@@ -119,7 +119,7 @@
             <li class="nav-item">
               <div class="iq-card shadow-none m-0">
                 <div class="iq-card-body p-0">
-                  <div class="p-3">
+                  <div>
                     <ModalCrear />
                   </div>
                 </div>
