@@ -151,6 +151,8 @@ export default {
           { label: "APELLIDO CIUDADANO", name: "ciudadano.apellidos", orderable: true },
           { label: "CANTIDAD ENTREGADA", name: "cantidad_entregada", orderable: true },
           { label: "FECHA ENTREGA", name: "fecha_entrega", orderable: true },
+          { label: "USUARIO CREACIÓN", name: "usuario_creacion.name", orderable: true },
+          { label: "USUARIO ACTUALZIACIÓN", name: "usuario_actualizacion.name", orderable: true },
         ],
       },
     };

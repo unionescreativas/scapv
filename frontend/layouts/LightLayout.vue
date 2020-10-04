@@ -157,7 +157,7 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="javascript:void(0)" class="search-toggle iq-waves-effect">
                 <lottie :option="require('~/assets/images/small/lottie-bell')" id="lottie-beil" />
                 <span class="bg-danger dots"></span>
@@ -215,7 +215,7 @@
                   </div>
                 </div>
               </div>
-            </li>
+            </li> -->
           </ul>
         </template>
         <template slot="right">
@@ -224,7 +224,7 @@
               <a href="javascript:void(0)" class="search-toggle iq-waves-effect d-flex align-items-center">
                 <img :src="userProfile" class="img-fluid rounded mr-3" alt="user" />
                 <div class="caption">
-                  <h6 class="mb-0 line-height">{{ usuario.nombre }}</h6>
+                  <h6 class="mb-0 line-height">{{ usuario.name }}</h6>
                   <span class="font-size-12">{{ $t("nav.user.available") }}</span>
                 </div>
               </a>
@@ -232,7 +232,7 @@
                 <div class="iq-card shadow-none m-0">
                   <div class="iq-card-body p-0">
                     <div class="bg-primary p-3">
-                      <h5 class="mb-0 text-white line-height">Hola {{ usuario.nombre }}</h5>
+                      <h5 class="mb-0 text-white line-height">{{ usuario.name }}</h5>
                       <span class="text-white font-size-12">{{ $t("nav.user.available") }}</span>
                     </div>
                     <a href="javascript:void(0)" class="iq-sub-card iq-bg-primary-hover">

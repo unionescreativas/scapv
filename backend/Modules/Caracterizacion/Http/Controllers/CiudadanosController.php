@@ -116,6 +116,7 @@ class CiudadanosController extends Controller {
         $variableConsulta->tipo_empleo = $request->tipo_empleo;
         $variableConsulta->observaciones = $request->observaciones;
         $variableConsulta->usuario_creacion_id = $request->user()->id;
+        $variableConsulta->usuario_actualizacion_id = $request->user()->id;
         $variableConsulta->save();
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];

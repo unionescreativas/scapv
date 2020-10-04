@@ -12,9 +12,7 @@ class CreateUsersTable extends Migration {
      */
     public function up() {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->primary('id');
-
+            $table->id();
             $table->string('name');
             $table->string('apellido')->nullable();
             $table->string('numero_documento');
@@ -28,7 +26,6 @@ class CreateUsersTable extends Migration {
             $table->softDeletesTz();
             $table->timestamps();
             $table->unique('numero_documento');
-
         });
     }
 

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 use Webpatser\Uuid\Uuid;
 
-class User extends Authenticatable {
+class User extends \TCG\Voyager\Models\User {
     use SoftDeletes, Notifiable, LaravelVueDatatableTrait;
     protected $keyType = 'string';
     public $incrementing = false;

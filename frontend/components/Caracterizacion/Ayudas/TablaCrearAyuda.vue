@@ -148,6 +148,8 @@ export default {
           { label: "AYUDA", name: "lista.valor_campo_1", orderable: true },
           { label: "CANTIDAD", name: "cantidad_entregada", orderable: true },
           { label: "FECHA ENTREGA", name: "fecha_entrega", orderable: true },
+          { label: "USUARIO CREACIÓN", name: "usuario_creacion.name", orderable: true },
+          { label: "USUARIO ACTUALZIACIÓN", name: "usuario_actualizacion.name", orderable: true },
         ],
       },
     };

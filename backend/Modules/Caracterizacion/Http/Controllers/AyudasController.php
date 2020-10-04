@@ -35,7 +35,7 @@ class AyudasController extends Controller {
             $orderBy,
             $searchValue,
             [
-                "lista", "ciudadano",
+                "lista", "ciudadano", "usuario_creacion", "usuario_actualizacion",
             ]
         )->where('ayudas.estado', '1');
         $data = $variableConsulta->paginate($length);
@@ -43,7 +43,7 @@ class AyudasController extends Controller {
     }
     public function editarRegistro($id) {
         $variableConsulta = $this->configModelo::where('id', $id)->get();
-        $variableConsulta->usuario_actualizacion = $request->user()->id;
+        $variableConsulta->usuario_actualizacion_id = $request->user()->id;
         if ($variableConsulta->isEmpty()) {
             $variableConsulta = $this->configModelo::where('id', $id)->get();
             ActivityLogger::activity("Consulto datos del modulo {$this->modulo} para el registro por cedula: {$id}, Valores consultados: {$variableConsulta} -> Metodo show");
@@ -138,7 +138,8 @@ class AyudasController extends Controller {
             $variableConsulta->ciudadano_id = $request->ciudadano_id;
             $variableConsulta->cantidad_entregada = $request->cantidad_entregada;
             $variableConsulta->fecha_entrega = $request->fecha_entrega;
-            $variableConsulta->usuario_creacion = $request->user()->id;
+            $variableConsulta->usuario_creacion_id = $request->user()->id;
+            $variableConsulta->usuario_actualizacion_id = $request->user()->id;
             //Campos a guardar aquí--------------->
             $variableConsulta->save();
             ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
@@ -224,12 +225,12 @@ class AyudasController extends Controller {
             $datosAnteriores = $this->configModelo::find($id);
             $variableConsulta = $this->configModelo::find($id);
             //Campos a guardar aquí--------------->
-            $variableConsulta->usuario_actualizacion = $request->user()->id;
+            $variableConsulta->usuario_actualizacion_id = $request->user()->id;
             $variableConsulta->lista_id = $request->lista_id;
             $variableConsulta->ciudadano_id = $request->ciudadano_id;
             $variableConsulta->cantidad_entregada = $request->cantidad_entregada;
             $variableConsulta->fecha_entrega = $request->fecha_entrega;
-            $variableConsulta->usuario_actualizacion = Auth::id();
+            $variableConsulta->usuario_actualizacion_id = Auth::id();
 
             //Campos a guardar aquí--------------->
             $variableConsulta->save();
