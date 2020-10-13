@@ -16,7 +16,7 @@ class Ciudadano extends Model {
 
     protected $dataTableColumns = [
         'id' => ['searchable' => false],
-        'tipo_documento' => ['searchable' => true, 'order_term' => 'orderable'],
+        'tipo_documento' => ['searchable' => true, 'order_term' => true],
         'numero_documento' => ['searchable' => true, 'order_term' => 'orderable'],
         'pep' => ['searchable' => true, 'order_term' => 'orderable'],
         'nombres' => ['searchable' => true, 'order_term' => 'orderable'],
@@ -89,13 +89,13 @@ class Ciudadano extends Model {
 
         ],
     ];
-    public function transferencia() {
-        return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
-    }
+    // public function transferencia() {
+    //     return $this->hasMany('Modules\Caracterizacion\Entities\Transferencia');
+    // }
 
-    public function familias() {
-        return $this->hasMany('Modules\Caracterizacion\Entities\Familia');
-    }
+    // public function familias() {
+    //     return $this->hasMany('Modules\Caracterizacion\Entities\Familia');
+    // }
     public function ayudas() {
         return $this->hasMany('Modules\Caracterizacion\Entities\Ayuda');
     }

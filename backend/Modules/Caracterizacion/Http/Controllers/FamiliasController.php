@@ -169,7 +169,7 @@ class FamiliasController extends Controller {
     public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
-        $variableConsulta = $this->configModelo::destroy($id);
+        $variableConsulta = $this->configModelo::find($id)->forceDelete();
         ActivityLogger::activity("Eliminado Registo Modulo {$this->modulo},Datos eliminados:{$datosElimnados},  para el registro {$id} -> Metodo destroy");
         return ['data' => $variableConsulta, 'status' => '204'];
     }
