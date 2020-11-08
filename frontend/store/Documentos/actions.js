@@ -1,8 +1,11 @@
 import Swal from "sweetalert2";
 
 export default {
-  archivosSeleccionados({}, { payload, fileRecords }) {
+  archivosSeleccionados({ dispatch }, { payload, fileRecords }) {
     payload.fileRecordsForUpload = [...payload.fileRecordsForUpload, ...fileRecords.filter((file) => !file.error)];
+    if (payload.subida_automatica && payload.fileRecordsForUpload.length) {
+      dispatch("subirDocumentos", payload);
+    }
   },
 
   async subirDocumentos({ commit }, payload) {
@@ -169,7 +172,7 @@ export default {
           commit("ELIMINAR_DOCUMENTO", payload);
 
           Swal.fire({
-            html: `<h4>el documento se ha eliminado con éxito!</h4>`,
+            html: `<h4>El documento se ha eliminado con éxito!</h4>`,
             icon: "success",
             allowOutsideClick: false,
             allowEscapeKey: false,

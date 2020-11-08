@@ -42,23 +42,7 @@ export default {
         if (!payload.$refs.formWizard.isLastStep) {
           if (payload.formChanged) {
             payload.formChanged = false;
-            Swal.fire({
-              html: "<h4>Desea guardar los cambios hasta aquí?</h4>",
-              icon: "info",
-              confirmButtonColor: "#3085d6",
-              confirmButtonText: "Si",
-              cancelButtonColor: "#d33",
-              cancelButtonText: "No",
-              showCancelButton: true,
-              allowOutsideClick: false,
-              allowEscapeKey: false,
-            }).then((result) => {
-              if (result.value) {
-                dispatch("guardarCiudadano", payload);
-              } else {
-                payload.$refs.formWizard.nextTab();
-              }
-            });
+            dispatch("guardarCiudadano", payload);
           } else {
             payload.$refs.formWizard.nextTab();
           }
@@ -103,21 +87,19 @@ export default {
         allowEscapeKey: false,
       }).then((result) => {
         if (result.value) {
-          // SI LA ACCIÓN ES REGISTRAR
-          if (method == "post") {
-            // SI ES EL ÚLTIMO PASO (PESTAÑA)
-            if (ultimaPestana) {
-              // SE REINICIA EL FORMULARIO Y SE DEVUELVE A LA PRIMER PESTAÑA
-              payload.resetFormVeeValidate(payload);
-              payload.$refs.formWizard.reset();
-            } else {
-              // SI NO ES EL ÚLTIMO PASO (PESTAÑA), SE CARGA EL CIUDADANO AL FORMULARIO
+          // SI  NO ES EL ÚLTIMO PASO (PESTAÑA)
+          if (!ultimaPestana) {
+            // SI LA ACCIÓN ES REGISTRAR
+            if (method == "post") {
+              // SE CARGA EL CIUDADANO AL FORMULARIO
               payload.form = { ...res.data.data };
               // LOS CAMBIOS DEL FORMULARIO PASAN A SER FALSE
               payload.$nextTick(() => {
                 payload.formChanged = false;
               });
             }
+            // SE REDIRIGE A LA SIGUIENTE PESTAÑA
+            payload.$refs.formWizard.nextTab();
           }
         }
       });
@@ -158,6 +140,7 @@ export default {
           // SI LA ACCIÓN ES REGISTRAR SE REINICIA EL FORMULARIO
           if (method == "post") {
             payload.resetFormVeeValidate(payload);
+            payload.llenarDatosIntegrante();
           }
         }
       });
@@ -184,6 +167,82 @@ export default {
           allowEscapeKey: false,
         });
       }
+    }
+  },
+
+  async eliminarCiudadano({ commit }, { data, reloadDataTable }) {
+    try {
+      Swal.fire({
+        html: "<h4>Está seguro(a) que desea eliminar este ciudadano?</h4>",
+        icon: "warning",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Si",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No",
+        showCancelButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.value) {
+          let res = this.$axios.delete(`/api/ciudadanos/${data.id}`);
+          Swal.fire({
+            html: "<h4>El ciudadano se ha eliminado con éxito!</h4>",
+            icon: "success",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then((result) => {
+            if (result.value) {
+              reloadDataTable();
+            }
+          });
+        } else {
+        }
+      });
+    } catch (err) {
+      Swal.fire({
+        html: "<h4>No se pudieron guardar los datos, consulte con el administrador!</h4>",
+        icon: "error",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
+    }
+  },
+
+  async eliminarIntegrante({ commit }, { data, reloadDataTable }) {
+    try {
+      Swal.fire({
+        html: "<h4>Está seguro(a) que desea eliminar este integrante?</h4>",
+        icon: "warning",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Si",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No",
+        showCancelButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.value) {
+          let res = this.$axios.delete(`/api/familias/${data.id}`);
+          Swal.fire({
+            html: "<h4>El Integrante se ha eliminado con éxito!</h4>",
+            icon: "success",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then((result) => {
+            if (result.value) {
+              reloadDataTable();
+            }
+          });
+        } else {
+        }
+      });
+    } catch (err) {
+      Swal.fire({
+        html: "<h4>No se pudieron guardar los datos, consulte con el administrador!</h4>",
+        icon: "error",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
     }
   },
 };

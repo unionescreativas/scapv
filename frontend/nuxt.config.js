@@ -34,6 +34,7 @@ export default {
         hid: "description",
         name: "description",
         content: process.env.npm_package_description || "",
+        author: "Daniel Alexander Paz Rodriguez, Brayan Jose Cuellar Paz",
       },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
@@ -87,7 +88,7 @@ export default {
   axios: {
     baseURL: process.env.API_URL,
     credentials: true,
-    https: true,
+    https: process.env.https,
   },
   auth: {
     strategies: {

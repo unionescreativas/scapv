@@ -119,7 +119,7 @@
             <li class="nav-item">
               <div class="iq-card shadow-none m-0">
                 <div class="iq-card-body p-0">
-                  <div class="p-3">
+                  <div>
                     <ModalCrear />
                   </div>
                 </div>
@@ -157,7 +157,7 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="javascript:void(0)" class="search-toggle iq-waves-effect">
                 <lottie :option="require('~/assets/images/small/lottie-bell')" id="lottie-beil" />
                 <span class="bg-danger dots"></span>
@@ -215,7 +215,7 @@
                   </div>
                 </div>
               </div>
-            </li>
+            </li> -->
           </ul>
         </template>
         <template slot="right">
@@ -232,7 +232,7 @@
                 <div class="iq-card shadow-none m-0">
                   <div class="iq-card-body p-0">
                     <div class="bg-primary p-3">
-                      <h5 class="mb-0 text-white line-height">Hola {{ usuario.name }}</h5>
+                      <h5 class="mb-0 text-white line-height">{{ usuario.name }}</h5>
                       <span class="text-white font-size-12">{{ $t("nav.user.available") }}</span>
                     </div>
                     <a href="javascript:void(0)" class="iq-sub-card iq-bg-primary-hover">

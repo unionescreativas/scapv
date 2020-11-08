@@ -1,18 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateAyudasTable extends Migration
-{
+class CreateAyudasTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('ayudas', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
@@ -23,8 +21,8 @@ class CreateAyudasTable extends Migration
             $table->date('fecha_entrega');
             //aqui van los campos------------------>
             $table->boolean('estado')->default(1);
-            $table->uuid('usuario_creacion')->nullable();
-            $table->uuid('usuario_actualizacion')->nullable();
+            $table->uuid('usuario_creacion_id')->nullable();
+            $table->uuid('usuario_actualizacion_id')->nullable();
             $table->softDeletesTz();
             $table->timestamps();
             $table->foreign('ciudadano_id')
@@ -37,8 +35,7 @@ class CreateAyudasTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('ayudas');
     }
 }

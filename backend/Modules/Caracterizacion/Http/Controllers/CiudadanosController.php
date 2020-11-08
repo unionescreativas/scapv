@@ -4,6 +4,7 @@ namespace Modules\Caracterizacion\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use JamesDordoy\LaravelVueDatatable\Http\Resources\DataTableCollectionResource;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use Modules\Caracterizacion\Entities\Ciudadano;
@@ -22,16 +23,25 @@ class CiudadanosController extends Controller {
 
     // Variables Globales---------------------------->
     public function index(Request $request) {
-        $length = $request->input('length');
+
+        // return $usuario;
+
+        $all = DB::table('ciudadanos')->count();
+        $length = $request->input('length') == "all" ? $all : $request->input('length');
         $sortBy = $request->input('column');
         $orderBy = $request->input('dir');
         $searchValue = $request->input('search');
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo},Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
-        $variableConsulta = Ciudadano::eloquentQuery($sortBy, $orderBy, $searchValue,
+        $variableConsulta = $this->configModelo::eloquentQuery(
+            $sortBy,
+            $orderBy,
+            $searchValue,
             [
-                "ayudas",
-            ])->where('ciudadanos.estado', '1');
+                "ayudas", "usuario_creacion", "usuario_actualizacion",
+            ]
+        )->where('ciudadanos.estado', '1');
         $data = $variableConsulta->paginate($length);
+        $ciudadanos = DB::table('ciudadanos')->count();
         return new DataTableCollectionResource($data);
     }
 
@@ -105,6 +115,8 @@ class CiudadanosController extends Controller {
         $variableConsulta->trabajo = $request->trabajo;
         $variableConsulta->tipo_empleo = $request->tipo_empleo;
         $variableConsulta->observaciones = $request->observaciones;
+        $variableConsulta->usuario_creacion_id = $request->user()->id;
+        $variableConsulta->usuario_actualizacion_id = $request->user()->id;
         $variableConsulta->save();
         ActivityLogger::activity("Guardando datos del modulo {$this->modulo}, Datos Guardaros:{$variableConsulta}, -> Metodo Store.");
         return ['data' => $variableConsulta, 'status' => '202'];
@@ -151,6 +163,7 @@ class CiudadanosController extends Controller {
         $variableConsulta->trabajo = $request->trabajo;
         $variableConsulta->tipo_empleo = $request->tipo_empleo;
         $variableConsulta->observaciones = $request->observaciones;
+        $variableConsulta->usuario_actualizacion_id = $request->user()->id;
         $variableConsulta->save();
         ActivityLogger::activity("Actualizando datos del modulo {$this->modulo},  Datos Anteriores:{$datosAnteriores}  Datos Nuevos:{$variableConsulta}, para el registro id {$id} ->Metodo Update.");
         return ['data' => $variableConsulta, 'status' => '203'];
@@ -159,14 +172,25 @@ class CiudadanosController extends Controller {
     public function destroy($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosElimnados = $variableConsulta;
-        $variableConsulta = $this->configModelo::destroy($id);
+        $ciudadano = DB::table('familias')->where('ciudadano_id', $id)->delete();
+        $ciudadano = DB::table('ayudas')->where('ciudadano_id', $id)->delete();
+        $variableConsulta = $this->configModelo::find($id)->forceDelete();
+
         ActivityLogger::activity("Eliminado Registo Modulo {$this->modulo},Datos eliminados:{$datosElimnados},  para el registro {$id} -> Metodo destroy");
         return ['data' => $variableConsulta, 'status' => '204'];
+
+        // $variableConsulta = $this->configModelo::find($id);
+        // $datosElimnados = $variableConsulta;
+        // $variableConsulta->usuario_actualizacion_id = $request->user()->id;
+        // $variableConsulta = $this->configModelo::destroy($id);
+        // ActivityLogger::activity("Eliminado Registo Modulo {$this->modulo},Datos eliminados:{$datosElimnados},  para el registro {$id} -> Metodo destroy");
+        // return ['data' => $variableConsulta, 'status' => '204'];
     }
 
     public function activar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
+        $variableConsulta->usuario_actualizacion_id = $request->user()->id;
         ActivityLogger::activity("Activando Registo Modulo {$this->modulo},Datos Activar: {$datosActivar}, para el registro {$id} -> Metodo Activar.");
         $variableConsulta->estado = 1;
         $variableConsulta->save();
@@ -176,6 +200,7 @@ class CiudadanosController extends Controller {
     public function inactivar($id) {
         $variableConsulta = $this->configModelo::find($id);
         $datosActivar = $variableConsulta;
+        $variableConsulta->usuario_actualizacion_id = $request->user()->id;
         ActivityLogger::activity("Inactivando Registo Modulo {$this->modulo},Datos Inactivar: {$datosActivar}, para el registro {$id} -> Metodo Inactivar.");
         $variableConsulta->estado = 0;
         $variableConsulta->save();

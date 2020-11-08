@@ -33,7 +33,7 @@
               </tab-content>
 
               <tab-content title="Finalizar" icon="fa fa-check" v-if="Object.values(ciudadano).length">
-                <documentos :modulo="modulo" :moduloid="ciudadano.id" class="mb-4" />
+                <documentos :modulo="modulo" :moduloid="ciudadano.id" subida_automatica class="mb-4" />
               </tab-content>
 
               <template slot="footer" slot-scope="props">

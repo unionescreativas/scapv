@@ -86,6 +86,23 @@ class Ayuda extends Model {
                     'valor_campo_4' => ['searchable' => true, 'order_term' => 'orderable'],
                 ],
             ],
+            "usuario_creacion" => [
+                "model" => \App\User::class,
+                "foreign_key" => "usuario_creacion_id",
+                "columns" => [
+                    'name' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'email' => ['searchable' => true, 'order_term' => 'orderable'],
+                ],
+            ],
+            "usuario_actualizacion" => [
+                "model" => "App\User",
+                "alias" => "Actualizacion",
+                "foreign_key" => "usuario_actualizacion_id",
+                "columns" => [
+                    'name' => ['searchable' => true, 'order_term' => 'orderable'],
+                    'email' => ['searchable' => true, 'order_term' => 'orderable'],
+                ],
+            ],
         ],
     ];
 
@@ -96,7 +113,12 @@ class Ayuda extends Model {
     public function lista() {
         return $this->belongsTo('\Modules\Caracterizacion\Entities\Lista');
     }
-
+    public function usuario_creacion() {
+        return $this->belongsTo('App\User');
+    }
+    public function usuario_actualizacion() {
+        return $this->belongsTo('App\User');
+    }
     //Relaciones --------------------------------------------------------->
 
     //Creacion del campo id Uuid --------------------------------------------------------->

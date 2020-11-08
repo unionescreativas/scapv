@@ -24,7 +24,7 @@
               </nuxt-link>
             </li>
           </ul>
-          <div class="iq-search-bar">
+          <div class="iq-search-bar-nav">
             <vue-bootstrap-typeahead
               ref="VueBootstrapTypeahead"
               backgroundVariant="white"

@@ -120,7 +120,7 @@
 
 <script>
 import { vito } from "~/plugins/config/pluginInit";
-
+import { mapActions } from "vuex";
 export default {
   props: {
     ciudadano: {
@@ -153,6 +153,13 @@ export default {
             event: "click",
             handler: this.getRowData,
             component: () => import("./BtnEditarIntegrante.vue"),
+          },
+          {
+            label: "ELIMINAR",
+            orderable: false,
+            event: "click",
+            handler: this.eliminar,
+            component: () => import("./BtnEliminarIntegrante.vue"),
           },
           { label: "PARENTESCO", name: "parentesco", orderable: true },
           { label: "TIPO DE DOCUMENTO", name: "tipo_documento", orderable: true },
@@ -189,9 +196,13 @@ export default {
       this.$emit("getRowData", data);
       this.$emit("modalShow", true);
     },
+    eliminar(data) {
+      this.eliminarIntegrante({ data, reloadDataTable: this.reloadDataTable });
+    },
     reloadDataTable() {
       this.$refs.dataTable.getData();
     },
+    ...mapActions("Familias", ["eliminarIntegrante"]),
   },
   mounted() {
     vito.index();

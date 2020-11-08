@@ -33,8 +33,8 @@ export default {
     return {
       // Mapas-------------------->
       center: {
-        lat: 47.376332,
-        lng: 8.547511,
+        lat: 3.4208869,
+        lng: -76.5530585,
       },
       infoWindowPos: null,
       infoWinOpen: false,
@@ -53,18 +53,19 @@ export default {
   methods: {
     async consultarDatos() {
       let iconBase = "http://maps.google.com/mapfiles/kml/shapes/";
-      let icons = {
-        pendiente: {
-          icon: iconBase + "caution.png",
-        },
-        entregado: {
-          icon: iconBase + "ranger_station.png",
-        },
+      let pendiente = {
+        url: "http://maps.google.com/mapfiles/kml/shapes/caution.png", // url
+        scaledSize: { width: 20, height: 20 },
       };
+      let entregado = {
+        url: "http://maps.google.com/mapfiles/kml/shapes/ranger_station.png", // url
+        scaledSize: { width: 20, height: 20 },
+      };
+
       try {
         let consulta;
         let listas = {};
-        let res = await this.$axios.get(`/api/ciudadanos`);
+        let res = await this.$axios.get(`/api/ciudadanos?length=all`);
         consulta = res.data.data;
         // console.log(consulta);
         let tipodeicono;
@@ -74,9 +75,9 @@ export default {
             this.center.lng = consulta[index].let;
             // console.log(consulta[index].ayudas.length);
             if (consulta[index].ayudas.length > 0) {
-              tipodeicono = icons.entregado.icon;
+              tipodeicono = entregado;
             } else {
-              tipodeicono = icons.pendiente.icon;
+              tipodeicono = pendiente;
             }
             listas = {
               position: {

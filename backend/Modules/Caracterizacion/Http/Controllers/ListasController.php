@@ -40,7 +40,7 @@ class ListasController extends Controller {
         ActivityLogger::activity("Consulto datos del modulo {$this->modulo}, Parametros: Cantidad de registros: {$length}, Tipo de Ordenamiento:{$sortBy}, Campo para ordenar:{$orderBy}, Valor a Buscar {$searchValue}-> Metodo Index");
         $variableConsulta = $this->configModelo::eloquentQuery($sortBy, $orderBy, $searchValue)
             ->where('estado', '1')->where('nombre_lista', $id);
-        $data = $variableConsulta->paginate(100);
+        $data = $variableConsulta->paginate(500);
         return new DataTableCollectionResource($data);
 
         // $variableConsulta = $this->configModelo::where('id', $id)->where('estado', '1')->get();

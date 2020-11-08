@@ -23,13 +23,7 @@
 
     <ValidationProvider name="numero_documento" v-slot="{ errors }">
       <b-form-group label="NUMERO DE DOCUMENTO: *">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="INGRESE NUMERO DE DOCUMENTO"
-          v-model="form.numero_documento"
-          :readonly="!!form.id"
-        />
+        <input type="text" class="form-control" placeholder="INGRESE NUMERO DE DOCUMENTO" v-model="form.numero_documento" />
         <div style="color: var(--iq-danger-light);" v-if="errors[0]">
           {{ errors[0].replace("numero_documento", "") }}
         </div>
