@@ -115,10 +115,6 @@ export default {
   created() {
     this.form = { numero_documento: this.numero_documento, ...this.ciudadano };
     this.$watch("form", (value) => (this.formChanged = true), { deep: true });
-
-    Object.keys(this.options).forEach((option) => {
-      this.$axios.get(`/api/listas/${option}`).then((res) => (this.options[option] = res.data.data));
-    });
   },
 };
 </script>
