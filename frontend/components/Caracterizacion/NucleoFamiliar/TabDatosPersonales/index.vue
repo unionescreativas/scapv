@@ -3,11 +3,13 @@
     <ValidationProvider name="tipo_documento" v-slot="{ errors }">
       <b-form-group label="TIPO DE DOCUMENTO: *">
         <v-select
+          ref="tipos_documentos"
           placeholder="Seleccione ..."
           :options="options.tipos_documentos"
           label="valor_campo_1"
           :reduce="(option) => option.codigo_campo"
           v-model="form.tipo_documento"
+          @search="(search, loading) => onSearch2(search, loading, 'tipos_documentos')"
         >
           <template slot="no-options">
             <span>Escriba para buscar ...</span>
@@ -112,11 +114,13 @@
     <ValidationProvider name="genero" v-slot="{ errors }">
       <b-form-group label="GÉNERO: *">
         <v-select
+          ref="generos"
           placeholder="Seleccione ..."
           :options="options.generos"
           label="valor_campo_1"
           :reduce="(option) => option.codigo_campo"
           v-model="form.genero"
+          @search:focus.once="onSearch('generos')"
         >
           <template slot="no-options">
             <span>Escriba para buscar ...</span>
@@ -215,7 +219,6 @@
     <ValidationProvider name="barrio" v-slot="{ errors }">
       <b-form-group label="BARRIO DE RESIDENCIA: *">
         <v-select
-          ref="vSelect"
           placeholder="Seleccione ..."
           :options="options.barrios"
           label="valor_campo_1"
@@ -263,6 +266,7 @@
 
 <script>
 import { calcularEdad } from "~/plugins/general/scripts";
+import _ from "lodash";
 
 export default {
   props: {
@@ -286,6 +290,22 @@ export default {
       this.$refs.inputEdad.value = edad;
       this.form.edad = edad;
     },
+    async onSearch(lista) {
+      const loading = this.$refs[lista].toggleLoading;
+      loading(true);
+      let res = await this.$axios.get(`/api/listas/${lista}`);
+      this.options[lista] = res.data.data;
+      loading(false);
+    },
+    onSearch2(search, loading, lista) {
+      loading(true);
+      this.search(loading, search, lista, this);
+    },
+    search: _.debounce(async (loading, search, lista, vm) => {
+      let res = await vm.$axios.get(`/api/listas/${lista}`);
+      vm.options.tipos_documentos = res.data.data;
+      loading(false);
+    }, 350),
   },
 };
 </script>
